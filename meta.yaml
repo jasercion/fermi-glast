@@ -1,0 +1,48 @@
+package:
+   name: fermi-glast
+   version: "0.0.0"
+
+source:
+   git_url: https://github.com/Areustle/fermi-glast.git
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - fermi-heacore
+    - fermi-f2c
+    - fermi-minuit2
+	  - astropy
+	  - cppunit
+    - clhep
+	  - distribute
+	  - fftw
+	  - gsl
+    - healpy
+	  - matplotlib
+	  - numpy
+    - pmw
+    - pyds9
+	  - scipy
+	  - swig
+	  - xerces-c
+
+  run:
+    - fermi-heacore
+    # - fermi-f2c
+    - fermi-minuit2
+	  - astropy
+	  - cppunit
+    - clhep
+	  # - distribute
+	  - fftw
+	  - gsl
+    - healpy
+	  - matplotlib
+	  - numpy
+    - pmw
+    - pyds9
+	  - scipy
+	  # - swig
+	  - xerces-c
