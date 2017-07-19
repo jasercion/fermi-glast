@@ -1930,7 +1930,7 @@ UNAME_SYSTEM=`(uname -s) 2>/dev/null` || UNAME_SYSTEM=unknown
 
 #-------------------------------------------------------------------------------
 
-h_all_components="heacore tcltk external attitude heatools heagen demo suzaku swift Xspec integral nustar hitomi xmm glast ftools GSSC heasim"
+h_all_components="attitude heatools heagen demo suzaku swift Xspec integral nustar hitomi xmm glast ftools GSSC heasim"
 h_components=
 
 #-------------------------------------------------------------------------------
@@ -2450,11 +2450,11 @@ for dir in $HD_SELECTED; do
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: glast component requires our copy of readline" >&5
 $as_echo "glast component requires our copy of readline" >&6; }
      fi
-     force_readline_build=yes
+     force_readline_build=no
      hoops_required=yes
      st_stream_required=yes
-     tcl_required=yes
-     tk_required=yes
+     tcl_required=no
+     tk_required=no
      xpa_required=yes
   fi
   if test `echo $dir | grep -c nustar` -ne 0; then
