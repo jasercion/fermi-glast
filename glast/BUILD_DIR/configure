@@ -3020,17 +3020,17 @@ elif test -d "$h_heacore/BUILD_DIR"; then
 fi
 
 # Search the path for a configuration specification.
-h_coreBUILD_DIR=
-for h_dir in $h_corepath; do
-  if test -f "$h_dir/hmakerc"; then
-    h_coreBUILD_DIR="$h_dir"
-    break
-  fi
-done
+# h_coreBUILD_DIR=
+# for h_dir in $h_corepath; do
+#   if test -f "$h_dir/hmakerc"; then
+#     h_coreBUILD_DIR="$h_dir"
+#     break
+#   fi
+# done
 
-if test "x$h_coreBUILD_DIR" = x; then
-  as_fn_error $? "Unable to guess location of heacore/BUILD_DIR directory" "$LINENO" 5
-fi
+# if test "x$h_coreBUILD_DIR" = x; then
+#   AC_MSG_ERROR(Unable to guess location of heacore/BUILD_DIR directory)
+# fi
 
 # If heatools was not specified on the cmd line, make a search path for it.
 # Otherwise, try to interpret the supplied heatools to determine a directory
@@ -3204,19 +3204,19 @@ elif test -d "$h_top/$h_external/BUILD_DIR"; then
 elif test -d "$h_external/BUILD_DIR"; then
   h_externalpath="$h_external/BUILD_DIR"
 fi
-# Search the path for a configuration specification.
-if test "x$h_externalpath" != x; then
-  h_externalBUILD_DIR=
-  for h_dir in $h_externalpath; do
-    if test -f "$h_dir/hmakerc"; then
-      h_externalBUILD_DIR="$h_dir"
-      break
-    fi
-  done
-  if test "x$h_externalBUILD_DIR" = x; then
-    as_fn_error $? "Unable to guess location of external/BUILD_DIR directory" "$LINENO" 5
-  fi
-fi
+# # Search the path for a configuration specification.
+# if test "x$h_externalpath" != x; then
+#   h_externalBUILD_DIR=
+#   for h_dir in $h_externalpath; do
+#     if test -f "$h_dir/hmakerc"; then
+#       h_externalBUILD_DIR="$h_dir"
+#       break
+#     fi
+#   done
+#   if test "x$h_externalBUILD_DIR" = x; then
+#     AC_MSG_ERROR(Unable to guess location of external/BUILD_DIR directory)
+#   fi
+# fi
 
 # -----------------------------------------------------------------------------
 

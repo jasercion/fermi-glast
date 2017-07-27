@@ -1930,7 +1930,7 @@ UNAME_SYSTEM=`(uname -s) 2>/dev/null` || UNAME_SYSTEM=unknown
 
 #-------------------------------------------------------------------------------
 
-h_all_components="attitude heatools heagen demo suzaku swift Xspec integral nustar hitomi xmm glast ftools GSSC heasim"
+h_all_components="heacore tcltk external attitude heatools heagen demo suzaku swift Xspec integral nustar hitomi xmm glast ftools GSSC heasim"
 h_components=
 
 #-------------------------------------------------------------------------------
@@ -2248,37 +2248,37 @@ $as_echo "Component $h_comp requires $h_tmp" >&6; }
   done
 fi
 
-#  while test "x$h_tmp" != x; do
-#    changequote(,)
-#    # Get next component from the back of the list.
-#    h_comp=`echo $h_tmp | sed 's%.*[ 	][ 	]*%%'`
-#
-#    # Remove this component from the back of the list.
-#    h_tmp=`echo $h_tmp | sed -ne "s%[ 	][ 	]*$h_comp\$%%p"`
-#    changequote([,])
-#
-#    # Put this component on the grand list of components.
-#    HD_SELECTED="$HD_SELECTED$h_comp "
-#
-#    # Find the configuration directory.
-#    if test -f $h_top/$h_comp/BUILD_DIR/$hd_conf_file; then
-#      h_dir=$h_top/$h_comp/BUILD_DIR
-#    else
-#      AC_MSG_ERROR(Unable to find a configuration dir for $h_comp)
-#    fi
-#
-#    # From the configuration directory, extract dependencies. These are the
-#    # names of other components needed by the current component.
-#    h_dep=`$hd_scanenv $h_dir/$hd_conf_file DEPENDENCIES`
-#
-#    # Put these dependencies onto the back the list of components so
-#    # that they too can be handled in this loop.
-#    if test "x$h_dep" != x; then h_tmp="$h_tmp $h_dep"; fi
-#
-#    # Put the current configuration directory into the output
-#    # configuration directory list.
-#    h_config_dir_list="$h_dir $h_config_dir_list"
-#  done
+ # while test "x$h_tmp" != x; do
+ #   changequote(,)
+ #   # Get next component from the back of the list.
+ #   h_comp=`echo $h_tmp | sed 's%.*[ 	][ 	]*%%'`
+
+ #   # Remove this component from the back of the list.
+ #   h_tmp=`echo $h_tmp | sed -ne "s%[ 	][ 	]*$h_comp\$%%p"`
+ #   changequote([,])
+
+ #   # Put this component on the grand list of components.
+ #   HD_SELECTED="$HD_SELECTED$h_comp "
+
+ #   # Find the configuration directory.
+ #   if test -f $h_top/$h_comp/BUILD_DIR/$hd_conf_file; then
+ #     h_dir=$h_top/$h_comp/BUILD_DIR
+ #   else
+ #     AC_MSG_ERROR(Unable to find a configuration dir for $h_comp)
+ #   fi
+
+ #   # From the configuration directory, extract dependencies. These are the
+ #   # names of other components needed by the current component.
+ #   h_dep=`$hd_scanenv $h_dir/$hd_conf_file DEPENDENCIES`
+
+ #   # Put these dependencies onto the back the list of components so
+ #   # that they too can be handled in this loop.
+ #   if test "x$h_dep" != x; then h_tmp="$h_tmp $h_dep"; fi
+
+ #   # Put the current configuration directory into the output
+ #   # configuration directory list.
+ #   h_config_dir_list="$h_dir $h_config_dir_list"
+ # done
 
 # Eliminate duplicates from list of selected components.
 h_tmp=
@@ -2450,11 +2450,11 @@ for dir in $HD_SELECTED; do
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: glast component requires our copy of readline" >&5
 $as_echo "glast component requires our copy of readline" >&6; }
      fi
-     force_readline_build=no
+     force_readline_build=yes
      hoops_required=yes
      st_stream_required=yes
-     tcl_required=no
-     tk_required=no
+     tcl_required=yes
+     tk_required=yes
      xpa_required=yes
   fi
   if test `echo $dir | grep -c nustar` -ne 0; then
