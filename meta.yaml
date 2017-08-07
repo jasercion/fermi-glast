@@ -13,7 +13,7 @@ requirements:
     - fermi-heacore
     - fermi-f2c
     - fermi-minuit2
-    - python2.7
+    - python
     - astropy
     - cppunit
     - clhep
