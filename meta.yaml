@@ -28,6 +28,8 @@ requirements:
     - scipy
     - swig
     - xerces-c
+    - healpix_cxx
+    - wcslib
 
   run:
     - fermi-heacore
@@ -47,3 +49,6 @@ requirements:
     - scipy
       # - swig
     - xerces-c
+    - healpix_cxx
+    - wcslib
+
