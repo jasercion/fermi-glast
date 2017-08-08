@@ -4,7 +4,7 @@
  * various energies.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/BinnedExposureBase.cxx,v 1.1 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/BinnedExposureBase.cxx,v 1.1.2.1 2017/02/01 04:20:08 jasercio Exp $
  */
 
 #include <cmath>

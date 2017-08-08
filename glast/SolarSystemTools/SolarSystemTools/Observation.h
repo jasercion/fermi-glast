@@ -3,7 +3,7 @@
  * @brief Extending the Likelihood Observation to work with SolarSystemTools
  * @author G. Johannesson
  *
- * $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/Observation.h,v 1.1.1.1 2012/06/25 17:19:30 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/Observation.h,v 1.1.1.1 2012/06/25 17:19:30 areustle Exp $
  */
 
 #ifndef SolarSystemTools_Observation_h
@@ -27,7 +27,7 @@ namespace SolarSystemTools {
  *
  * @author G. Johannesson
  *
- * $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/Observation.h,v 1.1.1.1 2012/06/25 17:19:30 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/Observation.h,v 1.1.1.1 2012/06/25 17:19:30 areustle Exp $
  */
 
 class Observation : public Likelihood::Observation {

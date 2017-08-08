@@ -1580,6 +1580,9 @@ int main(int argc, char** argv) {
 }
 /******************************************************************************
  * $Log: hd_install.c,v $
+ * Revision 1.11.36.5  2017/02/01 04:26:24  jasercio
+ * Updates from ScienceTools-v11r5p0-slac-20161104
+ *
  * Revision 1.15  2016/09/12 14:44:43  jasercio
  * Synchronization with with El Capitan patch release 20160831
  *

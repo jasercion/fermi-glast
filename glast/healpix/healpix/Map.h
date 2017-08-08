@@ -3,7 +3,7 @@
 
 @author M. Roth 
 
-$Header: /heacvs/glast/ScienceTools/glast/healpix/healpix/Map.h,v 1.7 2017/01/29 01:48:43 jasercio Exp $
+$Header: /glast/ScienceTools/glast/healpix/healpix/Map.h,v 1.1.1.4.6.4 2017/02/01 04:27:01 jasercio Exp $
 */
 #include <string>
 #include <vector>

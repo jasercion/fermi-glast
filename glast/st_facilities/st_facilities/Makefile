@@ -15,6 +15,7 @@ HD_INSTALL_HEADERS      = Bilinear.h \
                           Util.h \
                           Timer.h \
                           dgaus8.h \
-                          libStApiExports.h
+                          libStApiExports.h \
+			  RootFinder.h
 
 include ${HD_STD_MAKEFILE}

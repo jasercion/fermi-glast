@@ -3,7 +3,7 @@
  * @brief Wrapper for GSL root finder
  * @author M. Wood
  *
- * $Header: /heacvs/glast/ScienceTools/glast/st_facilities/st_facilities/RootFinder.h,v 1.2 2017/01/29 01:48:46 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/st_facilities/st_facilities/RootFinder.h,v 1.2.2.1 2017/02/01 04:28:07 jasercio Exp $
  */
 
 #ifndef st_facilities_RootFinder_h

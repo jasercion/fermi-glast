@@ -1,7 +1,7 @@
 /** @file PySkySpectrum.h
 @brief declare class PySkySpectrum
 
-$Header: /heacvs/glast/ScienceTools/glast/skymaps/skymaps/PySkySpectrum.h,v 1.3 2016/09/12 15:03:34 jasercio Exp $
+$Header: /glast/ScienceTools/glast/skymaps/skymaps/PySkySpectrum.h,v 1.2.2.2 2017/02/01 04:23:57 jasercio Exp $
 
 */
 

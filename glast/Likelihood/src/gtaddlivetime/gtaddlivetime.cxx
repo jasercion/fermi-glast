@@ -3,7 +3,7 @@
  * @brief Create an Exposure hypercube.
  * @author J. Chiang
  *
- *  $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/gtaddlivetime/gtaddlivetime.cxx,v 1.6 2016/09/12 14:50:22 jasercio Exp $
+ *  $Header: /glast/ScienceTools/glast/Likelihood/src/gtaddlivetime/gtaddlivetime.cxx,v 1.4.6.3 2017/02/01 04:26:59 jasercio Exp $
  */
 
 #include <cstdlib>

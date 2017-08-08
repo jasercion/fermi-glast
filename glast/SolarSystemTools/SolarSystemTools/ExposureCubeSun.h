@@ -3,7 +3,7 @@
  * @brief Exposure time hypercube.
  * @author G. Johannesson <gudlaugu@glast2.stanford.edu>
  *
- * $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/ExposureCubeSun.h,v 1.1.1.2 2012/09/10 18:39:14 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/ExposureCubeSun.h,v 1.1.1.2 2012/09/10 18:39:14 areustle Exp $
  */
 
 #ifndef SolarSystemTools_ExposureCubeSun_h
@@ -35,7 +35,7 @@ namespace SolarSystemTools {
  *
  * @author G. Johannesson
  *
- * $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/ExposureCubeSun.h,v 1.1.1.2 2012/09/10 18:39:14 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/ExposureCubeSun.h,v 1.1.1.2 2012/09/10 18:39:14 areustle Exp $
  */
 
 class ExposureCubeSun {

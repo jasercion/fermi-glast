@@ -3,7 +3,7 @@
  * @brief Implementation for the LogGaussian Function class
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/LogGaussian.cxx,v 1.4 2016/11/08 21:05:51 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/LogGaussian.cxx,v 1.1.1.1.6.10 2017/02/01 04:19:55 jasercio Exp $
  */
 
 #include <cmath>

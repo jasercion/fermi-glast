@@ -4,7 +4,7 @@
  * map binnen in solar angles and a binned exposure map
  * @author G. Johannesson
  *
- * $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/SolarTemplate.h,v 1.1.1.1 2012/06/25 17:19:30 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/SolarTemplate.h,v 1.1.1.1 2012/06/25 17:19:30 areustle Exp $
  */
 
 #ifndef SolarSystemTools_SolarTemplate_h

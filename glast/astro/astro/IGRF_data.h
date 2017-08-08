@@ -4,7 +4,7 @@
  * IGRF-11 model.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/astro/astro/IGRF_data.h,v 1.1.1.1 2012/06/25 17:19:33 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/astro/astro/IGRF_data.h,v 1.1.1.1 2012/06/25 17:19:33 areustle Exp $
  */
 
 #ifndef astro_IGRF_data_h

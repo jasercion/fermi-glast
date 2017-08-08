@@ -1,7 +1,7 @@
 /**
  * @file FitScanner.cxx
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/FitScanner.cxx,v 1.4 2017/01/29 01:48:40 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/FitScanner.cxx,v 1.1.2.2 2017/02/01 04:19:56 jasercio Exp $
  */
 
 

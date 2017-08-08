@@ -3,7 +3,7 @@
  * @brief Functionality to deal with source maps extracted from BinnedLikelihood
  * @author E. Charles, (from BinnedLikelihood by J. Chiang)
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/SourceMapCache.h,v 1.1 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/SourceMapCache.h,v 1.1.2.1 2017/02/01 04:22:06 jasercio Exp $
  */
 
 #ifndef Likelihood_SourceMapCache_h

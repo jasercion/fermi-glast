@@ -1,5 +1,5 @@
 #
-# $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/pfiles/gtltsumsun.par,v 1.1.1.1 2012/09/12 23:41:17 areustle Exp $
+# $Header: /glast/ScienceTools/glast/SolarSystemTools/pfiles/gtltsumsun.par,v 1.1.1.1 2012/09/12 23:41:17 areustle Exp $
 #
 infile1,f,a,"",,,"Livetime cube 1 or list of files"
 infile2,f,a,"none",,,"Livetime cube 2"

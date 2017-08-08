@@ -3,7 +3,7 @@
  * @brief Adds diffuse response information for desired components.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/diffuseResponses/diffuseResponses.cxx,v 1.9 2016/09/12 14:50:23 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/diffuseResponses/diffuseResponses.cxx,v 1.7.2.4 2017/02/01 04:27:32 jasercio Exp $
  */
 
 #include <cmath>

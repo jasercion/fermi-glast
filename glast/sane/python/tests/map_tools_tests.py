@@ -4,7 +4,7 @@ Exercise the map_tools applications.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/sane/python/tests/map_tools_tests.py,v 1.1.1.1 2009/09/22 19:04:19 elwinter Exp $
+# $Header: /glast/ScienceTools/glast/sane/python/tests/map_tools_tests.py,v 1.1.1.1 2009/09/22 19:04:19 elwinter Exp $
 #
 
 from setPaths import *

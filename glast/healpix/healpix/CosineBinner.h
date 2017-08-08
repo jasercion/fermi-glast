@@ -3,7 +3,7 @@
 
 @author T. Burnett
 
-$Header: /heacvs/glast/ScienceTools/glast/healpix/healpix/CosineBinner.h,v 1.1.1.3 2011/03/20 19:25:02 elwinter Exp $
+$Header: /glast/ScienceTools/glast/healpix/healpix/CosineBinner.h,v 1.1.1.3 2011/03/20 19:25:02 elwinter Exp $
 */
 
 #ifndef healpix_CosineBinner_h

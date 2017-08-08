@@ -4,7 +4,7 @@
  * uses astro::ProjBase for indexing its internal representation.
  * @author E. Charles, from J. Chiang WcsMap2
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/ProjMap.h,v 1.1 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/ProjMap.h,v 1.1.2.1 2017/02/01 04:22:02 jasercio Exp $
  */
 
 #ifndef Likelihood_ProjMap_h

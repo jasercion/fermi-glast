@@ -16,6 +16,7 @@ HD_CXXLIBS              = ${HD_LFLAGS} \
                           -leblAtten \
                           ${GT_FLUX_LIBS} \
                           ${GT_XML_LIBS} \
-                          ${GT_STD_CXXLIBS}
+                          ${GT_STD_CXXLIBS} \
+			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx
 
 include ${HD_STD_MAKEFILE}

@@ -3,7 +3,7 @@
  * @brief Prototype standalone application for the Likelihood tool.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/likelihood/likelihood.cxx,v 1.11 2016/11/08 21:05:52 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/likelihood/likelihood.cxx,v 1.1.1.31.2.3 2017/02/01 04:27:45 jasercio Exp $
  */
 
 #ifdef TRAP_FPE

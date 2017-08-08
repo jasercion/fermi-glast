@@ -1,7 +1,7 @@
 /**
  * @file CountsMapHealpix.cxx
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/CountsMapHealpix.cxx,v 1.2 2017/01/29 01:48:40 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/CountsMapHealpix.cxx,v 1.2.2.2 2017/05/10 14:27:04 jasercio Exp $
  */
 
 #include <algorithm>
@@ -37,8 +37,6 @@
 #include "Likelihood/CountsMapHealpix.h"
 #include "Likelihood/HistND.h"
 
-#include "healpix/HealpixRegion.h"
-
 namespace Likelihood {
 
 
@@ -66,8 +64,8 @@ namespace Likelihood {
       m_solidAngle(rhs.m_solidAngle),
       m_pixelSize(rhs.m_pixelSize),
       m_nPixels(rhs.m_nPixels){
-    m_healpixProj = static_cast<const astro::HealpixProj*>(m_proj);
-    m_hpx_binner = static_cast<const evtbin::HealpixBinner*>(m_hist->getBinners()[0]);    
+    m_healpixProj = static_cast<astro::HealpixProj*>(m_proj);
+    m_hpx_binner = const_cast<evtbin::HealpixBinner*>(static_cast<const evtbin::HealpixBinner*>(m_hist->getBinners()[0]));    
   }
 
   CountsMapHealpix::CountsMapHealpix(const CountsMapHealpix & rhs,
@@ -76,8 +74,8 @@ namespace Likelihood {
     m_solidAngle(rhs.m_solidAngle),
     m_pixelSize(rhs.m_pixelSize),
     m_nPixels(rhs.m_nPixels){    
-    m_healpixProj = static_cast<const astro::HealpixProj*>(m_proj);
-    m_hpx_binner = static_cast<const evtbin::HealpixBinner*>(m_hist-> getBinners()[0]);
+    m_healpixProj = static_cast<astro::HealpixProj*>(m_proj);
+    m_hpx_binner = const_cast<evtbin::HealpixBinner*>(static_cast<const evtbin::HealpixBinner*>(m_hist-> getBinners()[0]));
   }
 
   CountsMapHealpix::~CountsMapHealpix() throw() {;}

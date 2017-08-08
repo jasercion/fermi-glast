@@ -4,7 +4,7 @@
 @brief header file for EventMap.cxx
 @author Eric Charles
 
-$Header: /heacvs/glast/ScienceTools/glast/evtUtils/evtUtils/EventMap.h,v 1.1.1.3 2012/01/17 17:18:05 elwinter Exp $
+$Header: /glast/ScienceTools/glast/evtUtils/evtUtils/EventMap.h,v 1.1.1.3 2012/01/17 17:18:05 elwinter Exp $
 */
 
 #ifndef EventUtils_EventMap_h

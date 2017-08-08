@@ -3,7 +3,7 @@
  * @brief Gaussian class declaration
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/optimizers/optimizers/Gaussian.h,v 1.4 2016/11/08 20:32:40 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/optimizers/optimizers/Gaussian.h,v 1.1.1.2.2.6 2017/02/01 04:15:49 jasercio Exp $
  */
 
 #ifndef optimizers_Gaussian_h

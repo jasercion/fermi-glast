@@ -2,7 +2,7 @@
  * @file Bilinear.h
  * @brief Definition of interpolating class Bilinear.
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/latResponse/Bilinear.h,v 1.1.1.3 2011/03/20 19:24:51 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/latResponse/Bilinear.h,v 1.1.1.3 2011/03/20 19:24:51 elwinter Exp $
  */
 
 #ifndef latResponse_Bilinear_h

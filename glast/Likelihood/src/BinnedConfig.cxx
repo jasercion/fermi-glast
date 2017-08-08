@@ -3,7 +3,7 @@
  * @brief Classes to store configuration for BinnedLikelihood fitting
  * @author E. Charles, from code in SourceMap by J. Chiang and M. Wood.
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/BinnedConfig.cxx,v 1.1 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/BinnedConfig.cxx,v 1.1.2.1 2017/02/01 04:19:57 jasercio Exp $
  */
 
 #include "Likelihood/BinnedConfig.h"

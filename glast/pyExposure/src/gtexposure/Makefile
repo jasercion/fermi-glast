@@ -26,7 +26,7 @@ HD_CXXLIBS              = ${HD_LFLAGS} \
                           -llatResponse \
                           -ldc1aResponse \
                           -ltestResponse \
-			  -lwcs -lgsl -lgslcblas -lhealpix_cxx
+			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx
 
 HD_INSTALL_HELP         = gtexposure.txt
 

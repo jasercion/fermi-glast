@@ -3,7 +3,7 @@
  * @brief Create an Exposure hypercube.
  * @author J. Chiang
  *
- *  $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/makeExposureCube/makeExposureCube.cxx,v 1.8 2016/09/12 14:50:21 jasercio Exp $
+ *  $Header: /glast/ScienceTools/glast/Likelihood/src/makeExposureCube/makeExposureCube.cxx,v 1.1.1.29.2.3 2017/02/01 04:24:12 jasercio Exp $
  */
 
 #include <cstdio>

@@ -6,7 +6,7 @@
  *
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/dataSubselector/dataSubselector/BitMaskCut.h,v 1.3 2016/09/12 14:46:53 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/dataSubselector/dataSubselector/BitMaskCut.h,v 1.1.1.2.2.3 2017/02/01 04:24:46 jasercio Exp $
  */
 
 #ifndef dataSubselector_BitMaskCut_h

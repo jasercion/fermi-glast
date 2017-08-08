@@ -1,7 +1,7 @@
 /** @file IsotropicSpectrum.h
     @brief declare class IsotropicSpectrum
 
-$Header: /heacvs/glast/ScienceTools/glast/skymaps/skymaps/IsotropicSpectrum.h,v 1.3 2016/09/12 15:03:32 jasercio Exp $
+$Header: /glast/ScienceTools/glast/skymaps/skymaps/IsotropicSpectrum.h,v 1.2.2.2 2017/02/01 04:23:55 jasercio Exp $
 
 */
 #ifndef skymaps_IsotropicSpectrum_h

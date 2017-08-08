@@ -5,7 +5,7 @@ System tests for Science Tools
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/sane/python/tests/default_tests.py,v 1.1.1.3 2011/03/20 19:25:00 elwinter Exp $
+# $Header: /glast/ScienceTools/glast/sane/python/tests/default_tests.py,v 1.1.1.3 2011/03/20 19:25:00 elwinter Exp $
 #
 
 import os

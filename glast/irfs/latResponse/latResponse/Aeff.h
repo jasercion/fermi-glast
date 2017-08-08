@@ -3,7 +3,7 @@
  * @brief Aeff class declaration for post-handoff review IRFs.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/latResponse/Aeff.h,v 1.1 2016/11/04 19:11:35 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/latResponse/Aeff.h,v 1.1.2.1 2017/02/01 04:23:59 jasercio Exp $
  */
   
 #ifndef latResponse_Aeff_h

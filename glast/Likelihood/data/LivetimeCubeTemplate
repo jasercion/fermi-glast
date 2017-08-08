@@ -1,5 +1,5 @@
 # Definition of Livetime cube file (see LS-003)
-# $Header: /heacvs/glast/ScienceTools/glast/Likelihood/data/LivetimeCubeTemplate,v 1.5 2016/11/08 21:05:53 jasercio Exp $
+# $Header: /glast/ScienceTools/glast/Likelihood/data/LivetimeCubeTemplate,v 1.1.1.4.6.2 2017/02/01 04:15:00 jasercio Exp $
 
 SIMPLE  = T                        / file does conform to FITS standard
 BITPIX  = 8                        / number of bits per data pixel

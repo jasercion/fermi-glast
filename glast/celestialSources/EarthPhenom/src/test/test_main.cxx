@@ -1,7 +1,7 @@
 /**  @file test_main.cxx
 @brief EarthPhenom test program
 
-$Header: /heacvs/glast/ScienceTools/glast/celestialSources/EarthPhenom/src/test/test_main.cxx,v 1.1.1.2 2013/01/14 16:40:51 jasercio Exp $
+$Header: /glast/ScienceTools/glast/celestialSources/EarthPhenom/src/test/test_main.cxx,v 1.1.1.2 2013/01/14 16:40:51 jasercio Exp $
 */
 
 #include "flux/SpectrumFactoryTable.h"

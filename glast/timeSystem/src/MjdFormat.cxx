@@ -27,9 +27,6 @@ namespace {
   */
   class MjdFormat : public TimeFormat<Mjd> {
     public:
-	  /** \brief User defined default constructor
-	  */
-//	  MjdFormat(){};
       /** \brief Convert date and time into an MJD number, and return it.
           \param datetime Date and time to convert.
       */
@@ -57,9 +54,6 @@ namespace {
   */
   class Mjd1Format : public TimeFormat<Mjd1> {
     public:
-	  /** \brief User defined default constructor
-	  */
-//	  Mjd1Format(){};
       /** \brief Convert date and time into an MJD number, and return it.
           \param datetime Date and time to convert.
       */
@@ -87,9 +81,6 @@ namespace {
   */
   class JdFormat : public TimeFormat<Jd> {
     public:
-	  /** \brief User defined default constructor
-	  */
-//	  JdFormat(){};
       /** \brief Convert date and time into a JD number, and return it.
           \param datetime Date and time to convert.
       */
@@ -117,9 +108,6 @@ namespace {
   */
   class Jd1Format : public TimeFormat<Jd1> {
     public:
-	  /** \brief User defined default constructor
-	  */
-//	  Jd1Format(){};
       /** \brief Convert date and time into a JD number, and return it.
           \param datetime Date and time to convert.
       */

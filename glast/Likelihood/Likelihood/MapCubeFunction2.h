@@ -3,7 +3,7 @@
  * @brief Encapsulation of a 3D FITS image.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/MapCubeFunction2.h,v 1.4 2016/11/08 21:05:52 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/MapCubeFunction2.h,v 1.1.1.2.6.6 2017/02/01 04:22:01 jasercio Exp $
  */
 
 #ifndef Likelihood_MapCubeFunction2_h

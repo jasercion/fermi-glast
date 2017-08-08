@@ -1,7 +1,7 @@
 /**
  * @file CountsMapBase.h
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/CountsMapBase.h,v 1.1 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/CountsMapBase.h,v 1.1.2.1 2017/02/01 04:22:04 jasercio Exp $
  */
 
 #ifndef Likelihood_CountsMapBase_h

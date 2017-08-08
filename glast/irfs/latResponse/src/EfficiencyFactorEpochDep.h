@@ -4,7 +4,7 @@
  *
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/EfficiencyFactorEpochDep.h,v 1.1.1.1 2013/07/22 20:11:19 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/EfficiencyFactorEpochDep.h,v 1.1.1.1 2013/07/22 20:11:19 jasercio Exp $
  */
 
 #ifndef latResponse_EfficiencyFactorEpochDep_h

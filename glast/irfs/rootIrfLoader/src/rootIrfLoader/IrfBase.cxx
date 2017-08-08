@@ -3,7 +3,7 @@
  * @brief Base class for irfInterface wrapper classes for use from ROOT
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/rootIrfLoader/src/rootIrfLoader/IrfBase.cxx,v 1.1.1.2 2011/03/20 19:24:51 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/rootIrfLoader/src/rootIrfLoader/IrfBase.cxx,v 1.1.1.2 2011/03/20 19:24:51 elwinter Exp $
  */
 
 #include <algorithm>

@@ -6,7 +6,7 @@
  *
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/celestialSources/eblAtten/src/Primack05.cxx,v 1.1.1.2 2011/03/20 19:24:56 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/celestialSources/eblAtten/src/Primack05.cxx,v 1.1.1.2 2011/03/20 19:24:56 elwinter Exp $
  */
 
 #include <algorithm>

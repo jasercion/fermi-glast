@@ -4,7 +4,7 @@
  * from solar binned exposure and solar profile
  * @author G. Johannesson
  *
- * $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/src/SolarTemplate.cxx,v 1.4 2016/11/08 19:52:09 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/SolarSystemTools/src/SolarTemplate.cxx,v 1.1.1.2.6.4 2017/02/01 04:21:27 jasercio Exp $
  */
 
 #include <cmath>

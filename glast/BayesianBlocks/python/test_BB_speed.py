@@ -5,7 +5,7 @@ function of sample size.
 @author J. Chiang
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/BayesianBlocks/python/test_BB_speed.py,v 1.4 2016/11/08 19:52:04 jasercio Exp $
+# $Header: /glast/ScienceTools/glast/BayesianBlocks/python/test_BB_speed.py,v 1.1.2.2 2017/02/01 04:27:27 jasercio Exp $
 #
 import sys
 import time

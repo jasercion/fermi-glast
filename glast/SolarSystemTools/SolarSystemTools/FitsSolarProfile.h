@@ -3,7 +3,7 @@
  * @brief Access to solar intensity as a function of angle and energy
  * @author G. Johannesson
  *
- * $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/FitsSolarProfile.h,v 1.1.1.1 2012/06/25 17:19:30 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/FitsSolarProfile.h,v 1.1.1.1 2012/06/25 17:19:30 areustle Exp $
  */
 
 #ifndef SolarSystemTools_FitsSolarProfile_h
@@ -22,7 +22,7 @@ namespace SolarSystemTools {
  *
  * @author G. Johannesson
  *
- * $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/FitsSolarProfile.h,v 1.1.1.1 2012/06/25 17:19:30 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/FitsSolarProfile.h,v 1.1.1.1 2012/06/25 17:19:30 areustle Exp $
  */
 
 class FitsSolarProfile : public SolarProfile {

@@ -6,7 +6,7 @@
  *
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/dataSubselector/src/VersionCut.cxx,v 1.4 2016/11/08 19:52:02 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/dataSubselector/src/VersionCut.cxx,v 1.1.2.4 2017/02/01 04:28:20 jasercio Exp $
  */
 
 #include <sstream>

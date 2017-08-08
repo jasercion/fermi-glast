@@ -1,4 +1,4 @@
-# $Id: SourceLibraryDocumentEditor.py,v 1.3 2016/09/12 14:50:47 jasercio Exp $
+# $Id: SourceLibraryDocumentEditor.py,v 1.1.1.1.6.5 2017/02/01 04:22:16 jasercio Exp $
 
 #******************************************************************************
 

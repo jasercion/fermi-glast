@@ -8,7 +8,7 @@
  *
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/EfficiencyFactor.h,v 1.3 2016/09/12 15:22:56 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/EfficiencyFactor.h,v 1.1.1.3.2.5 2017/02/01 04:23:18 jasercio Exp $
  */
 
 #ifndef latResponse_EfficiencyFactor_h

@@ -5,7 +5,7 @@ Exercise rspgen.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/sane/python/tests/rspgen_tests.py,v 1.1.1.3 2011/03/20 19:25:00 elwinter Exp $
+# $Header: /glast/ScienceTools/glast/sane/python/tests/rspgen_tests.py,v 1.1.1.3 2011/03/20 19:25:00 elwinter Exp $
 #
 
 from setPaths import *

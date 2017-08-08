@@ -4,7 +4,7 @@
  * 
  * @author J. Chiang <jchiang@slac.stanford.edu>
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/MapBase.h,v 1.1.1.7 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/MapBase.h,v 1.1.1.6.6.1 2017/02/01 04:21:54 jasercio Exp $
  */
 
 #ifndef Likelihood_MapBase_h

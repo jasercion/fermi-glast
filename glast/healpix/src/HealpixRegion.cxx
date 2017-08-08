@@ -1,7 +1,7 @@
 /** @file HealpixRegion.cxx
 @brief implementation of the class HealpixProj
 
-$Header: /heacvs/glast/ScienceTools/glast/healpix/src/HealpixRegion.cxx,v 1.1 2016/11/04 19:11:43 jasercio Exp $
+$Header: /glast/ScienceTools/glast/healpix/src/HealpixRegion.cxx,v 1.1.2.1 2017/02/01 04:26:22 jasercio Exp $
 */
 
 // Include files

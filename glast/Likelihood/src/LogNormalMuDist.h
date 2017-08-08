@@ -5,7 +5,7 @@
  * 
  * @author J. Chiang <jchiang@slac.stanford.edu>
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/LogNormalMuDist.h,v 1.5 2016/11/08 21:05:50 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/LogNormalMuDist.h,v 1.1.1.2.6.10 2017/02/01 04:20:07 jasercio Exp $
  */
 
 #ifndef Likelihood_LogNormalMuDist_h

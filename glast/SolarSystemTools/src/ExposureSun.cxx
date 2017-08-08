@@ -2,7 +2,7 @@
     @brief Implementation of class ExposureSun
 		@author G. Johannesson
     
-		$Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/src/ExposureSun.cxx,v 1.3 2016/11/08 19:52:09 jasercio Exp $
+		$Header: /glast/ScienceTools/glast/SolarSystemTools/src/ExposureSun.cxx,v 1.1.1.2.6.3 2017/02/01 04:21:27 jasercio Exp $
 */
 #include "SolarSystemTools/ExposureSun.h"
 #include "healpix/HealpixArrayIO.h"

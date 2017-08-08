@@ -1,7 +1,7 @@
 /** @file PsfSkySpectrum.h
 @brief declare PsfSkySpectrum.
 
-$Header: /heacvs/glast/ScienceTools/glast/skymaps/skymaps/PsfSkySpectrum.h,v 1.3 2016/09/12 15:03:33 jasercio Exp $
+$Header: /glast/ScienceTools/glast/skymaps/skymaps/PsfSkySpectrum.h,v 1.2.2.2 2017/02/01 04:23:55 jasercio Exp $
 */
 #ifndef skymaps_PsfSkySpectrum_h
 #define skymaps_PsfSkySpectrum_h

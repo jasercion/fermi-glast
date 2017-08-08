@@ -6,7 +6,7 @@
  *
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/PsfIntegralCache.h,v 1.1.1.5 2011/03/20 19:24:50 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/PsfIntegralCache.h,v 1.1.1.5 2011/03/20 19:24:50 elwinter Exp $
  */
 
 #ifndef latResponse_PsfIntegralCache_h

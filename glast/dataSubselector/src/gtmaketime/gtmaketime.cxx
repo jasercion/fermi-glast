@@ -5,7 +5,7 @@
  * event data file.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/dataSubselector/src/gtmaketime/gtmaketime.cxx,v 1.9 2016/11/08 19:52:10 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/dataSubselector/src/gtmaketime/gtmaketime.cxx,v 1.6.6.4 2017/02/01 04:25:24 jasercio Exp $
  */
 
 #include <cstdio>

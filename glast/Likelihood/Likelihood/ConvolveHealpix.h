@@ -3,7 +3,7 @@
  * @brief Functions to perform convolutions of HEALPix maps
  * @author E. Charles
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/ConvolveHealpix.h,v 1.2 2017/01/29 01:49:33 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/ConvolveHealpix.h,v 1.2.2.1 2017/02/01 04:21:56 jasercio Exp $
  */
 
 #ifndef Likelihood_ConvolveHealpix_h

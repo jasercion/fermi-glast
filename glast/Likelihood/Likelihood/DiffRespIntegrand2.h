@@ -7,7 +7,7 @@
  * @author S. Fegan <sfegan@llr.in2p3.fr>, 
  *         J. Chiang <jchiang@slac.stanford.edu>
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/DiffRespIntegrand2.h,v 1.1.1.1 2012/01/17 17:18:14 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/DiffRespIntegrand2.h,v 1.1.1.1 2012/01/17 17:18:14 elwinter Exp $
  */
 
 #ifndef Likelihood_DiffRespIntegrand2_h

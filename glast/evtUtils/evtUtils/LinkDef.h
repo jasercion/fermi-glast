@@ -1,7 +1,7 @@
 // -*- Mode: c++ -*-
 /** @file LinkDef.h
     @brief for rootcint
- $Header: /heacvs/glast/ScienceTools/glast/evtUtils/evtUtils/LinkDef.h,v 1.1.1.3 2012/01/17 17:18:05 elwinter Exp $
+ $Header: /glast/ScienceTools/glast/evtUtils/evtUtils/LinkDef.h,v 1.1.1.3 2012/01/17 17:18:05 elwinter Exp $
 
 */
 #ifdef __CINT__

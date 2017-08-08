@@ -1,5 +1,5 @@
 # Definition of LAT Event Summary File (FT1)
-# $Header: /heacvs/glast/ScienceTools/glast/pulsarDb/data/timeformat_glast.tpl,v 1.4 2016/11/08 20:32:41 jasercio Exp $
+# $Header: /glast/ScienceTools/glast/pulsarDb/data/timeformat_glast.tpl,v 1.1.1.4.6.3 2017/02/01 04:24:42 jasercio Exp $
 SIMPLE      = T                              / file does conform to FITS standard
 BITPIX      = 8                              / number of bits per data pixel
 NAXIS       = 0                              / number of data axes

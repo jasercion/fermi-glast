@@ -4,7 +4,7 @@
  * the spectral shape.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/celestialSources/genericSources/genericSources/IsotropicFileSpectrum.h,v 1.1.1.1 2011/04/16 14:33:58 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/celestialSources/genericSources/genericSources/IsotropicFileSpectrum.h,v 1.1.1.1 2011/04/16 14:33:58 elwinter Exp $
  */
 
 #ifndef mySpectrum_IsotropicFileSpectrum_h

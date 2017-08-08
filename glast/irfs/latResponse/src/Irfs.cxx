@@ -5,7 +5,7 @@
  * corresponding IRF objects (aeff, psf, edisp) are accessed.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/Irfs.cxx,v 1.3 2016/09/12 15:22:57 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/Irfs.cxx,v 1.1.2.4 2017/02/01 04:23:20 jasercio Exp $
  */
 
 #include "irfUtil/EventTypeMapper.h"

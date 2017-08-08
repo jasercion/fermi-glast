@@ -3,7 +3,7 @@ A module to encapsulate a Likelihood source model xml file.
 
 @author J. Chiang <jchiang@slac.stanford.edu>
 
-$Header: /heacvs/glast/ScienceTools/glast/sane/python/readXml.py,v 1.1.1.2 2011/03/20 19:25:00 elwinter Exp $
+$Header: /glast/ScienceTools/glast/sane/python/readXml.py,v 1.1.1.2 2011/03/20 19:25:00 elwinter Exp $
 """
 import os, sys, string
 from xml.dom import minidom

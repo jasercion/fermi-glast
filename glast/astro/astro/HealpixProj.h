@@ -1,7 +1,7 @@
 /** @file SkyProj.h
 @brief declaration of the class SkyProj
 
-$Header: /heacvs/glast/ScienceTools/glast/astro/astro/HealpixProj.h,v 1.2 2017/01/29 01:49:01 jasercio Exp $
+$Header: /glast/ScienceTools/glast/astro/astro/HealpixProj.h,v 1.2.2.1 2017/02/01 04:26:55 jasercio Exp $
 =======
 */
 

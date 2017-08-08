@@ -14,7 +14,7 @@ HD_CXXLIBS              = ${HD_LFLAGS} \
                           -ldc1aResponse \
                           -lirfInterface \
                           ${GT_STD_CXXLIBS} \
-			  -lwcs -lgsl -lgslcblas -lhealpix_cxx
+			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx
 
 include ${HD_STD_MAKEFILE}
 

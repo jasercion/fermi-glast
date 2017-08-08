@@ -8,7 +8,7 @@
  * copied to skymaps, now derived from skymaps::GtiBase
  *
  * original Header: /nfs/slac/g/glast/ground/cvs/gti/src/Gti.cxx,v 1.10 2006/07/24 20:03:25 jchiang Exp $
- * $Header: /heacvs/glast/ScienceTools/glast/skymaps/src/Gti.cxx,v 1.3 2016/09/12 15:03:35 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/skymaps/src/Gti.cxx,v 1.2.2.2 2017/02/01 04:24:02 jasercio Exp $
  */
 
 #include <algorithm>

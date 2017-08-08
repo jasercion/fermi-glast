@@ -3,7 +3,7 @@
 
 @author M. Roth 
 
-$Header: /heacvs/glast/ScienceTools/glast/healpix/src/AlmOp.cxx,v 1.12 2017/01/29 01:49:02 jasercio Exp $
+$Header: /glast/ScienceTools/glast/healpix/src/AlmOp.cxx,v 1.8.2.7 2017/02/01 04:26:20 jasercio Exp $
 */
 
 #include "healpix/AlmOp.h"

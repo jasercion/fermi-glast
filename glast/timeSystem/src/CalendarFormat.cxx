@@ -331,10 +331,6 @@ namespace {
   */
   class CalendarFormat : public TimeFormat<Calendar> {
     public:
-	  /** \brief User Defined Default Constructor
-	   */
-//	  CalendarFormat(){};
-
       /** \brief Convert date and time to a calendar date, and return it.
           \param datetime Date and time to convert.
       */
@@ -362,10 +358,6 @@ namespace {
   */
   class IsoWeekFormat : public TimeFormat<IsoWeek> {
     public:
-	  /** \brief User Defined Default Constructor
-	   */
-//	  IsoWeekFormat(){};
-
       /** \brief Convert date and time to an ISO week date, and return it.
           \param datetime Date and time to convert.
       */
@@ -402,10 +394,6 @@ namespace {
   */
   class OrdinalFormat : public TimeFormat<Ordinal> {
     public:
-	  /** \brief User Defined Default Constructor
-	  */
-//	  OrdinalFormat(){};
-
       /** \brief Convert date and time to an ordinal date, and return it.
           \param datetime Date and time to convert.
       */

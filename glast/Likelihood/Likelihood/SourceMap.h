@@ -4,7 +4,7 @@
  *        instrument response.
  * @author J. Chiang
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/ScienceTools-scons/Likelihood/Likelihood/SourceMap.h,v 1.74 2016/10/22 04:12:31 echarles Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/ScienceTools-scons/Likelihood/Likelihood/SourceMap.h,v 1.76 2017/04/21 19:57:26 asercion Exp $
  */
 
 #ifndef Likelihood_SourceMap_h
@@ -134,8 +134,12 @@ public:
    /* How the source map is stored */
    inline FileUtils::SrcMapType mapType() const { return m_mapType; }
 
-   /* Flag to indicat that we should save the model */
+   /* Flag to indicate that we should save the model */
    inline bool save_model() const { return m_save_model; }
+
+   /* Flag to indicated that model is out of sync with file */
+   inline bool model_is_local() const { return m_model_is_local; }
+
 
    /* --------------- Class Methods ----------------------*/
 
@@ -144,9 +148,10 @@ public:
       up a lot of memory.       
    */
    void clear_model(bool force=false) {
-     if ( force || !m_save_model ) {
+     if ( force || ( !m_save_model && !m_model_is_local ) ) {
        m_model.clear();
        m_sparseModel.clear();
+       m_model_is_local = false;
      }
    }      
 
@@ -223,7 +228,7 @@ public:
 
    /* The source map model.  This must be multiplied by the spectrum for each pixel 
       and integrated over the energy bin to obtain the predicted counts */
-   const std::vector<float> & model(bool force=false);
+   std::vector<float> & model(bool force=false);
 
    /* These are the 'spectrum' values, I.e., the spectrum evaluated at the energy points */
    const std::vector<double> & specVals(bool force=false);
@@ -259,6 +264,9 @@ public:
 
    /// Set the filename (e.g., b/c we are writing the source map)
    inline void setFilename(const std::string& filename) { m_filename = filename; }
+
+   /// Set value of model_is_local (e.g., b/c we are writing the source map)
+   inline void setModelIsLocal(bool val) { m_model_is_local = val; }
 
 
    /* --------------------- Debugging -------------------- */
@@ -354,6 +362,10 @@ private:
 
    /// Flag to indicate that we should save the model
    bool m_save_model;
+
+   /// Flag to indicated that model is out of sync with file
+   bool m_model_is_local;
+
 
    /// This is the 'source map' data. 
    /// It is not the counts map, but rather the coefficients

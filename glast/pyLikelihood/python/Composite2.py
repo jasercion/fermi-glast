@@ -5,7 +5,7 @@ more natural symantics for use in python alongside other analysis classes.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/pyLikelihood/python/Composite2.py,v 1.4 2016/11/08 21:07:11 jasercio Exp $
+# $Header: /glast/ScienceTools/glast/pyLikelihood/python/Composite2.py,v 1.1.1.2.6.6 2017/02/01 04:25:07 jasercio Exp $
 #
 
 import pyLikelihood as pyLike

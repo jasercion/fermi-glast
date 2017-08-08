@@ -5,7 +5,7 @@
  * 
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/irfInterface/src/IEfficiencyFactor.cxx,v 1.1.1.4 2013/07/22 20:11:20 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/irfInterface/src/IEfficiencyFactor.cxx,v 1.1.1.4 2013/07/22 20:11:20 jasercio Exp $
  */
 
 #include <cmath>

@@ -5,7 +5,7 @@
  *
  * @author J. Chiang <jchiang@slac.stanford.edu>
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/PsfEpochDep.cxx,v 1.6 2016/09/12 15:22:56 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/PsfEpochDep.cxx,v 1.4.2.5 2017/02/01 04:23:17 jasercio Exp $
  */
 
 #include "PsfEpochDep.h"

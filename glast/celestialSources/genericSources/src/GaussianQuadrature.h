@@ -3,7 +3,7 @@
  * @brief Wrapper for dgaus8.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/celestialSources/genericSources/src/GaussianQuadrature.h,v 1.1.1.2 2011/03/20 19:24:54 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/celestialSources/genericSources/src/GaussianQuadrature.h,v 1.1.1.2 2011/03/20 19:24:54 elwinter Exp $
  */
 
 #ifndef genericSources_GaussianQuadrature_h

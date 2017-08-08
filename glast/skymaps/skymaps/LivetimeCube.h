@@ -2,7 +2,7 @@
     @brief definition of the class LivetimeCube
 
     @author T.Burnett
-    $Header: /heacvs/glast/ScienceTools/glast/skymaps/skymaps/LivetimeCube.h,v 1.3 2016/09/12 15:03:34 jasercio Exp $
+    $Header: /glast/ScienceTools/glast/skymaps/skymaps/LivetimeCube.h,v 1.2.2.2 2017/02/01 04:23:56 jasercio Exp $
     copied from:
     /nfs/slac/g/glast/ground/cvs/map_tools/map_tools/Exposure.h,v 1.23 2007/12/11 05:06:57 burnett Exp $
 */

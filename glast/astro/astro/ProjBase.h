@@ -1,7 +1,7 @@
 /** @file ProjBase.h
 @brief declaration of the class ProjBase
 
-$Header: /heacvs/glast/ScienceTools/glast/astro/astro/ProjBase.h,v 1.1 2016/11/04 19:11:39 jasercio Exp $
+$Header: /glast/ScienceTools/glast/astro/astro/ProjBase.h,v 1.1.2.1 2017/02/01 04:26:56 jasercio Exp $
 =======
 */
 

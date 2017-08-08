@@ -4,7 +4,7 @@ Get paths for system tests, move to data subdirectory
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/sane/python/tests/setPaths.py,v 1.4 2016/09/12 15:02:50 jasercio Exp $
+# $Header: /glast/ScienceTools/glast/sane/python/tests/setPaths.py,v 1.1.1.8.2.3 2017/02/01 04:24:40 jasercio Exp $
 #
 
 import os

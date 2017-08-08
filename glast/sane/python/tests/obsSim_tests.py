@@ -5,7 +5,7 @@ Generate test data with obsSim.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/sane/python/tests/obsSim_tests.py,v 1.9 2016/09/12 15:02:49 jasercio Exp $
+# $Header: /glast/ScienceTools/glast/sane/python/tests/obsSim_tests.py,v 1.7.2.3 2017/02/01 04:24:40 jasercio Exp $
 #
 import shutil
 import random

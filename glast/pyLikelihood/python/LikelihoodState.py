@@ -4,7 +4,7 @@
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/pyLikelihood/python/LikelihoodState.py,v 1.4 2016/11/08 21:07:11 jasercio Exp $
+# $Header: /glast/ScienceTools/glast/pyLikelihood/python/LikelihoodState.py,v 1.1.1.4.2.6 2017/02/01 04:25:08 jasercio Exp $
 #
 import pyLikelihood
 

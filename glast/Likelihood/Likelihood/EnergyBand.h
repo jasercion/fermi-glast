@@ -4,7 +4,7 @@
  *
  * @author J. Chiang <jchiang@slac.stanford.edu>
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/EnergyBand.h,v 1.4 2016/11/08 21:05:51 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/EnergyBand.h,v 1.1.1.1.6.6 2017/02/01 04:22:06 jasercio Exp $
  */
 
 #include "optimizers/Function.h"

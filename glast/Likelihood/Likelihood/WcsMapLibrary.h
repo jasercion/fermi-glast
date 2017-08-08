@@ -6,7 +6,7 @@
  * the full path to the FITS file.
  * @author J. Chiang 
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/WcsMapLibrary.h,v 1.1.1.3 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/WcsMapLibrary.h,v 1.1.1.2.6.1 2017/02/01 04:21:58 jasercio Exp $
  */
 
 #ifndef Likelihood_WcsMapLibrary_h

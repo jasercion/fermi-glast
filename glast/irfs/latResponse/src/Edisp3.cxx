@@ -3,7 +3,7 @@
 * @brief Implementation for third generation energy dispersion class.
 * @author J. Chiang
 *
-* $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/Edisp3.cxx,v 1.5 2017/01/29 01:48:38 jasercio Exp $
+* $Header: /glast/ScienceTools/glast/irfs/latResponse/src/Edisp3.cxx,v 1.1.2.5 2017/02/01 04:23:18 jasercio Exp $
 */
 
 #include <cmath>

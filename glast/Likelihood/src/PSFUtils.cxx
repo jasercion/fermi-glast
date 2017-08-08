@@ -3,7 +3,7 @@
  * @brief Functions to  deal with PSF Integration and convolution
  * @author E. Charles, from code in SourceMap by J. Chiang and M. Wood.
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/PSFUtils.cxx,v 1.1 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/PSFUtils.cxx,v 1.1.2.2 2017/05/10 14:27:07 jasercio Exp $
  */
 
 #include "Likelihood/PSFUtils.h"
@@ -843,7 +843,8 @@ namespace Likelihood {
 	std::vector<double> mapIntegrals(energies.size());
 	bool apply_map_corrections = config.applyPsfCorrections() &&
 	  dataMap.withinBounds(dir, energies.at(energies.size()/2), 4);
-	  
+	double psfRadius = maxPsfRadius(pointSrc,dataMap);	  
+
 	//std::vector<Pixel>::const_iterator pixel(pixels.begin());
 	pixel = pixels.begin();
 	for (int j = 0; pixel != pixels.end(); ++pixel, j++) {
@@ -864,7 +865,8 @@ namespace Likelihood {
 					      pixCoords[j],pixelOffsets,ref_pixel_size,config));
 	    // This is the value without the exposure, which we need for the map integrals
 	    double value = psf_value*pixel->solidAngle();
-	    mapIntegrals[k] += value;
+	    if (dir.difference(pixels.at(j).dir())*180./M_PI <= psfRadius)
+	      mapIntegrals[k] += value;
 	    // Now we factor in the exposure
  	    value *= exposure.at(k);
 	    modelmap.at(indx) += value;
@@ -873,7 +875,6 @@ namespace Likelihood {
 	}
 	// We have finished the loop of the pixels, now we apply the map corrections, if requested
 	if ( apply_map_corrections ) {
-	  double psfRadius = maxPsfRadius(pointSrc,dataMap);	  
 	  std::vector<double>::const_iterator energy = energies.begin();
 	  for ( int kk = 0; energy != energies.end(); ++energy, kk++) {
 	    // This is the correction factor for this energy layer
@@ -990,7 +991,8 @@ namespace Likelihood {
 	return -1;
       }      
       if ( compSrc.sourceMapCache() == 0 ) {
-	compSrc.buildSourceMapCache(dataCache,srcMapsFile,drm);
+	CompositeSource& nc_compSrc = const_cast<CompositeSource&>(compSrc);
+	nc_compSrc.buildSourceMapCache(dataCache,srcMapsFile,drm);
       }
       compSrc.fillSummedSourceMap(modelmap);
       if ( compSrc.config().psf_integ_config().verbose() ) {

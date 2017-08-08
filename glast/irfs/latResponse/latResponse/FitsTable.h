@@ -6,7 +6,7 @@
  *
  * @author J. Chiang <jchiang@slac.stanford.edu>
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/latResponse/FitsTable.h,v 1.1.1.7 2016/11/04 19:11:35 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/latResponse/FitsTable.h,v 1.1.1.6.2.1 2017/02/01 04:23:57 jasercio Exp $
  */
 
 #ifndef latResponse_FitsTable_h

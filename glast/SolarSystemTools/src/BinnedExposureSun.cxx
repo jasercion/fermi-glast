@@ -4,7 +4,7 @@
  * various energies and binned in angles from the sun.
  * @author G. Johannesson
  *
- * $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/src/BinnedExposureSun.cxx,v 1.1.1.1 2012/06/25 17:19:30 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/SolarSystemTools/src/BinnedExposureSun.cxx,v 1.1.1.1 2012/06/25 17:19:30 areustle Exp $
  */
 
 #include <cmath>

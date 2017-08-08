@@ -3,7 +3,7 @@
 
 @author T. Burnett <tburnett@u.washington.edu>
 
-$Header: /heacvs/glast/ScienceTools/glast/healpix/healpix/HeallpixMap.h,v 1.1.1.2 2011/03/20 19:25:02 elwinter Exp $
+$Header: /glast/ScienceTools/glast/healpix/healpix/HeallpixMap.h,v 1.1.1.2 2011/03/20 19:25:02 elwinter Exp $
 */
 
 #ifndef healpix_HealpixMap_h

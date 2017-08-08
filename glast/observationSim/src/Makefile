@@ -9,7 +9,8 @@ HD_LIBRARY_SRC_cxx      = ContainerBase.cxx \
                           EventContainer.cxx \
                           LatSc.cxx \
                           ScDataContainer.cxx \
-                          Simulator.cxx
+                          Simulator.cxx \
+			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx
 
 HD_SUBDIRS              = obsSim
 

@@ -6,7 +6,7 @@ reconstructions should be identical.
 @author J. Chiang
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/BayesianBlocks/python/test_BB.py,v 1.4 2016/11/08 19:52:04 jasercio Exp $
+# $Header: /glast/ScienceTools/glast/BayesianBlocks/python/test_BB.py,v 1.1.2.2 2017/02/01 04:27:30 jasercio Exp $
 #
 import numpy as num
 import numpy.random as ra

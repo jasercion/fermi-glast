@@ -3,7 +3,7 @@
  * @brief Application for creating binned exposure maps.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/gtexpcube2/gtexpcube2.cxx,v 1.5 2016/09/12 14:50:23 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/gtexpcube2/gtexpcube2.cxx,v 1.3.2.4 2017/02/01 04:27:31 jasercio Exp $
  */
 
 #include <cmath>

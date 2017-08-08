@@ -3,7 +3,7 @@
 
 @author B. Lesnick (based on information from http://www.eso.org/science/healpix/) 
 
-$Header: /heacvs/glast/ScienceTools/glast/healpix/healpix/Healpix.h,v 1.6 2016/11/08 19:52:01 jasercio Exp $
+$Header: /glast/ScienceTools/glast/healpix/healpix/Healpix.h,v 1.1.1.3.6.4 2017/02/01 04:27:02 jasercio Exp $
 */
 
 #ifndef healpix_Healpix_h

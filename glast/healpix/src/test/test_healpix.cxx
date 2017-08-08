@@ -3,12 +3,12 @@
 
 @author M. Roth, T. Burnett
 
-$Header: /heacvs/glast/ScienceTools/glast/healpix/src/test/test_healpix.cxx,v 1.11 2016/11/08 19:52:05 jasercio Exp $
+$Header: /glast/ScienceTools/glast/healpix/src/test/test_healpix.cxx,v 1.1.1.5.6.7 2017/02/21 08:37:56 jasercio Exp $
 */
 
 #include "healpix/Map.h"
 // EAC, the error handling has changed
-#include "error_handling.h"
+#include "healpix_cxx/error_handling.h"
 #include "healpix/HealPixel.h"
 #include "TestHealpix.h"
 #include "TestHealpixArray.h"

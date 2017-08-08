@@ -1,7 +1,7 @@
 /** @file HealPixel.cxx
 @brief Implement the HealPixel class
 
-$Header: /heacvs/glast/ScienceTools/glast/healpix/src/HealPixel.cxx,v 1.5 2016/11/08 19:52:02 jasercio Exp $
+$Header: /glast/ScienceTools/glast/healpix/src/HealPixel.cxx,v 1.1.1.3.6.6 2017/02/01 04:26:22 jasercio Exp $
 */
 
 #include "healpix/HealPixel.h" 

@@ -3,7 +3,7 @@
  * @file pyExposure.in
  * @author J. Chiang <jchiang@slac.stanford.edu>
  *
- * $Header: /heacvs/glast/ScienceTools/glast/pyExposure/src/pyExposure.i,v 1.1.1.2 2011/03/20 19:24:45 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/pyExposure/src/pyExposure.i,v 1.1.1.2 2011/03/20 19:24:45 elwinter Exp $
  */
 %module pyExposure
 %{

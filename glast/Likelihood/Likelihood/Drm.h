@@ -5,7 +5,7 @@
  *
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/Drm.h,v 1.1.1.3 2017/05/03 13:51:46 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/Drm.h,v 1.1.1.1.6.2 2017/05/10 14:27:12 jasercio Exp $
  */
 
 #ifndef Likelihood_Drm_h

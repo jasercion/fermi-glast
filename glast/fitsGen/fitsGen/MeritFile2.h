@@ -5,7 +5,7 @@
  * having to generate a temporary file.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/fitsGen/fitsGen/MeritFile2.h,v 1.3 2016/09/12 14:47:38 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/fitsGen/fitsGen/MeritFile2.h,v 1.1.1.3.2.2 2017/02/01 04:25:00 jasercio Exp $
  */
 
 #ifndef fitsGen_MeritFile2_h

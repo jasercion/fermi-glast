@@ -6,7 +6,7 @@
  * computed in Source::fluxDensity(...).
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/gtsrcprob/gtsrcprob.cxx,v 1.4 2016/09/12 14:50:23 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/gtsrcprob/gtsrcprob.cxx,v 1.1.1.19.2.3 2017/02/01 04:28:18 jasercio Exp $
  */
 
 #include <cmath>

@@ -4,7 +4,7 @@
 @brief header file for EventClass.cxx
 @author Eric Charles
 
-$Header: /heacvs/glast/ScienceTools/glast/evtUtils/evtUtils/EventClass.h,v 1.1.1.4 2012/01/17 17:18:05 elwinter Exp $
+$Header: /glast/ScienceTools/glast/evtUtils/evtUtils/EventClass.h,v 1.1.1.4 2012/01/17 17:18:05 elwinter Exp $
 */
 
 

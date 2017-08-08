@@ -3,7 +3,7 @@
  * @brief A source made of a collection of sources.
  * @author E. Charles
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/CompositeSource.cxx,v 1.1 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/CompositeSource.cxx,v 1.1.2.1 2017/02/01 04:20:01 jasercio Exp $
  */
 
 #include "Likelihood/CompositeSource.h"

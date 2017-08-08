@@ -1,4 +1,4 @@
-# $Id: ModelEditor.py,v 1.3 2016/11/08 21:07:11 jasercio Exp $
+# $Id: ModelEditor.py,v 1.1.2.2 2017/02/01 04:16:15 jasercio Exp $
 
 # Python program to allow editing of models for the GLAST LAT
 # likelihood estimator.

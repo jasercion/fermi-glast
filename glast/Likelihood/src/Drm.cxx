@@ -5,7 +5,7 @@
  *
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/Drm.cxx,v 1.4 2016/11/08 21:05:51 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/Drm.cxx,v 1.1.1.2.2.10 2017/05/10 14:27:07 jasercio Exp $
  */
 
 #include <cmath>
@@ -42,7 +42,7 @@ namespace Likelihood {
 
 Drm::Drm(double ra, double dec, const Observation & observation, 
          const std::vector<double> & ebounds, size_t npts) 
-   : m_dir(ra, dec), m_observation(observation), m_npts(npts) {
+  : m_dir(ra, dec), m_observation(observation), m_npts(npts){
    // Prepare the energy bounds array to be used for both true and
    // measured counts bins.
    m_ebounds.resize(ebounds.size());
@@ -104,6 +104,12 @@ void Drm::convolve(const std::vector<double> & true_counts,
 
 void Drm::compute_drm() {
    m_drm.clear();
+   
+   // EAC, Fix this code to use the binning from the livetime cube instead of sampling in cos theta.
+   // Sampling in cos theta can fail for pointed observations where all of the livetime comes 
+   // in a particular cos theta bin.
+   compute_livetime();
+
    for (size_t k(0); k < m_ebounds.size()-1; k++) {
       std::vector<double> row;
       for (size_t kp(0); kp < m_ebounds.size() - 3; kp++) {
@@ -116,11 +122,39 @@ void Drm::compute_drm() {
    }
 }
 
+
+void Drm::compute_livetime() {
+  // This it can be done once for the entire matrix
+  const ExposureCube & expcube = m_observation.expCube();
+  const healpix::CosineBinner& cos_binner = expcube.get_cosine_binner(m_dir);
+  size_t nmu = cos_binner.size();
+  
+  m_costheta_vals.resize(nmu, 0);
+  m_theta_vals.resize(nmu, 0);
+  m_livetime.resize(nmu, 0);
+
+  size_t j(0);
+  for ( std::vector<float>::const_iterator itrcos = cos_binner.begin(); 
+	itrcos != cos_binner.end_costh(); itrcos++, j++) {
+    double cos_theta = cos_binner.costheta(itrcos);
+    m_costheta_vals[j] = cos_theta;
+    m_theta_vals[j] = std::acos(cos_theta)*180./M_PI;
+    m_livetime[j] = *itrcos;
+  }
+
+}
+
+
 double Drm::
 matrix_element(double etrue, double emeas_min, double emeas_max) const {
    const ResponseFunctions & resps(m_observation.respFuncs());
    const ExposureCube & expcube(m_observation.expCube());
    double met((expcube.tstart() + expcube.tstop())/2.);
+
+   size_t nmu = m_livetime.size();
+   if ( nmu == 0 ) {
+     throw std::runtime_error("Drm::matrix_element() called before Drm::compute_livetime()");
+   }
 
    // Use phi-averged exposure
    double phi(-1);
@@ -130,37 +164,30 @@ matrix_element(double etrue, double emeas_min, double emeas_max) const {
    std::vector<bool> phideps;
    std::vector<int> evtTypes;
    std::map<unsigned int, irfInterface::Irfs *>::const_iterator it;
-   for (it = resps.begin(); it != resps.end(); ++it) {
-      phideps.push_back(it->second->aeff()->usePhiDependence());
-      it->second->aeff()->setPhiDependence(false);
-      evtTypes.push_back(it->second->irfID());
-   }
 
-   size_t nmu(20);
-   std::vector<double> mu_vals;
-   double dmu(0.99/(nmu-1.));
-   for (size_t i(0); i < nmu; i++) {
-      mu_vals.push_back(1 - dmu*i);
+   for (it = resps.begin(); it != resps.end(); ++it) {
+       phideps.push_back(it->second->aeff()->usePhiDependence());
+       it->second->aeff()->setPhiDependence(false);
+       evtTypes.push_back(it->second->irfID());
    }
 
    std::vector<double> exposr(nmu, 0);
    std::vector<double> top(nmu, 0);
-   size_t j(0);
-   for (std::vector<double>::const_iterator mu(mu_vals.begin());
-        mu != mu_vals.end(); ++mu, j++) {
-      double theta(std::acos(*mu)*180./M_PI);
-      double livetime(expcube.livetime(m_dir, *mu, phi));
+
+   for ( size_t j(0); j < nmu; j++ ) {
+      double theta = m_theta_vals[j];
+      double livetime = m_livetime[j];
       for (size_t i(0); i < evtTypes.size(); i++) {
          double aeff(resps.aeff(etrue, theta, phi, evtTypes[i], met));
          double edisp(resps.edisp(evtTypes[i]).integral(emeas_min, emeas_max, 
                                                         etrue, theta, phi,
                                                         met));
-         exposr[j] += aeff*livetime;
+	 exposr[j] += aeff*livetime;
          top[j] += edisp*aeff*livetime;
       }
    }
-   double numerator(::integrate(mu_vals, top));
-   double denominator(::integrate(mu_vals, exposr));
+   double numerator(::integrate(m_costheta_vals, top));
+   double denominator(::integrate(m_costheta_vals, exposr));
    double my_disp(0);
    if (numerator != 0) {
       my_disp = numerator/denominator;

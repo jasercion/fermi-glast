@@ -4,7 +4,7 @@ Tests of Pulsar source and pulsar-related tools.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/sane/python/tests/Pulsar_tests.py,v 1.2 2009/09/23 23:26:48 elwinter Exp $
+# $Header: /glast/ScienceTools/glast/sane/python/tests/Pulsar_tests.py,v 1.2 2009/09/23 23:26:48 elwinter Exp $
 #
 import os
 from setPaths import *

@@ -3,7 +3,7 @@
  * @brief Small helper classes to deal with BinnedLikelihood configuration
  * @author E. Charles
 
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/BinnedConfig.h,v 1.1 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/BinnedConfig.h,v 1.1.2.1 2017/02/01 04:21:57 jasercio Exp $
  */
 
 #ifndef Likelihood_BinnedConfig_h

@@ -4,7 +4,7 @@
  * by the Likelihood tool.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/expMap/expMap.cxx,v 1.6 2016/09/12 14:50:22 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/expMap/expMap.cxx,v 1.1.1.31.2.5 2017/02/01 04:24:51 jasercio Exp $
  */
 
 #include <cmath>

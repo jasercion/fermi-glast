@@ -4,7 +4,7 @@ Use Likelihood applications to analyze obsSim data.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/sane/python/tests/Likelihood_tests.py,v 1.8 2016/09/12 15:02:49 jasercio Exp $
+# $Header: /glast/ScienceTools/glast/sane/python/tests/Likelihood_tests.py,v 1.1.1.6.2.3 2017/02/01 04:24:39 jasercio Exp $
 #
 
 from setPaths import *

@@ -5,7 +5,7 @@ Generate test data with dataSubselector.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/sane/python/tests/dataSubselector_tests.py,v 1.3 2016/09/12 15:02:50 jasercio Exp $
+# $Header: /glast/ScienceTools/glast/sane/python/tests/dataSubselector_tests.py,v 1.1.1.4.6.3 2017/02/01 04:24:41 jasercio Exp $
 #
 
 from setPaths import *

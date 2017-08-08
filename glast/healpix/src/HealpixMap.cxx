@@ -1,6 +1,6 @@
 /** @file HealpixMap.cxx
     @brief implement HealpixMap
-$Header: /heacvs/glast/ScienceTools/glast/healpix/src/HealpixMap.cxx,v 1.7 2016/11/08 19:52:02 jasercio Exp $
+$Header: /glast/ScienceTools/glast/healpix/src/HealpixMap.cxx,v 1.4.2.7 2017/02/01 04:26:21 jasercio Exp $
 */
 
 #include "healpix/HealpixMap.h"

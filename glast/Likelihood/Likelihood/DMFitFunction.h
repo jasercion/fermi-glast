@@ -3,7 +3,7 @@
  * @brief Declaration for the DMFit Function class
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/DMFitFunction.h,v 1.4 2016/11/08 21:05:52 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/DMFitFunction.h,v 1.1.1.4.6.6 2017/02/01 04:22:02 jasercio Exp $
  */
 
 #ifndef Likelihood_DMFitFunction_h
@@ -23,7 +23,7 @@ namespace Likelihood {
  *
  * @author J. Cohen-Tanugi, based on the DMFit package by S. Profumo and T. Jeltema
  *    
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/DMFitFunction.h,v 1.4 2016/11/08 21:05:52 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/DMFitFunction.h,v 1.1.1.4.6.6 2017/02/01 04:22:02 jasercio Exp $
  */
     
 class DMFitFunction : public optimizers::Function {

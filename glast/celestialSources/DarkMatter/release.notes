@@ -2,7 +2,7 @@
 *   Package DarkMatter
 *   Managers:  <a href="mailto:cohen@slac.stanford.edu">Johann Cohen-Tanugi</a>,
 *
-*   $Header: /heacvs/glast/ScienceTools/glast/celestialSources/DarkMatter/release.notes,v 1.4 2016/11/08 19:52:09 jasercio Exp $
+*   $Header: /glast/ScienceTools/glast/celestialSources/DarkMatter/release.notes,v 1.1.1.2.6.14 2017/05/10 14:27:27 jasercio Exp $
 *@verbatim
 *
 *   v0   JCT  initial import of the DarkMatter sources

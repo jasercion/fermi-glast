@@ -12,19 +12,19 @@ HD_LN			= ln
 HD_LN_S			= ${HD_LN_SYM}
 HD_TARG_PFX		= hd-std-
 
-HD_TOP_BIN		= ${DESTDIR}${HD_TOP_EXEC_PFX}/bin
-HD_TOP_INC		= ${DESTDIR}${HD_TOP_EXEC_PFX}/include
-HD_TOP_HELP		= ${DESTDIR}${HD_TOP_EXEC_PFX}/help
-HD_TOP_LIB		= ${DESTDIR}${HD_TOP_EXEC_PFX}/lib
-HD_TOP_PERL_LIB		= ${DESTDIR}${HD_TOP_EXEC_PFX}/lib/perl
-HD_TOP_PYTHON_LIB	= ${DESTDIR}${HD_TOP_EXEC_PFX}/lib/python
-HD_TOP_PFILES		= ${DESTDIR}${HD_TOP_EXEC_PFX}/syspfiles
-HD_TOP_REFDATA		= ${DESTDIR}${HD_TOP_EXEC_PFX}/refdata
-HD_TOP_SCRIPTS		= ${DESTDIR}${HD_TOP_EXEC_PFX}/bin
-HD_TOP_XML		= ${DESTDIR}${HD_TOP_EXEC_PFX}/xml
+HD_TOP_BIN		= ${HD_TOP_EXEC_PFX}/bin
+HD_TOP_INC		= ${HD_TOP_EXEC_PFX}/include
+HD_TOP_HELP		= ${HD_TOP_EXEC_PFX}/help
+HD_TOP_LIB		= ${HD_TOP_EXEC_PFX}/lib
+HD_TOP_PERL_LIB		= ${HD_TOP_EXEC_PFX}/lib/perl
+HD_TOP_PYTHON_LIB	= ${HD_TOP_EXEC_PFX}/lib/python
+HD_TOP_PFILES		= ${HD_TOP_EXEC_PFX}/syspfiles
+HD_TOP_REFDATA		= ${HD_TOP_EXEC_PFX}/refdata
+HD_TOP_SCRIPTS		= ${HD_TOP_EXEC_PFX}/bin
+HD_TOP_XML		= ${HD_TOP_EXEC_PFX}/xml
 
 # For future use if/when refdata moves out from under $HEADAS/:
-#HD_TOP_REFDATA		= ${DESTDIR}${HD_TOP_PFX}/refdata
+#HD_TOP_REFDATA		= ${HD_TOP_PFX}/refdata
 
 HD_BLD_BIN		= ${HD_BLD_EXEC_PFX}/bin
 HD_BLD_INC		= ${HD_BLD_EXEC_PFX}/include
@@ -40,19 +40,19 @@ HD_BLD_XML		= ${HD_BLD_EXEC_PFX}/xml
 # For future use if/when refdata moves out from under $HEADAS/:
 #HD_BLD_REFDATA		= ${HD_BLD_PFX}/refdata
 
-HD_BIN			= ${DESTDIR}${HD_EXEC_PFX}/bin
-HD_INC			= ${DESTDIR}${HD_EXEC_PFX}/include
-HD_HELP			= ${DESTDIR}${HD_EXEC_PFX}/help
-HD_LIB			= ${DESTDIR}${HD_EXEC_PFX}/lib
-HD_PERL_LIB		= ${DESTDIR}${HD_EXEC_PFX}/lib/perl
-HD_PYTHON_LIB		= ${DESTDIR}${HD_EXEC_PFX}/lib/python
-HD_PFILES		= ${DESTDIR}${HD_EXEC_PFX}/syspfiles
-HD_REFDATA		= ${DESTDIR}${HD_EXEC_PFX}/refdata
-HD_SCRIPTS		= ${DESTDIR}${HD_EXEC_PFX}/bin
-HD_XML			= ${DESTDIR}${HD_EXEC_PFX}/xml
+HD_BIN			= ${HD_EXEC_PFX}/bin
+HD_INC			= ${HD_EXEC_PFX}/include
+HD_HELP			= ${HD_EXEC_PFX}/help
+HD_LIB			= ${HD_EXEC_PFX}/lib
+HD_PERL_LIB		= ${HD_EXEC_PFX}/lib/perl
+HD_PYTHON_LIB		= ${HD_EXEC_PFX}/lib/python
+HD_PFILES		= ${HD_EXEC_PFX}/syspfiles
+HD_REFDATA		= ${HD_EXEC_PFX}/refdata
+HD_SCRIPTS		= ${HD_EXEC_PFX}/bin
+HD_XML			= ${HD_EXEC_PFX}/xml
 
 # For future use if/when refdata moves out from under $HEADAS/:
-#HD_REFDATA		= ${DESTDIR}${HD_PREFIX}/refdata
+#HD_REFDATA		= ${HD_PREFIX}/refdata
 
 #-------------------------------------------------------------------------------
 # The following targets supply default behavior for HEADAS standard
@@ -547,11 +547,11 @@ ${HD_TARG_PFX}install-perl-scripts:
 	  if [ "x${HD_SCRIPTS}" != "x${HD_TOP_SCRIPTS}" ]; then \
 	    ${HD_INSTALL} ${HD_SCRIPTS}/$$filepart ${HD_TOP_SCRIPTS}/$$filepart ${HD_LN_S}; \
 	    status=$$?; if [ $$status -ne 0 ]; then exit $$status; fi; \
-	  fi; \
-	  filepart_no_pl_suffix=`echo $$filepart | sed 's%.pl$$%%'`; \
-	  if [ $$filepart != $$filepart_no_pl_suffix ]; then \
-	    ${HD_INSTALL} ${HD_TOP_SCRIPTS}/$$filepart ${HD_TOP_SCRIPTS}/$$filepart_no_pl_suffix ${HD_LN_S}; \
-	    status=$$?; if [ $$status -ne 0 ]; then exit $$status; fi; \
+	    filepart_no_pl_suffix=`echo $$filepart | sed 's%.pl$$%%'`; \
+	    if [ $$filepart != $$filepart_no_pl_suffix ]; then \
+	      ${HD_INSTALL} ${HD_TOP_SCRIPTS}/$$filepart ${HD_TOP_SCRIPTS}/$$filepart_no_pl_suffix ${HD_LN_S}; \
+	      status=$$?; if [ $$status -ne 0 ]; then exit $$status; fi; \
+	    fi; \
 	  fi; \
 	done
 

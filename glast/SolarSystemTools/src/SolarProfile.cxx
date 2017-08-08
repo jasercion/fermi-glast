@@ -3,7 +3,7 @@
  * @brief Virtual access class to solar profiles for the solar template class
  * @author G. Johannesson
  *
- * $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/src/SolarProfile.cxx,v 1.1.1.2 2012/09/10 18:39:14 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/SolarSystemTools/src/SolarProfile.cxx,v 1.1.1.2 2012/09/10 18:39:14 areustle Exp $
  */
 
 #include <vector>

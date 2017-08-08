@@ -5,7 +5,7 @@
  * 
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/CaldbDate.h,v 1.1.1.2 2011/03/20 19:24:50 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/CaldbDate.h,v 1.1.1.2 2011/03/20 19:24:50 elwinter Exp $
  */
 
 #include "astro/JulianDate.h"

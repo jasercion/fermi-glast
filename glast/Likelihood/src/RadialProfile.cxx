@@ -3,7 +3,7 @@
  * @brief Radial profile for extended sources using ascii file template.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/RadialProfile.cxx,v 1.4 2016/11/08 21:05:50 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/RadialProfile.cxx,v 1.1.1.3.6.10 2017/02/01 04:19:52 jasercio Exp $
  */
 
 #include <cmath>

@@ -4,7 +4,7 @@
  *
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/Aeff.cxx,v 1.5 2017/01/29 01:48:36 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/Aeff.cxx,v 1.1.1.7.2.5 2017/02/01 04:23:18 jasercio Exp $
  */
 
 #include <cmath>

@@ -2,7 +2,7 @@
 This module uses GtApp to wraps the Science Tools as python objects.
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/sane/python/gt_apps.py,v 1.1.1.3 2012/01/17 17:18:11 elwinter Exp $
+# $Header: /glast/ScienceTools/glast/sane/python/gt_apps.py,v 1.1.1.3 2012/01/17 17:18:11 elwinter Exp $
 #
 from GtApp import GtApp
 

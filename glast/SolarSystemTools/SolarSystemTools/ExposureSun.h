@@ -3,7 +3,7 @@
 
     @author G. Johannesson
 
-		$Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/ExposureSun.h,v 1.1.1.2 2012/09/10 18:39:14 areustle Exp $
+		$Header: /glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/ExposureSun.h,v 1.1.1.2 2012/09/10 18:39:14 areustle Exp $
 */
 #ifndef SolarSystemTools_EXPOSURE_SUN_H
 #define SolarSystemTools_EXPOSURE_SUN_H
@@ -30,7 +30,7 @@ namespace SolarSystemTools {
 
 It is a pixelated using Healpix binning, and the CosineBinner2D class
 
-$Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/ExposureSun.h,v 1.1.1.2 2012/09/10 18:39:14 areustle Exp $
+$Header: /glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/ExposureSun.h,v 1.1.1.2 2012/09/10 18:39:14 areustle Exp $
 */
 
 class ExposureSun : public SkyExposure2D {

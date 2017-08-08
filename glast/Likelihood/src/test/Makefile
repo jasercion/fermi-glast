@@ -51,7 +51,7 @@ HD_CXXLIBS              = ${HD_LFLAGS} \
                           ${GT_FFT_LIBS} \
                           ${GT_CPPUNIT_LIBS} \
                           ${GT_STD_CXXLIBS} \
-			  -lwcs -lgsl -lgslcblas -lhealpix_cxx
+			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx
 
 include ${HD_STD_MAKEFILE}
 

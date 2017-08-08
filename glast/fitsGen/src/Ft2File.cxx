@@ -4,7 +4,7 @@
  *
  * @author J. Chiang <jchiang@slac.stanford.edu>
  *
- * $Header: /heacvs/glast/ScienceTools/glast/fitsGen/src/Ft2File.cxx,v 1.1.1.2 2011/03/20 19:24:57 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/fitsGen/src/Ft2File.cxx,v 1.1.1.2 2011/03/20 19:24:57 elwinter Exp $
  */
 
 #include "astro/SkyDir.h"

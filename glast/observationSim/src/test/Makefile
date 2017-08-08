@@ -28,6 +28,7 @@ HD_CXXLIBS              = ${HD_LFLAGS} \
                           ${GT_XML_LIBS} \
                           ${GT_EMBED_PYTHON_LIBS} \
                           ${PYTHON_LIB} \
-                          ${GT_STD_CXXLIBS}
+                          ${GT_STD_CXXLIBS} \
+			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx
 
 include ${HD_STD_MAKEFILE}

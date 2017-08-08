@@ -6,7 +6,7 @@
  * a string comprising the name of the FITS file and the extension.
  * @author J. Chiang 
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/WcsMapLibrary.cxx,v 1.5 2016/11/08 21:05:50 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/WcsMapLibrary.cxx,v 1.1.1.2.6.10 2017/02/01 04:20:01 jasercio Exp $
  */
 
 #include <utility>

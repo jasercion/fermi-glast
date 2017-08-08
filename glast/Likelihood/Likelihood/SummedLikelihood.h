@@ -6,7 +6,7 @@
  * 
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/SummedLikelihood.h,v 1.4 2016/11/08 21:05:51 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/SummedLikelihood.h,v 1.1.1.3.6.8 2017/02/01 04:21:54 jasercio Exp $
  */
 
 #ifndef Likelihood_SummedLikelihood_h

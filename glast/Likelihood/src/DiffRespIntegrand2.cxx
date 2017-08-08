@@ -5,7 +5,7 @@
  *
  * @author J. Chiang <jchiang@slac.stanford.edu>
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/DiffRespIntegrand2.cxx,v 1.4 2016/11/08 21:05:51 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/DiffRespIntegrand2.cxx,v 1.1.1.2.2.10 2017/02/01 04:19:53 jasercio Exp $
  */
 
 #include <cmath>

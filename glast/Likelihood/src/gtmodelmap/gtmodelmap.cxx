@@ -3,7 +3,7 @@
  * @brief Compute a model counts map based on binned likelihood fits.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/gtmodelmap/gtmodelmap.cxx,v 1.8 2016/11/08 21:05:54 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/gtmodelmap/gtmodelmap.cxx,v 1.1.1.31.2.4 2017/02/01 04:28:15 jasercio Exp $
  */
 
 #include <iostream>

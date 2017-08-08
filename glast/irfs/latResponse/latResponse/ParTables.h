@@ -4,7 +4,7 @@
  *
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/latResponse/ParTables.h,v 1.2 2017/01/29 01:48:35 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/latResponse/ParTables.h,v 1.1.1.5.6.2 2017/05/10 14:27:09 jasercio Exp $
  */
 
 #ifndef latResponse_ParTables_h

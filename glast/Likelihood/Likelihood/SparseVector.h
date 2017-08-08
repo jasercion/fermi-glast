@@ -4,7 +4,7 @@
  * @author E. Charles
  *
 
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/SparseVector.h,v 1.1 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/SparseVector.h,v 1.1.2.1 2017/02/01 04:21:55 jasercio Exp $
  */
 
 #ifndef Likelihood_SparseVector_h

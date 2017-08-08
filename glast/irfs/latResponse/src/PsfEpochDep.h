@@ -3,7 +3,7 @@
  * @brief PsfEpochDep class declaration.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/PsfEpochDep.h,v 1.4 2016/09/12 15:22:56 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/PsfEpochDep.h,v 1.1.1.1.2.1 2017/02/01 04:23:17 jasercio Exp $
  */
 
 #ifndef latResponse_PsfEpochDep_h

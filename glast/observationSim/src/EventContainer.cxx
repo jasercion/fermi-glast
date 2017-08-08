@@ -43,7 +43,6 @@ using CLHEP::HepRotation;
 
 #include "observationSim/EventContainer.h"
 #include "observationSim/Spacecraft.h"
-#include "observationSim/Event.h"
 
 namespace {
    double my_acos(double mu) {

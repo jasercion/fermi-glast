@@ -4,7 +4,7 @@
  * 
  * @author J. Chiang
  * 
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/EblAtten.cxx,v 1.4 2016/11/08 21:05:50 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/EblAtten.cxx,v 1.1.1.3.6.10 2017/02/01 04:19:57 jasercio Exp $
  */
 
 #include <algorithm>

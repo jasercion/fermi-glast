@@ -3,7 +3,7 @@
  * @brief Implmentation of a sparse vector (similar to an std::map, but with less functionality, and using less memory)
  * @author E. Charles
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/SparseVector.cxx,v 1.1 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/SparseVector.cxx,v 1.1.2.1 2017/02/01 04:19:57 jasercio Exp $
  */
 
 

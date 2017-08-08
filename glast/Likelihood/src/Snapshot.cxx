@@ -1,7 +1,7 @@
 /**
  * @file Snapshot.cxx
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/Snapshot.cxx,v 1.1 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/Snapshot.cxx,v 1.1.2.2 2017/05/10 14:27:05 jasercio Exp $
  */
 
 
@@ -382,7 +382,7 @@ namespace Likelihood {
     return status;
   }
  
-  void Snapshot::compare_latched(const SourceModel& model, const std::vector<std::string>& latched_sources,
+  void Snapshot::compare_latched(SourceModel& model, const std::vector<std::string>& latched_sources,
 				 Snapshot_Status& latched_status, std::vector<std::string>& changed_latched,
 				 Snapshot_Status& unlatched_status, std::vector<std::string>& changed_unlatched,
 				 std::vector<std::string>& new_free, std::vector<std::string>& new_fixed) const {

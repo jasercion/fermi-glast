@@ -4,7 +4,7 @@ Standard plotting interface for XY plots with matplotlib backend
 @author T. Stephens <thomas.stephens@nasa.gov>
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/pyLikelihood/python/MPLPlot.py,v 1.4 2016/11/08 21:07:11 jasercio Exp $
+# $Header: /glast/ScienceTools/glast/pyLikelihood/python/MPLPlot.py,v 1.1.2.7 2017/02/01 04:25:09 jasercio Exp $
 #
 import sys
 from array import array

@@ -3,7 +3,7 @@
  * @brief Pixel-by-pixel weights for binned likelihood.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/WeightMap.cxx,v 1.1 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/WeightMap.cxx,v 1.1.2.1 2017/02/01 04:20:02 jasercio Exp $
  */
 
 #include "st_stream/StreamFormatter.h"

@@ -3,7 +3,7 @@
  * @brief IsotropicFileSpectrum diffuse emission
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/celestialSources/genericSources/src/IsotropicFileSpectrum.cxx,v 1.1.1.2 2012/09/10 18:39:09 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/celestialSources/genericSources/src/IsotropicFileSpectrum.cxx,v 1.1.1.2 2012/09/10 18:39:09 areustle Exp $
  */
 
 #include <cmath>

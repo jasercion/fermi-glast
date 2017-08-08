@@ -43,7 +43,7 @@ extern "C" {
 #include "tip/KeyRecord.h"
 #include "tip/TipFile.h"
 
-static const std::string s_cvs_id("$Name: ScienceTools-09-28-00 $");
+static const std::string s_cvs_id("$Name: ScienceTools-11-05-03 $");
 
 using namespace st_app;
 using namespace timeSystem;
@@ -2866,7 +2866,7 @@ void TimeSystemTestApp::testIntFracUtility() {
   sval_list.push_back(" ");
   sval_list.push_back("");
   sval_list.push_back("12,345");
-//  sval_list.push_back("0x1234");
+  //sval_list.push_back("0x1234");
   num_nine = std::numeric_limits<double>::digits10 + 5;
   {
     std::ostringstream os;

@@ -10,7 +10,7 @@ HD_TEST_CXXTASK_SRC_cxx	= test.cxx
 
 HD_CXXFLAGS             = ${HD_STD_CXXFLAGS}
 
-HD_CXXLIBS              = -leblAtten ${HD_LFLAGS} ${GT_STD_CXXLIBS} -lwcs -lgsl -lgslcblas -lhealpix_cxx
+HD_CXXLIBS              = -leblAtten ${HD_LFLAGS} ${GT_STD_CXXLIBS} -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx
 
 include ${HD_STD_MAKEFILE}
 

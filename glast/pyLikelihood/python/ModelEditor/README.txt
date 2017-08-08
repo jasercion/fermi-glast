@@ -1,4 +1,4 @@
-$Id: README.txt,v 1.3 2016/11/08 21:07:11 jasercio Exp $
+$Id: README.txt,v 1.1.2.2 2017/02/01 04:16:11 jasercio Exp $
 
 The GLAST Science Tools Model Editor (HEADAS version)
 -----------------------------------------------------

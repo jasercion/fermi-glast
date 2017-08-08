@@ -3,7 +3,7 @@
  * @brief Wrapper class for IAeff for use from ROOT
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/rootIrfLoader/src/rootIrfLoader/Aeff.cxx,v 1.1.1.2 2011/03/20 19:24:51 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/rootIrfLoader/src/rootIrfLoader/Aeff.cxx,v 1.1.1.2 2011/03/20 19:24:51 elwinter Exp $
  */
 
 #include "irfInterface/Irfs.h"

@@ -9,10 +9,8 @@ HD_CXXTASK_SRC_cxx      = gtbin.cxx
 HD_CXXFLAGS             = ${HD_STD_CXXFLAGS}
 
 HD_CXXLIBS              = ${HD_LFLAGS} \
-			  -lhealpix \
-			  -lgomp \
-			  -lwcs \
-			  -lhealpix_cxx \
+			  -lwcs-5.16 \
+			  -lhealpix_cxx -lcfitsio \
 			  ${GT_EVTBIN_LIBS} \
                           ${GT_STD_CXXLIBS}
 

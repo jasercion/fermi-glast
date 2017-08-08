@@ -1,4 +1,4 @@
-// @(#)root/minuit2:$Id: StMnMinos.cxx,v 1.4 2016/11/08 20:32:41 jasercio Exp $
+// @(#)root/minuit2:$Id: StMnMinos.cxx,v 1.1.2.7 2017/02/01 04:26:35 jasercio Exp $
 // Authors: M. Winkler, F. James, L. Moneta, A. Zsenei   2003-2005  
 
 /**********************************************************************
@@ -13,7 +13,7 @@
  * user-specified bounds on parameters and resulting scaling
  * differences applied in MnFunctionCross.
  * 
- * $Header: /heacvs/glast/ScienceTools/glast/optimizers/src/StMnMinos.cxx,v 1.4 2016/11/08 20:32:41 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/optimizers/src/StMnMinos.cxx,v 1.1.2.7 2017/02/01 04:26:35 jasercio Exp $
  */
 
 #include <stdexcept>

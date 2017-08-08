@@ -3,7 +3,7 @@
  * @brief const interface to std::map<std::string, std::string>.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/celestialSources/celestialSources/ConstParMap.h,v 1.1.1.1 2012/09/10 18:39:08 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/celestialSources/celestialSources/ConstParMap.h,v 1.1.1.1 2012/09/10 18:39:08 areustle Exp $
  */
 
 #ifndef celestialSources_ConstParMap_h

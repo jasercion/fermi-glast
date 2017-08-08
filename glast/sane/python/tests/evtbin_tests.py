@@ -5,7 +5,7 @@ Exercise evtbin PHA and CMAP using Crab-only obsSim data.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/sane/python/tests/evtbin_tests.py,v 1.3 2016/09/12 15:02:49 jasercio Exp $
+# $Header: /glast/ScienceTools/glast/sane/python/tests/evtbin_tests.py,v 1.1.1.2.6.2 2017/02/01 04:24:40 jasercio Exp $
 #
 
 from setPaths import *

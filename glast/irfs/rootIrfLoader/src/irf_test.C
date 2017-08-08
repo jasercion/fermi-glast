@@ -4,7 +4,7 @@
  * @brief Macro to demonstrate the use of IRF components.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/rootIrfLoader/src/irf_test.C,v 1.1.1.2 2011/03/20 19:24:51 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/rootIrfLoader/src/irf_test.C,v 1.1.1.2 2011/03/20 19:24:51 elwinter Exp $
  */
 
 gSystem->Load("librootIrfLoader");

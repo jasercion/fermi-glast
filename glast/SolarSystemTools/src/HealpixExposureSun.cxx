@@ -4,7 +4,7 @@
  * various energies.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/src/HealpixExposureSun.cxx,v 1.1.1.2 2012/09/10 18:39:14 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/SolarSystemTools/src/HealpixExposureSun.cxx,v 1.1.1.2 2012/09/10 18:39:14 areustle Exp $
  */
 
 #include <cmath>

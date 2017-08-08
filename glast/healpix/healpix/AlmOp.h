@@ -3,7 +3,7 @@
 
 @author M. Roth 
 
-$Header: /heacvs/glast/ScienceTools/glast/healpix/healpix/AlmOp.h,v 1.6 2017/01/29 01:48:43 jasercio Exp $
+$Header: /glast/ScienceTools/glast/healpix/healpix/AlmOp.h,v 1.1.1.3.6.4 2017/02/01 04:27:02 jasercio Exp $
 */
 
 // EAC, update include path

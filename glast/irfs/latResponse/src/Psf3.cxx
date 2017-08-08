@@ -5,7 +5,7 @@
  * In contrast to Psf2, this class interpolates the distributions 
  * rather than the parameters.
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/Psf3.cxx,v 1.5 2017/01/29 01:48:37 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/Psf3.cxx,v 1.1.1.3.2.5 2017/02/01 04:23:15 jasercio Exp $
  */
 
 #include <cmath>

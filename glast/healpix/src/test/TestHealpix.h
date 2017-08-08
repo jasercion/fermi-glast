@@ -1,7 +1,7 @@
 /** @file TestHealpix.h
 @brief code to test the class Healpix
 
-$Header: /heacvs/glast/ScienceTools/glast/healpix/src/test/TestHealpix.h,v 1.7 2016/11/08 19:52:05 jasercio Exp $
+$Header: /glast/ScienceTools/glast/healpix/src/test/TestHealpix.h,v 1.1.1.3.6.6 2017/02/01 04:26:00 jasercio Exp $
 
 */
 

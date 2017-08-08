@@ -5,7 +5,7 @@ Basic script for steering the observationSim code.
 @author J. Chiang
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/observationSim/observationSim/python/latSim.py,v 1.1.1.1 2013/02/11 21:30:46 areustle Exp $
+# $Header: /glast/ScienceTools/glast/observationSim/observationSim/python/latSim.py,v 1.1.1.1 2013/02/11 21:30:46 areustle Exp $
 #
 import os, sys, string, numarray
 

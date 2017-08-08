@@ -6,7 +6,7 @@ estimate the 1 sigma error.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/pyLikelihood/python/FluxDensity.py,v 1.4 2016/11/08 21:07:11 jasercio Exp $
+# $Header: /glast/ScienceTools/glast/pyLikelihood/python/FluxDensity.py,v 1.1.1.3.6.6 2017/02/01 04:25:08 jasercio Exp $
 #
 
 import numpy as num

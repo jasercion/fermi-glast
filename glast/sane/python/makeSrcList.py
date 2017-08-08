@@ -6,7 +6,7 @@ provided.
 
 @author J. Chiang <jchiang@slac.stanford.edu>
 
-$Header: /heacvs/glast/ScienceTools/glast/sane/python/makeSrcList.py,v 1.1.1.3 2012/01/17 17:18:11 elwinter Exp $
+$Header: /glast/ScienceTools/glast/sane/python/makeSrcList.py,v 1.1.1.3 2012/01/17 17:18:11 elwinter Exp $
 """
 import copy, string
 import celgal

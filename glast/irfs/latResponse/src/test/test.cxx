@@ -3,7 +3,7 @@
  * @brief Test program for latResponse package
  * @author J. Chiang
  *
-* $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/test/test.cxx,v 1.8 2016/11/08 19:52:05 jasercio Exp $
+* $Header: /glast/ScienceTools/glast/irfs/latResponse/src/test/test.cxx,v 1.5.2.4 2017/02/01 04:26:19 jasercio Exp $
 */
 
 #ifdef TRAP_FPE

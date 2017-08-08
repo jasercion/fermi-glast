@@ -1,5 +1,5 @@
 # @file gtltcube.par
-# $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/pfiles/gtltcubesun.par,v 1.1.1.2 2012/09/10 18:39:14 areustle Exp $
+# $Header: /glast/ScienceTools/glast/SolarSystemTools/pfiles/gtltcubesun.par,v 1.1.1.2 2012/09/10 18:39:14 areustle Exp $
 #
 evfile,s,a,"",,,"Event data file"
 evtable,s,h,"EVENTS",,,"Event data extension"

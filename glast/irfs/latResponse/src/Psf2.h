@@ -3,7 +3,7 @@
  * @brief Psf2 class declaration.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/Psf2.h,v 1.1.1.3 2011/03/20 19:24:50 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/Psf2.h,v 1.1.1.3 2011/03/20 19:24:50 elwinter Exp $
  */
 
 #ifndef latResponse_Psf2_h

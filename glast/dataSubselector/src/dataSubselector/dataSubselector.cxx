@@ -3,7 +3,7 @@
  * @brief Filter FT1 data.
  * @author J. Chiang
  *
- *  $Header: /heacvs/glast/ScienceTools/glast/dataSubselector/src/dataSubselector/dataSubselector.cxx,v 1.7 2016/11/08 19:52:09 jasercio Exp $
+ *  $Header: /glast/ScienceTools/glast/dataSubselector/src/dataSubselector/dataSubselector.cxx,v 1.1.1.21.2.4 2017/02/01 04:24:59 jasercio Exp $
  */
 
 #include <algorithm>

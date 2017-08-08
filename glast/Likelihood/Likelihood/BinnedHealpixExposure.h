@@ -4,7 +4,7 @@
  * integrations
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/BinnedHealpixExposure.h,v 1.5 2017/01/29 01:49:31 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/BinnedHealpixExposure.h,v 1.1.2.7 2017/02/01 04:21:54 jasercio Exp $
  */
 
 #ifndef Likelihood_BinnedHealpixExposure_h

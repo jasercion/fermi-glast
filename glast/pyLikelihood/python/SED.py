@@ -61,7 +61,7 @@ results_dictionary=eval(open('sed_vela.dat').read())
 Todo:
 * Merge upper limits at either edge in energy.
 
-$Header: /heacvs/glast/ScienceTools/glast/pyLikelihood/python/SED.py,v 1.4 2016/11/08 21:07:11 jasercio Exp $
+$Header: /glast/ScienceTools/glast/pyLikelihood/python/SED.py,v 1.1.1.5.2.6 2017/02/01 04:25:09 jasercio Exp $
 """
 from pprint import pformat
 

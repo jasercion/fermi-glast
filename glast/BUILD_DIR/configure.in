@@ -1249,7 +1249,7 @@ if test $GXX = yes; then
       if test $CXX_BASENAME = icpc; then
          CXXFLAGS="-Wall $CXXFLAGS"
       else
-         CXXFLAGS="-Wall --pedantic -Wno-comment -Wno-long-long $CXXFLAGS"
+         CXXFLAGS="-Wall --pedantic -Wno-comment -Wno-long-long -fexceptions $CXXFLAGS"
       fi
 fi
 

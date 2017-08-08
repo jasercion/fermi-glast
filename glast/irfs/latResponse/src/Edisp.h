@@ -3,7 +3,7 @@
  * @brief Edisp class definition for post-handoff review IRFs.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/Edisp.h,v 1.1.1.4 2013/07/22 20:11:19 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/Edisp.h,v 1.1.1.4 2013/07/22 20:11:19 jasercio Exp $
  */
 
 #ifndef latResponse_Edisp_h

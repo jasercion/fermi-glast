@@ -4,7 +4,7 @@
  *
  * @author E. Charles, from TsMap by J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/TsCube/TsCube.cxx,v 1.3 2016/11/08 21:05:52 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/TsCube/TsCube.cxx,v 1.1.2.2 2017/02/01 04:24:33 jasercio Exp $
  */
 
 #include <cmath>

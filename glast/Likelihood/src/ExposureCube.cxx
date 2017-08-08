@@ -3,7 +3,7 @@
  * @brief Implementation for ExposureCube wrapper class of map_tools::Exposure
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/ExposureCube.cxx,v 1.4 2016/11/08 21:05:51 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/ExposureCube.cxx,v 1.1.1.9.2.10 2017/02/01 04:19:54 jasercio Exp $
  */
 
 #include "tip/Header.h"

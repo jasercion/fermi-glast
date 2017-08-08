@@ -4,7 +4,7 @@
  *
  * @author J. Chiang <jchiang@slac.stanford.edu>
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/FitsTable.cxx,v 1.1.1.8 2016/11/04 19:11:36 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/FitsTable.cxx,v 1.1.1.7.2.1 2017/02/01 04:23:18 jasercio Exp $
  */
 
 #include <cmath>

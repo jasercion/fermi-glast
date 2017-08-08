@@ -1,7 +1,7 @@
 /** @file Background.h
     @brief declare class Background
 
-$Header: /heacvs/glast/ScienceTools/glast/skymaps/skymaps/Background.h,v 1.5 2016/09/12 15:03:33 jasercio Exp $
+$Header: /glast/ScienceTools/glast/skymaps/skymaps/Background.h,v 1.4.2.2 2017/02/01 04:23:56 jasercio Exp $
 
 */
 #ifndef skymaps_Background_h

@@ -4,7 +4,7 @@
  * on the log(energy)-cos(theta) grid on which IRF parameters are fit.
  * @author J. Chiang
  * 
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/latResponse/EdispInterpolator.h,v 1.1 2016/11/04 19:11:35 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/latResponse/EdispInterpolator.h,v 1.1.2.1 2017/02/01 04:23:58 jasercio Exp $
  */
 
 #ifndef latResponse_EdispInterpolator_h

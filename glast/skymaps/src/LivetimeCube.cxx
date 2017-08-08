@@ -1,7 +1,7 @@
 /** @file LivetimeCube.cxx
     @brief Implementation of class LivetimeCube
 
-   $Header: /heacvs/glast/ScienceTools/glast/skymaps/src/LivetimeCube.cxx,v 1.4 2016/09/12 15:03:34 jasercio Exp $
+   $Header: /glast/ScienceTools/glast/skymaps/src/LivetimeCube.cxx,v 1.3.2.2 2017/02/01 04:24:05 jasercio Exp $
    copied from: /nfs/slac/g/glast/ground/cvs/map_tools/src/Exposure.cxx,v 1.33 2008/01/16 21:33:59 burnett Exp $
 */
 #include "skymaps/LivetimeCube.h"

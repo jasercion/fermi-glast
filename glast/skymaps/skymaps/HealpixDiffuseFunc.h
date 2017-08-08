@@ -1,7 +1,7 @@
 /** @file HealpixDiffuseFunc.h
     @brief declare class HealpixDiffuseFunc
 
-$Header: /heacvs/glast/ScienceTools/glast/skymaps/skymaps/HealpixDiffuseFunc.h,v 1.3 2016/09/12 15:03:34 jasercio Exp $
+$Header: /glast/ScienceTools/glast/skymaps/skymaps/HealpixDiffuseFunc.h,v 1.2.2.2 2017/02/01 04:23:54 jasercio Exp $
 
 */
 #ifndef skymaps_HealpixDiffuseFunc_h

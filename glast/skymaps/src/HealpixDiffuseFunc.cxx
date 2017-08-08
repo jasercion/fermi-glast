@@ -1,6 +1,6 @@
 /** @file HealpixDiffuseFunc.cxx
     @brief implement HealpixDiffuseFunc
-$Header: /heacvs/glast/ScienceTools/glast/skymaps/src/HealpixDiffuseFunc.cxx,v 1.3 2016/09/12 15:03:35 jasercio Exp $
+$Header: /glast/ScienceTools/glast/skymaps/src/HealpixDiffuseFunc.cxx,v 1.2.2.2 2017/02/01 04:24:00 jasercio Exp $
 */
 
 #include "skymaps/HealpixDiffuseFunc.h"

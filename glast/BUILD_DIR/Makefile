@@ -119,4 +119,4 @@ subdir:
 # Install BUILD_DIR; tap dance needed because the built tools live in BUILD_DIR
 #------------------------------------------------------------------------------
 install-BUILD_DIR:
-	@${HD_INSTALL} ${HD_BUILD_DIR} ${DESTDIR}${HD_EXEC_PFX}/BUILD_DIR ${HD_CP_P}
+	@${HD_INSTALL} ${HD_BUILD_DIR} ${HD_EXEC_PFX}/BUILD_DIR ${HD_CP_P}

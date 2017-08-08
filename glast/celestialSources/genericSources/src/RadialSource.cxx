@@ -3,7 +3,7 @@
  * @brief A simple Spectrum subclass that exercises the flux package.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/celestialSources/genericSources/src/RadialSource.cxx,v 1.1.1.3 2012/09/10 18:39:09 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/celestialSources/genericSources/src/RadialSource.cxx,v 1.1.1.3 2012/09/10 18:39:09 areustle Exp $
  */
 
 #include <cmath>

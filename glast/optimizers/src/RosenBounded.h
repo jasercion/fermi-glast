@@ -3,7 +3,7 @@
  * @brief Declaration for a 2D Rosenbrock objective function
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/optimizers/src/RosenBounded.h,v 1.4 2016/11/08 20:32:41 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/optimizers/src/RosenBounded.h,v 1.1.2.7 2017/02/01 04:26:34 jasercio Exp $
  */
 
 #include "optimizers/Statistic.h"

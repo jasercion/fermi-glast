@@ -4,7 +4,7 @@
  * position-dependent spectral variation.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/MapCubeFunction2.cxx,v 1.4 2016/11/08 21:05:50 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/MapCubeFunction2.cxx,v 1.1.1.3.6.11 2017/02/01 04:19:53 jasercio Exp $
  */
 
 #include <cmath>

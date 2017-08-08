@@ -2,7 +2,7 @@
  * @brief Implementation for post-handoff review IRFs
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/IrfLoader.cxx,v 1.4 2016/11/08 19:52:05 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/IrfLoader.cxx,v 1.1.1.7.2.8 2017/02/01 04:23:17 jasercio Exp $
  */
 
 #include <algorithm>

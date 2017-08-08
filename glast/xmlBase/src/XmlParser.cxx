@@ -172,14 +172,14 @@ namespace xmlBase {
   // parse file
     m_errorsOccurred = false;
     try {
-      char fakeid =99;
+      const char* fakeid;
       XMLCh* buffer = XMLString::transcode(input.c_str());
       //      XMLCh* buffer = Dom::transToXMLCh(input.c_str());
 
       unsigned int byteCount = sizeof(XMLCh) * input.length();  
 
       MemBufInputSource source((const unsigned char*)buffer, byteCount, 
-                               &fakeid, false);
+                               fakeid, false);
       m_parser->parse(source);
       XMLString::release(&buffer);
     }

@@ -14,8 +14,7 @@ HD_CXXLIBS              = ${HD_LFLAGS} \
                           ${GT_OPT_LIBS} \
                           ${GT_XML_LIBS} \
                           ${GT_STD_CXXLIBS} \
-			  -lwcs \
-			  -lgomp \
+			  -lwcs-5.16 \
 			  -lhealpix_cxx
 
 HD_INSTALL_TASKS        = ${HD_CXXTASK}

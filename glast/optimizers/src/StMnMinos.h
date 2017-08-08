@@ -6,7 +6,7 @@
  * on parameters and resulting scaling differences applied in
  * MnFunctionCross.
  *
- * $Header: /heacvs/glast/ScienceTools/glast/optimizers/src/StMnMinos.h,v 1.4 2016/11/08 20:32:41 jasercio Exp $ 
+ * $Header: /glast/ScienceTools/glast/optimizers/src/StMnMinos.h,v 1.1.2.7 2017/02/01 04:26:32 jasercio Exp $ 
  */
 
 #ifndef optimizers_StMnMinos_h

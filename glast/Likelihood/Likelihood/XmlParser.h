@@ -3,7 +3,7 @@
  * @brief Singleton wrapper for xmlBase::XmlParser instance
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/XmlParser.h,v 1.1.1.1 2012/01/17 17:18:14 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/XmlParser.h,v 1.1.1.1 2012/01/17 17:18:14 elwinter Exp $
  */
 
 #ifndef Likelihood_XmlParser_h

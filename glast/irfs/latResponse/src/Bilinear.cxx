@@ -2,7 +2,7 @@
  * @file Bilinear.cxx
  * @brief Implementation for Bilinear 
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/Bilinear.cxx,v 1.1.1.3 2011/03/20 19:24:50 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/Bilinear.cxx,v 1.1.1.3 2011/03/20 19:24:50 elwinter Exp $
  */
 
 #include <cmath>

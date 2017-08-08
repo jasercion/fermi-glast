@@ -3,7 +3,7 @@
  * @brief Log-Normal distribution for spectral modeling.  log10 is applied
  * to the energy value.
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/LogNormal.cxx,v 1.4 2016/11/08 21:05:50 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/LogNormal.cxx,v 1.1.1.2.6.10 2017/02/01 04:19:52 jasercio Exp $
  */
 
 #include <cmath>

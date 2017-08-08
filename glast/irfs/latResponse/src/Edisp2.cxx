@@ -3,7 +3,7 @@
 * @brief Implementation for post-handoff review energy dispersion class.
 * @author J. Chiang
 *
-* $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/Edisp2.cxx,v 1.4 2016/09/12 15:22:56 jasercio Exp $
+* $Header: /glast/ScienceTools/glast/irfs/latResponse/src/Edisp2.cxx,v 1.2.2.5 2017/02/01 04:23:16 jasercio Exp $
 */
 
 #include <cmath>

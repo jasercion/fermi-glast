@@ -3,7 +3,7 @@
  * @brief Psf class definition.
  * @author J. Chiang
  * 
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/rootIrfLoader/src/rootIrfLoader/Psf.h,v 1.1.1.2 2011/03/20 19:24:51 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/rootIrfLoader/src/rootIrfLoader/Psf.h,v 1.1.1.2 2011/03/20 19:24:51 elwinter Exp $
  */
 
 #ifndef rootIrfLoader_Psf_h
@@ -27,7 +27,7 @@ namespace rootIrfLoader {
  *
  * @author J. Chiang
  *    
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/rootIrfLoader/src/rootIrfLoader/Psf.h,v 1.1.1.2 2011/03/20 19:24:51 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/rootIrfLoader/src/rootIrfLoader/Psf.h,v 1.1.1.2 2011/03/20 19:24:51 elwinter Exp $
  */
 
 class Psf : public IrfBase {

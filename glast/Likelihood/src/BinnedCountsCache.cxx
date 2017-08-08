@@ -3,7 +3,7 @@
  * @brief  
  * @author 
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/BinnedCountsCache.cxx,v 1.1 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/BinnedCountsCache.cxx,v 1.1.2.2 2017/05/10 14:27:06 jasercio Exp $
  */
 
 #include "Likelihood/BinnedCountsCache.h"
@@ -97,9 +97,7 @@ namespace Likelihood {
   }
 
   void BinnedCountsCache::identifyFilledPixels() {
-    if ( has_weights()  ) {
-      fillWeightedCounts();
-    }
+    fillWeightedCounts();
     const std::vector<float> & the_data = data(has_weights());
     m_filledPixels.clear();
     for (unsigned int i = 0; i < the_data.size(); i++) {

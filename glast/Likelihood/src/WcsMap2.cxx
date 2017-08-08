@@ -4,7 +4,7 @@
  * uses WCS projections for indexing its internal representation.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/WcsMap2.cxx,v 1.4 2016/11/08 21:05:50 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/WcsMap2.cxx,v 1.1.1.8.2.11 2017/02/01 04:20:02 jasercio Exp $
  */
 
 #include <cmath>

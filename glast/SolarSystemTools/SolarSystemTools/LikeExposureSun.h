@@ -3,7 +3,7 @@
  * @brief Exposure class for moving sources for use by the SolarSystemTools.
  * @author G. Johannesson
  *
- * $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/LikeExposureSun.h,v 1.1.1.1 2012/06/25 17:19:30 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/LikeExposureSun.h,v 1.1.1.1 2012/06/25 17:19:30 areustle Exp $
  */
 
 #ifndef SolarSystemTools_LikeExposureSun_h
@@ -37,7 +37,7 @@ namespace SolarSystemTools {
  *
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/LikeExposureSun.h,v 1.1.1.1 2012/06/25 17:19:30 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/SolarSystemTools/SolarSystemTools/LikeExposureSun.h,v 1.1.1.1 2012/06/25 17:19:30 areustle Exp $
  */
 
 class LikeExposureSun : public ExposureSun {

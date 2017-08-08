@@ -4,7 +4,7 @@
  * dispersion representation
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/Edisp2.h,v 1.4 2017/01/29 01:48:37 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/Edisp2.h,v 1.1.1.5.2.5 2017/02/01 04:23:20 jasercio Exp $
  */
 
 #ifndef latResponse_Edisp2_h

@@ -3,7 +3,7 @@
  * @brief Interface to merit files that uses ROOT directly.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/fitsGen/src/MeritFile2.cxx,v 1.4 2016/11/08 19:52:05 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/fitsGen/src/MeritFile2.cxx,v 1.1.1.4.2.2 2017/02/01 04:28:45 jasercio Exp $
  */
 
 #include <cstdlib>

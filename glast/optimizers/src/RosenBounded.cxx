@@ -3,7 +3,7 @@
  * @brief Implementation for the 2D RosenBoundedbrock objective function
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/optimizers/src/RosenBounded.cxx,v 1.4 2016/11/08 20:32:41 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/optimizers/src/RosenBounded.cxx,v 1.1.2.7 2017/02/01 04:26:35 jasercio Exp $
  */
 
 #include <cmath>

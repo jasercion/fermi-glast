@@ -2,7 +2,7 @@
 /** @file TestHealpixArrayr.h
 @brief test class for HealpixArray
 
-$Header: /heacvs/glast/ScienceTools/glast/healpix/src/test/TestHealpixArray.h,v 1.1.1.2 2011/03/20 19:25:02 elwinter Exp $
+$Header: /glast/ScienceTools/glast/healpix/src/test/TestHealpixArray.h,v 1.1.1.2 2011/03/20 19:25:02 elwinter Exp $
 
 
 */

@@ -1,7 +1,7 @@
 /** @file IParams.cxx
 @brief implement class IParams
 
-$Header: /heacvs/glast/ScienceTools/glast/skymaps/src/IParams.cxx,v 1.3 2016/09/12 15:03:35 jasercio Exp $
+$Header: /glast/ScienceTools/glast/skymaps/src/IParams.cxx,v 1.2.2.2 2017/02/01 04:24:05 jasercio Exp $
 
 */
 

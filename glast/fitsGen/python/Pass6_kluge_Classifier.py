@@ -5,7 +5,7 @@ http://www-glast.stanford.edu/protected/mail/irf/0157.html
 These definitions partition the events into three classes.
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/fitsGen/python/Pass6_kluge_Classifier.py,v 1.1.1.1 2008/08/07 01:24:33 elwinter Exp $
+# $Header: /glast/ScienceTools/glast/fitsGen/python/Pass6_kluge_Classifier.py,v 1.1.1.1 2008/08/07 01:24:33 elwinter Exp $
 #
 from EventClassifier import EventClassifier
 

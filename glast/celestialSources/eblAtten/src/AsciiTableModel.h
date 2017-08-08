@@ -6,7 +6,7 @@
  * 
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/celestialSources/eblAtten/src/AsciiTableModel.h,v 1.4 2016/11/08 19:52:07 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/celestialSources/eblAtten/src/AsciiTableModel.h,v 1.1.2.2 2017/02/01 04:26:42 jasercio Exp $
  */
 
 #ifndef IRB_AsciiTableModel_h

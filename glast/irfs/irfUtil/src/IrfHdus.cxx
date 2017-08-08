@@ -4,7 +4,7 @@
  * IRF components.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/irfUtil/src/IrfHdus.cxx,v 1.4 2016/11/08 19:52:03 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/irfUtil/src/IrfHdus.cxx,v 1.1.2.4 2017/02/01 04:24:58 jasercio Exp $
  */
 
 #include <sstream>

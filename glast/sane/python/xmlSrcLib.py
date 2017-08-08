@@ -2,7 +2,7 @@
 @brief Prototype xml entries for likelihood analysis
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
-# $Header: /heacvs/glast/ScienceTools/glast/sane/python/xmlSrcLib.py,v 1.1.1.1 2009/09/22 19:04:19 elwinter Exp $
+# $Header: /glast/ScienceTools/glast/sane/python/xmlSrcLib.py,v 1.1.1.1 2009/09/22 19:04:19 elwinter Exp $
 #
 from xml.dom import minidom
 

@@ -3,7 +3,7 @@
  * @brief User configurable multiply broken power-law.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/MultipleBrokenPowerLaw.cxx,v 1.4 2016/11/08 21:05:50 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/MultipleBrokenPowerLaw.cxx,v 1.1.2.6 2017/02/01 04:20:01 jasercio Exp $
  */
 
 #include <algorithm>

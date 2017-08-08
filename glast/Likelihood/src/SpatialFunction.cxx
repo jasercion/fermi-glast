@@ -6,7 +6,7 @@
  * 
  * @author M. Wood
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/SpatialFunction.cxx,v 1.1 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/SpatialFunction.cxx,v 1.1.2.1 2017/02/01 04:20:07 jasercio Exp $
  *
  */
 

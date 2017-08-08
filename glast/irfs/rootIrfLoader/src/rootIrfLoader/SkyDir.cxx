@@ -4,7 +4,7 @@
  * CLHEP-dependent parts of the interface.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/rootIrfLoader/src/rootIrfLoader/SkyDir.cxx,v 1.1.1.2 2011/03/20 19:24:51 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/rootIrfLoader/src/rootIrfLoader/SkyDir.cxx,v 1.1.1.2 2011/03/20 19:24:51 elwinter Exp $
  */
 
 #include "astro/SkyDir.h"

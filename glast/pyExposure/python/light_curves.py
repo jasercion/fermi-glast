@@ -4,7 +4,7 @@
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/pyExposure/python/light_curves.py,v 1.1.1.2 2011/03/20 19:24:46 elwinter Exp $
+# $Header: /glast/ScienceTools/glast/pyExposure/python/light_curves.py,v 1.1.1.2 2011/03/20 19:24:46 elwinter Exp $
 #
 
 import numpy as num

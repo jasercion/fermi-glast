@@ -5,7 +5,7 @@
  * 
  * @author J. Chiang
  * 
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/TiedParameter.h,v 1.1.1.2 2011/03/20 19:25:04 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/TiedParameter.h,v 1.1.1.2 2011/03/20 19:25:04 elwinter Exp $
  */
 
 #ifndef Likelihood_TiedParameter_h

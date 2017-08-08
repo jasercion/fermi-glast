@@ -1,6 +1,6 @@
 /** @file test_main.cxx
 
-$Header: /heacvs/glast/ScienceTools/glast/skymaps/src/test/test_main.cxx,v 1.5 2016/09/12 15:03:36 jasercio Exp $
+$Header: /glast/ScienceTools/glast/skymaps/src/test/test_main.cxx,v 1.4.2.2 2017/02/01 04:28:25 jasercio Exp $
 
 */
 //#include "skymaps/PhotonMap.h"

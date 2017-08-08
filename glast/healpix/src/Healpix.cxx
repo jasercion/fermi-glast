@@ -2,7 +2,7 @@
     @brief Healpix class implementation with code from WMAP
 
     @author B. Lesnick 
-    $Header: /heacvs/glast/ScienceTools/glast/healpix/src/Healpix.cxx,v 1.6 2017/01/29 01:49:03 jasercio Exp $
+    $Header: /glast/ScienceTools/glast/healpix/src/Healpix.cxx,v 1.1.1.4.6.6 2017/02/01 04:26:21 jasercio Exp $
 */
 /* Local Includes */
 

@@ -1,5 +1,5 @@
 // -*- mode: c++ -*-
-// $Header: /heacvs/glast/ScienceTools/glast/pyLikelihood/src/pyLikelihood.i,v 1.7 2016/11/08 21:07:12 jasercio Exp $
+// $Header: /glast/ScienceTools/glast/pyLikelihood/src/pyLikelihood.i,v 1.1.1.14.2.9 2017/05/10 15:34:49 jasercio Exp $
 %module pyLikelihood
 %{
 #ifdef TRAP_FPE
@@ -517,7 +517,7 @@ using optimizers::Exception;
 %extend Likelihood::BinnedLikelihood {
    std::vector<double> modelCounts(const std::string & srcName) {
       const Likelihood::Source * src(self->getSource(srcName));
-      const Likelihood::SourceMap & srcMap(self->sourceMap(srcName));
+      Likelihood::SourceMap & srcMap(self->sourceMap(srcName));
       const std::vector<float> & model(srcMap.model());
       const std::vector<float> & counts(self->countsMap().data());
       const std::vector<double> & energies(self->energies());

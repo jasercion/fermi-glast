@@ -4,7 +4,7 @@
  *
  * @author J. Chiang <jchiang@slac.stanford.edu>
  * 
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/EdispEpochDep.cxx,v 1.7 2016/09/12 15:22:57 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/EdispEpochDep.cxx,v 1.5.2.5 2017/02/01 04:23:16 jasercio Exp $
  */
 
 #include "EdispEpochDep.h"

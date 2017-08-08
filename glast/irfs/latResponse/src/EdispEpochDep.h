@@ -4,7 +4,7 @@
  * epoch to epoch.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/EdispEpochDep.h,v 1.4 2016/09/12 15:22:56 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/EdispEpochDep.h,v 1.1.1.1.2.1 2017/02/01 04:23:18 jasercio Exp $
  */
 
 #ifndef latResponse_EdispEpochDep_h

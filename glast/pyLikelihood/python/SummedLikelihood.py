@@ -6,7 +6,7 @@ classes.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/pyLikelihood/python/SummedLikelihood.py,v 1.4 2016/11/08 21:07:11 jasercio Exp $
+# $Header: /glast/ScienceTools/glast/pyLikelihood/python/SummedLikelihood.py,v 1.1.1.7.2.7 2017/02/01 04:25:09 jasercio Exp $
 #
 
 import pyLikelihood as pyLike

@@ -3,7 +3,7 @@
  * @brief Observation simulator using instrument response functions.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/observationSim/src/obsSim/obsSim.cxx,v 1.9 2016/11/08 20:32:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/observationSim/src/obsSim/obsSim.cxx,v 1.1.1.22.2.7 2017/02/01 04:27:17 jasercio Exp $
  */
 
 #ifdef TRAP_FPE

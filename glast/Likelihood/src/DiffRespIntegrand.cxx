@@ -8,7 +8,7 @@
  * @author S. Fegan <sfegan@llr.in2p3.fr>, 
  *         J. Chiang <jchiang@slac.stanford.edu>
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/DiffRespIntegrand.cxx,v 1.4 2016/11/08 21:05:50 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/DiffRespIntegrand.cxx,v 1.1.1.5.2.10 2017/02/01 04:19:59 jasercio Exp $
  */
 
 #include <cmath>

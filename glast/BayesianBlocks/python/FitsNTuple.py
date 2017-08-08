@@ -5,7 +5,7 @@ numarrays, optionally creating a HippoDraw NTuple.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Id: FitsNTuple.py,v 1.4 2016/11/08 19:52:04 jasercio Exp $
+# $Id: FitsNTuple.py,v 1.1.2.2 2017/02/01 04:27:29 jasercio Exp $
 #
 
 import numpy as np

@@ -1,7 +1,7 @@
 /** @file PhotonMap.h
 @brief declare class PhotonMap
 
-$Header: /heacvs/glast/ScienceTools/glast/skymaps/skymaps/PhotonMap.h,v 1.4 2016/09/12 15:03:34 jasercio Exp $
+$Header: /glast/ScienceTools/glast/skymaps/skymaps/PhotonMap.h,v 1.3.2.2 2017/02/01 04:23:55 jasercio Exp $
 
 */
 #ifndef skymaps_PhotonMap_h

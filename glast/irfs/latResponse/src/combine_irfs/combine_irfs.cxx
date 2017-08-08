@@ -4,7 +4,7 @@
  * combined in a single FITS file.
  * @author J. Chiang <jchiang@slac.stanford.edu>
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/combine_irfs/combine_irfs.cxx,v 1.10 2016/09/12 15:22:57 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/combine_irfs/combine_irfs.cxx,v 1.9.2.2 2017/02/01 04:27:45 jasercio Exp $
  */
 
 #include <cstdlib>

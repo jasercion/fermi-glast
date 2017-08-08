@@ -3,7 +3,7 @@
  * @brief Concrete derived class of irfInterface::IrfLoader
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/latResponse/IrfLoader.h,v 1.4 2016/11/08 19:52:08 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/latResponse/IrfLoader.h,v 1.1.1.5.2.6 2017/02/01 04:23:59 jasercio Exp $
  */
 
 #ifndef latResponse_IrfLoader_h

@@ -1,6 +1,6 @@
 /** @file HealPixel.h
 @brief Define the HealPixel class 
-$Header: /heacvs/glast/ScienceTools/glast/healpix/healpix/HealPixel.h,v 1.1.1.2 2011/03/20 19:25:02 elwinter Exp $
+$Header: /glast/ScienceTools/glast/healpix/healpix/HealPixel.h,v 1.1.1.2 2011/03/20 19:25:02 elwinter Exp $
 */
 
 #ifndef healpix_HealPixel_h

@@ -3,7 +3,7 @@
   @brief package latResponse
 
   @verbatim
-  $Id: release.notes,v 1.4 2016/11/08 19:52:10 jasercio Exp $
+  $Id: release.notes,v 1.1.1.16.2.14 2017/05/10 14:27:11 jasercio Exp $
   EOH
 
  latResponse-04-03-01 26-Oct-2016 mdwood Fix include statements in test program.

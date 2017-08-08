@@ -3,7 +3,7 @@
  * @brief Application for creating binned exposure maps for moving sources
  * @author G. Johannesson
  *
- * $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/src/gtltsumsun/gtltsumsun.cxx,v 1.4 2016/11/08 19:52:07 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/SolarSystemTools/src/gtltsumsun/gtltsumsun.cxx,v 1.2.6.3 2017/02/01 04:24:17 jasercio Exp $
  */
 
 #include <cstdlib>

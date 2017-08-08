@@ -4,14 +4,11 @@ HD_COMPONENT_VERS       =
 
 HD_LIBRARY_ROOT         = healpix
 
-HD_LIBRARY_SRC_cxx      = alm_filter_tools.cxx \
-			  AlmOp.cxx \
-                          CosineBinner.cxx \
+HD_LIBRARY_SRC_cxx      = CosineBinner.cxx \
                           HealpixArrayIO.cxx \
                           Healpix.cxx \
                           HealPixel.cxx \
                           HealpixMap.cxx \
-                          Map.cxx \
 			  HealpixRegion.cxx
 
 #HD_LIBRARY_SRC_cc       = base/alm_filter_tools.cc \
@@ -31,7 +28,7 @@ HD_LIBRARY_SRC_cxx      = alm_filter_tools.cxx \
 
 #HD_SUBDIRS              = base
 
-HD_CXXFLAGS             = ${HD_STD_CXXFLAGS} -lwcs -I${EXT_BLD_EXEC_PFX}/include -L${EXT_BLD_EXEC_PFX}/lib -fpermissive -lhealpix_cxx
+HD_CXXFLAGS             = ${HD_STD_CXXFLAGS} -lwcs-5.16 -I${EXT_BLD_EXEC_PFX}/include -L${EXT_BLD_EXEC_PFX}/lib -fpermissive -lhealpix_cxx
 
 HD_CFLAGS               = ${HD_STD_CFLAGS}
 

@@ -11,6 +11,6 @@
 
 int main(int iargc, char * argv[]) {
    std::ostringstream command;
-   command << "python $INST_DIR/python/gtburst.py";
+   command << "python $FERMI_DIR/lib/python/gtburst.py";
    std::system(command.str().c_str());
 }

@@ -3,7 +3,7 @@
   @brief package caldb_release
 
   @verbatim
-  $Id: release.notes,v 1.5 2016/11/08 19:52:08 jasercio Exp $
+  $Id: release.notes,v 1.2.2.15 2017/05/10 14:27:29 jasercio Exp $
   EOH
 
  caldb_release-07-00-03 21-Apr-2015 jchiang add text files with valid evtype and evclass down selections

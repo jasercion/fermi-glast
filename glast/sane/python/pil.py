@@ -5,7 +5,7 @@ Interface to .par files.
 @author J. Chiang
 """
 #
-#$Header: /heacvs/glast/ScienceTools/glast/sane/python/pil.py,v 1.5 2016/09/12 15:02:50 jasercio Exp $
+#$Header: /glast/ScienceTools/glast/sane/python/pil.py,v 1.1.1.4.2.1 2017/02/01 04:25:39 jasercio Exp $
 #
 
 import os, sys

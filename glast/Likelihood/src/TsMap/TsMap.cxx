@@ -4,7 +4,7 @@
  *
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/TsMap/TsMap.cxx,v 1.7 2016/11/08 21:05:53 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/TsMap/TsMap.cxx,v 1.1.1.31.2.3 2017/02/01 04:27:36 jasercio Exp $
  */
 
 #include <cmath>

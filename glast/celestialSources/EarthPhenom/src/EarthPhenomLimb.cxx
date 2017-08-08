@@ -3,7 +3,7 @@
 * @brief A phenomenological model of the Earth limb based on LAT measurements
 * @author Keith Bechtol
 *
-* $Header: /heacvs/glast/ScienceTools/glast/celestialSources/EarthPhenom/src/EarthPhenomLimb.cxx,v 1.4 2016/11/08 19:52:06 jasercio Exp $
+* $Header: /glast/ScienceTools/glast/celestialSources/EarthPhenom/src/EarthPhenomLimb.cxx,v 1.1.1.1.6.4 2017/02/01 04:26:26 jasercio Exp $
 */
 
 #include <iostream>

@@ -5,7 +5,7 @@
  *
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/fitsGen/src/XmlEventClassifier.cxx,v 1.1.1.3 2011/03/20 19:24:57 elwinter Exp $
+ * $Header: /glast/ScienceTools/glast/fitsGen/src/XmlEventClassifier.cxx,v 1.1.1.3 2011/03/20 19:24:57 elwinter Exp $
  */
 
 #include <cstdio>

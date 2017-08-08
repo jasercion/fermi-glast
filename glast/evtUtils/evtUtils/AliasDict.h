@@ -4,7 +4,7 @@
 @brief header file for AliasDict.cxx
 @author Eric Charles
 
-$Header: /heacvs/glast/ScienceTools/glast/evtUtils/evtUtils/AliasDict.h,v 1.1.1.1 2012/01/17 17:18:05 elwinter Exp $
+$Header: /glast/ScienceTools/glast/evtUtils/evtUtils/AliasDict.h,v 1.1.1.1 2012/01/17 17:18:05 elwinter Exp $
 */
 
 

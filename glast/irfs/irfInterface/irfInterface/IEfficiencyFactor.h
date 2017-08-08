@@ -9,7 +9,7 @@
  *
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/irfInterface/irfInterface/IEfficiencyFactor.h,v 1.1.1.3 2013/07/22 20:11:20 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/irfInterface/irfInterface/IEfficiencyFactor.h,v 1.1.1.3 2013/07/22 20:11:20 jasercio Exp $
  */
 
 #ifndef irfInterface_IEfficiencyFactor_h

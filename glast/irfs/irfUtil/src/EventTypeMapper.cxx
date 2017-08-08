@@ -4,7 +4,7 @@
  * mapping between IRF name and event types.
  * @author J. Chiang
  * 
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/irfUtil/src/EventTypeMapper.cxx,v 1.4 2016/11/08 19:52:04 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/irfUtil/src/EventTypeMapper.cxx,v 1.2.2.2 2017/02/01 04:24:58 jasercio Exp $
  */
 
 #include <stdexcept>

@@ -1,7 +1,7 @@
 /**
  * @file CountsMapHealpix.h
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/CountsMapHealpix.h,v 1.2 2017/01/29 01:49:35 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/CountsMapHealpix.h,v 1.2.2.1 2017/02/01 04:22:06 jasercio Exp $
  */
 
 #ifndef Likelihood_CountsMapHealpix_h

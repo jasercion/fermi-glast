@@ -3,7 +3,7 @@
  * @brief Bilinear interoplator of energy dispersion distributions.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/EdispInterpolator.cxx,v 1.4 2016/11/08 19:52:05 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/EdispInterpolator.cxx,v 1.1.2.5 2017/02/01 04:23:15 jasercio Exp $
  */
 
 #include <cmath>

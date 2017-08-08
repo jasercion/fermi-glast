@@ -3,7 +3,7 @@
  * @brief class for returning the log of a LogNormal function
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/LogNormalLog.h,v 1.4 2016/11/08 21:05:52 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/LogNormalLog.h,v 1.1.1.1.6.6 2017/02/01 04:22:06 jasercio Exp $
  */
 
 #ifndef Likelihood_LogNormalLog_h

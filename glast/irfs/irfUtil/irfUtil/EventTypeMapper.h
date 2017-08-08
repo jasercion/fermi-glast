@@ -3,7 +3,7 @@
  * @brief Singleton class to manage IRF name to event type mapping.
  * @author J. Chiang
  * 
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/irfUtil/irfUtil/EventTypeMapper.h,v 1.4 2016/11/08 19:52:03 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/irfUtil/irfUtil/EventTypeMapper.h,v 1.2.2.2 2017/02/01 04:27:55 jasercio Exp $
  */
 
 #ifndef irfUtil_EventTypeMapper_h

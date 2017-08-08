@@ -3,7 +3,7 @@
 
 @author T. Burnett
 
-$Header: /heacvs/glast/ScienceTools/glast/healpix/src/HealpixArrayIO.cxx,v 1.6 2016/11/08 19:52:02 jasercio Exp $
+$Header: /glast/ScienceTools/glast/healpix/src/HealpixArrayIO.cxx,v 1.1.1.4.6.6 2017/02/01 04:26:20 jasercio Exp $
 */
 
 #include "healpix/HealpixArrayIO.h"

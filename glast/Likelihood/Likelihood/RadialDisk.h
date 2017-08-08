@@ -3,7 +3,7 @@
  * @brief Declaration for the RadialDisk Function class
  * @author M. Wood
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/Likelihood/RadialDisk.h,v 1.1 2016/11/04 19:11:42 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/Likelihood/RadialDisk.h,v 1.1.2.1 2017/02/01 04:22:03 jasercio Exp $
  *
  */
 

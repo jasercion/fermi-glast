@@ -5,7 +5,7 @@
  * 
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/BayesianBlocks/src/BayesianBlocks.cxx,v 1.3 2016/09/12 14:27:54 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/BayesianBlocks/src/BayesianBlocks.cxx,v 1.1.2.2 2017/02/01 04:27:57 jasercio Exp $
  */
 
 #include <cmath>

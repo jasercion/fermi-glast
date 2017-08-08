@@ -1,4 +1,3 @@
-
 /**
  * @file ParTables.cxx
  * @brief Implementation for class to manage tables of parameters for
@@ -6,9 +5,9 @@
  *
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/ParTables.cxx,v 1.2 2017/01/29 01:48:38 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/ParTables.cxx,v 1.1.1.5.6.2 2017/05/10 14:27:19 jasercio Exp $
  */
-#include <map>
+
 #include <sstream>
 #include <stdexcept>
 

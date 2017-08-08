@@ -4,7 +4,7 @@
  * other extension.
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/dataSubselector/src/viewCuts/viewCuts.cxx,v 1.8 2016/09/12 14:46:53 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/dataSubselector/src/viewCuts/viewCuts.cxx,v 1.6.6.3 2017/02/01 04:27:18 jasercio Exp $
  */
 
 #include <cstdlib>

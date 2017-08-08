@@ -3,7 +3,7 @@
  * @brief Point source with Gaussian spectrum
  * @author J. Chiang
  *
- * $Header: /heacvs/glast/ScienceTools/glast/celestialSources/genericSources/genericSources/GaussianSpectrum.h,v 1.1.1.1 2012/06/25 17:19:27 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/celestialSources/genericSources/genericSources/GaussianSpectrum.h,v 1.1.1.1 2012/06/25 17:19:27 areustle Exp $
  */
 
 #ifndef fluxSources_GaussianSpectrum_h

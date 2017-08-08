@@ -3,7 +3,7 @@
  * @brief
  * @author J. Chiang
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/ScienceTools-scons/st_facilities/src/Util.cxx,v 1.18 2015/12/10 00:48:06 echarles Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/ScienceTools-scons/st_facilities/src/Util.cxx,v 1.19 2017/04/25 23:41:28 echarles Exp $
  */
 
 #include <cassert>
@@ -165,6 +165,10 @@ namespace st_facilities {
                  << x.front() << ", "
                  << x.back() << ")";
          throw std::range_error(message.str());
+      }
+      // EAC, protect against case that xx == x.back()
+      if ( xx == x.back() ) {
+	return y.back();
       }
       std::vector<double>::const_iterator it 
          = std::upper_bound(x.begin(), x.end(), xx) - 1;

@@ -67,12 +67,7 @@ UNAME_SYSTEM="@UNAME_SYSTEM@"
 EXT="@EXT@"
 LHEA_TOP="@prefix@"
 HD_BUILD_ARCH_32_BIT="@HD_BUILD_ARCH_32_BIT@"
-
-# Reassign LHEA_TOP based on value of HEADAS.  In most cases this
-# will not imply a change, but if the DESTDIR install mechanism
-# is used then we need LHEA_TOP to reflect that:
 #-------------------------------------------------------------------------------
-LHEA_TOP=`cd $HEADAS/.. ; pwd`
 
 # handle directory containing libraries
 #-------------------------------------------------------------------------------
@@ -283,6 +278,8 @@ if [ -r $LHEASOFT/xrdefaults/. ]; then XRDEFAULTS=$LHEASOFT/xrdefaults; fi
 if [ -x $LHEASOFT/bin/ximage -a ! -d $LHEASOFT/bin/ximage/. ]; then
   xanadu_opt=yes
 elif [ -x $LHEASOFT/bin/xspec -a ! -d $LHEASOFT/bin/xspec/. ]; then
+  xanadu_opt=yes
+elif [ -x $LHEASOFT/bin/xspec11 -a ! -d $LHEASOFT/bin/xspec11/. ]; then
   xanadu_opt=yes
 elif [ -x $LHEASOFT/bin/lcurve -a ! -d $LHEASOFT/bin/lcurve/. ]; then
   xanadu_opt=yes

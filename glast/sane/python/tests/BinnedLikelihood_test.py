@@ -4,7 +4,7 @@ Binned likelihood tests.
 @author J. Chiang <jchiang@slac.stanford.edu>
 """
 #
-# $Header: /heacvs/glast/ScienceTools/glast/sane/python/tests/BinnedLikelihood_test.py,v 1.3 2016/09/12 15:02:49 jasercio Exp $
+# $Header: /glast/ScienceTools/glast/sane/python/tests/BinnedLikelihood_test.py,v 1.1.1.7.6.3 2017/02/01 04:24:39 jasercio Exp $
 #
 
 from setPaths import *

@@ -3,7 +3,7 @@
  * @brief Implementation for the SmoothBrokenPowerLaw Function class
  * @author Benoit Lott
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/SmoothBrokenPowerLaw.cxx,v 1.4 2016/11/08 21:05:50 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/SmoothBrokenPowerLaw.cxx,v 1.1.1.2.6.10 2017/02/01 04:19:59 jasercio Exp $
  */
 
 #include <cmath>

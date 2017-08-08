@@ -5,7 +5,7 @@
  *
  * @author J. Chiang <jchiang@slac.stanford.edu>
  *
- * $Header: /heacvs/glast/ScienceTools/glast/irfs/latResponse/src/EpochDep.h,v 1.1.1.1 2013/07/22 20:11:19 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/irfs/latResponse/src/EpochDep.h,v 1.1.1.1 2013/07/22 20:11:19 jasercio Exp $
  */
 
 #ifndef _latResponse_EpochDep_h

@@ -15,7 +15,7 @@
  * AVGDIST which gives the average distance to the source used for the profile
  * in units of lightseconds.
  * 
- * $Header: /heacvs/glast/ScienceTools/glast/SolarSystemTools/src/FitsSolarProfile.cxx,v 1.1.1.2 2012/09/10 18:39:14 areustle Exp $
+ * $Header: /glast/ScienceTools/glast/SolarSystemTools/src/FitsSolarProfile.cxx,v 1.1.1.2 2012/09/10 18:39:14 areustle Exp $
  */
 
 #include <string>

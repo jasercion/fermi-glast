@@ -5,7 +5,7 @@
  *
  * @author J. Chiang <jchiang@slac.stanford.edu>
  *
- * $Header: /heacvs/glast/ScienceTools/glast/Likelihood/src/Composite2.cxx,v 1.4 2016/11/08 21:05:50 jasercio Exp $
+ * $Header: /glast/ScienceTools/glast/Likelihood/src/Composite2.cxx,v 1.1.1.3.6.11 2017/02/01 04:20:08 jasercio Exp $
  */
 
 #include <algorithm>
