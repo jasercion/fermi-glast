@@ -3220,20 +3220,20 @@ fi
 
 # -----------------------------------------------------------------------------
 
-HC_BLD_EXEC_PFX=`$hd_scanenv $h_coreBUILD_DIR/hmakerc HD_BLD_EXEC_PFX`
-HC_EXEC_PFX=`$hd_scanenv $h_coreBUILD_DIR/hmakerc HD_EXEC_PFX`
-CFITSIO=`$hd_scanenv $h_coreBUILD_DIR/hmakerc CFITSIO`
-CFITSIO_DIR=`$hd_scanenv $h_coreBUILD_DIR/hmakerc CFITSIO_DIR`
-PIL=`$hd_scanenv $h_coreBUILD_DIR/hmakerc PIL`
-READLINE=`$hd_scanenv $h_coreBUILD_DIR/hmakerc READLINE`
-HISTORY=`$hd_scanenv $h_coreBUILD_DIR/hmakerc HISTORY`
-HEAINIT=`$hd_scanenv $h_coreBUILD_DIR/hmakerc HEAINIT`
-HEAIO=`$hd_scanenv $h_coreBUILD_DIR/hmakerc HEAIO`
-HEAUTILS=`$hd_scanenv $h_coreBUILD_DIR/hmakerc HEAUTILS`
-HOOPS=`$hd_scanenv $h_coreBUILD_DIR/hmakerc HOOPS`
-HEASP=`$hd_scanenv $h_coreBUILD_DIR/hmakerc HEASP`
-CCFITS=`$hd_scanenv $h_coreBUILD_DIR/hmakerc CCFITS`
-WCSLIB=`$hd_scanenv $h_coreBUILD_DIR/hmakerc WCSLIB`
+# HC_BLD_EXEC_PFX=`$hd_scanenv $h_coreBUILD_DIR/hmakerc HD_BLD_EXEC_PFX`
+# HC_EXEC_PFX=`$hd_scanenv $h_coreBUILD_DIR/hmakerc HD_EXEC_PFX`
+# CFITSIO=`$hd_scanenv $h_coreBUILD_DIR/hmakerc CFITSIO`
+# CFITSIO_DIR=`$hd_scanenv $h_coreBUILD_DIR/hmakerc CFITSIO_DIR`
+# PIL=`$hd_scanenv $h_coreBUILD_DIR/hmakerc PIL`
+# READLINE=`$hd_scanenv $h_coreBUILD_DIR/hmakerc READLINE`
+# HISTORY=`$hd_scanenv $h_coreBUILD_DIR/hmakerc HISTORY`
+# HEAINIT=`$hd_scanenv $h_coreBUILD_DIR/hmakerc HEAINIT`
+# HEAIO=`$hd_scanenv $h_coreBUILD_DIR/hmakerc HEAIO`
+# HEAUTILS=`$hd_scanenv $h_coreBUILD_DIR/hmakerc HEAUTILS`
+# HOOPS=`$hd_scanenv $h_coreBUILD_DIR/hmakerc HOOPS`
+# HEASP=`$hd_scanenv $h_coreBUILD_DIR/hmakerc HEASP`
+# CCFITS=`$hd_scanenv $h_coreBUILD_DIR/hmakerc CCFITS`
+# WCSLIB=`$hd_scanenv $h_coreBUILD_DIR/hmakerc WCSLIB`
 
 if test "x$h_attBUILD_DIR" != x; then
    ATT_BLD_EXEC_PFX=`$hd_scanenv $h_attBUILD_DIR/hmakerc HD_BLD_EXEC_PFX`
