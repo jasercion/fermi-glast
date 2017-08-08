@@ -4,8 +4,8 @@ export CXXFLAGS='-I${PREFIX}/include -O2 -Wall --pedantic -Wno-comment -Wno-long
 export CPPFLAGS="-I${PREFIX}/include"
 export LDFLAGS="-L${PREFIX}/lib"
 export PYTHON="python2.7"
-export PYTHON_DIR="${PREFIX}/include/${PYTHON}"
-export PYTHON_INC="${PREFIX}/include/${PYTHON}"
+export PYTHON_DIR="-I${PREFIX}/include/${PYTHON}"
+export PYTHON_INC="-I${PREFIX}/include/${PYTHON}"
 ./configure --prefix=${PREFIX} --exec_prefix=${PREFIX} LDFLAGS="-Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
-./hmake EXT_BLD_EXEC_PFX=${PREFIX} HD_EXEC_PFX=${PREFIX} HD_TOP_EXEC_PFX=${PREFIX}
-./hmake install HD_EXEC_PFX=${PREFIX} HD_TOP_EXEC_PFX=${PREFIX}
+./hmake EXT_BLD_EXEC_PFX=${PREFIX} HD_EXEC_PFX=${PREFIX} HD_TOP_EXEC_PFX=${PREFIX} PYTHON_INC="-I${PREFIX}/include/${PYTHON}"
+./hmake install HD_EXEC_PFX=${PREFIX} HD_TOP_EXEC_PFX=${PREFIX} PYTHON_INC="-I${PREFIX}/include/${PYTHON}"
