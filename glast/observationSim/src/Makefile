@@ -10,7 +10,7 @@ HD_LIBRARY_SRC_cxx      = ContainerBase.cxx \
                           LatSc.cxx \
                           ScDataContainer.cxx \
                           Simulator.cxx \
-			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx
+			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp
 
 HD_SUBDIRS              = obsSim
 

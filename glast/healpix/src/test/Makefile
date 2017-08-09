@@ -13,6 +13,6 @@ HD_CXXFLAGS             = ${HD_STD_CXXFLAGS} -fpermissive -I../..
 HD_CXXLIBS              = ${HD_LFLAGS} \
                           ${GT_HEALPIX_LIBS} \
                           ${GT_STD_CXXLIBS} \
-			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx
+			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp
 
 include ${HD_STD_MAKEFILE}

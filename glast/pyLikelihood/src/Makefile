@@ -31,7 +31,7 @@ HD_SHLIB_LIBS           = ${HD_LFLAGS} \
                           ${ROOT_GUI_LIBS} -lMinuit2 -l${XERCES} \
                           ${CERN_ROOT_CXXLIBS} \
                           ${HD_STD_LIBS} ${SYSLIBS} -lf2c \
-			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx
+			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp
 
 HD_INSTALL_LIBRARIES    = ${HD_LIBRARY_ROOT}
 

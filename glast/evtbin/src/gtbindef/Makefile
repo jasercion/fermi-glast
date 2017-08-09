@@ -12,7 +12,7 @@ HD_CXXLIBS              = ${HD_LFLAGS} \
                           ${GT_EVTBIN_LIBS} \
                           ${GT_STD_CXXLIBS} \
 			  -lwcs-5.16 \
-			  -lhealpix_cxx
+			  -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp
 
 HD_INSTALL_TASKS        = ${HD_CXXTASK}
 

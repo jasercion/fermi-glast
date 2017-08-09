@@ -12,7 +12,7 @@ HD_CXXLIBS              = ${HD_LFLAGS} \
                           ${GT_STD_CXXLIBS} \
                           ${GT_OPT_LIBS} \
                           ${GT_XML_LIBS} \
-			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx
+			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp
 
 HD_INSTALL_HELP         = 
 

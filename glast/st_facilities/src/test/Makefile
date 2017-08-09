@@ -21,7 +21,7 @@ HD_CXXLIBS              = ${HD_LFLAGS} \
                           ${ROOT_GUI_LIBS} \
                           ${HD_STD_LIBS} \
                           ${SYSLIBS} \
-			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx
+			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp
 
 include ${HD_STD_MAKEFILE}
 

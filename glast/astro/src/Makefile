@@ -27,7 +27,7 @@ HD_LIBRARY_SRC_cxx      = EarthCoordinate.cxx \
 
 HD_CFLAGS               = ${HD_STD_CFLAGS}
 
-HD_CXXFLAGS             = ${HD_STD_CXXFLAGS} -L${HC_BLD_EXEC_PFX}/lib -lwcs-5.16 -lhealpix_cxx -lcfitsio
+HD_CXXFLAGS             = ${HD_STD_CXXFLAGS} -L${HC_BLD_EXEC_PFX}/lib -lwcs-5.16 -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp -lcfitsio
 
 HD_INSTALL_LIBRARIES    = ${HD_LIBRARY_ROOT}
 

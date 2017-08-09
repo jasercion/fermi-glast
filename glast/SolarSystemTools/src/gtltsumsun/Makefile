@@ -28,7 +28,7 @@ HD_CXXLIBS              = ${HD_LFLAGS} \
                           -lMinuit2 \
                           -lSolarSystemTools \
                           ${GT_STD_CXXLIBS} \
-			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx
+			  -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp
 
 HD_INSTALL_TASKS        = ${HD_CXXTASK}
 
