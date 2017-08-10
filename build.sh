@@ -11,10 +11,9 @@ export HOOPS="hoops_1.1"
 export PIL="ape_2.8"
 export CFITSIO="cfitsio"
 export READLINE="readline"
-# export CPPUNIT="cppunit"
-# export FFTW="fftw3"
-# export WCSLIB="wcslib"
-# export XERCES="xerces-c"
+export CPPUNIT="cppunit"
+export FFTW="fftw3"
+export XERCES="xerces-c"
 ./configure --prefix=${PREFIX} --exec_prefix=${PREFIX} \
     LDFLAGS="-Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib"
 ./hmake EXT_BLD_EXEC_PFX=${PREFIX} \
@@ -25,10 +24,9 @@ export READLINE="readline"
     PIL=${PIL} \
     CFITSIO=${CFITSIO} \
     READLINE=${READLINE} \
-    PYTHON_INC="-I${PREFIX}/include/${PYTHON}"
-    # CPPUNIT=${CPPUNIT} \
-    # FFTW=${FFTW} \
-    # WCSLIB="wcslib"
-    # XERCES=${XERCES} \
+    PYTHON_INC="-I${PREFIX}/include/${PYTHON}" \
+    CPPUNIT=${CPPUNIT} \
+    FFTW=${FFTW} \
+    XERCES=${XERCES}
 
 ./hmake install HD_EXEC_PFX=${PREFIX} HD_TOP_EXEC_PFX=${PREFIX}
