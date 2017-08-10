@@ -18,7 +18,7 @@ HD_CXXLIBS              = ${HD_LFLAGS} \
                           -ltestResponse \
 			  -lirfUtil \
 			  ${GT_STD_CXXLIBS} \
-			  -L${EXT_BLD_EXEC_PFX}/lib -lwcs-5.16 -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp -lcfitsio -lgsl -lgslcblas
+			  -L${EXT_BLD_EXEC_PFX}/lib -lwcs -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp -lcfitsio -lgsl -lgslcblas
 
 HD_INSTALL_TASKS        = ${HD_CXXTASK}
 

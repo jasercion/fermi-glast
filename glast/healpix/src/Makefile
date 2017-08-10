@@ -28,7 +28,7 @@ HD_LIBRARY_SRC_cxx      = CosineBinner.cxx \
 
 #HD_SUBDIRS              = base
 
-HD_CXXFLAGS             = ${HD_STD_CXXFLAGS} -lwcs-5.16 -I${EXT_BLD_EXEC_PFX}/include -L${EXT_BLD_EXEC_PFX}/lib -fpermissive -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp
+HD_CXXFLAGS             = ${HD_STD_CXXFLAGS} -lwcs -I${EXT_BLD_EXEC_PFX}/include -L${EXT_BLD_EXEC_PFX}/lib -fpermissive -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp
 
 HD_CFLAGS               = ${HD_STD_CFLAGS}
 

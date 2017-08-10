@@ -26,7 +26,7 @@ HD_CXXLIBS              = ${HD_LFLAGS} \
                           ${GT_FFT_LIBS} \
                           ${GT_STD_CXXLIBS} \
 			  -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp \
-			  -lwcs-5.16 \
+			  -lwcs \
 			  -lgsl \
 			  -lgslcblas
 

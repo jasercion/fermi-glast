@@ -8,7 +8,7 @@ HD_CXXTASK_SRC_cxx      = gtobspsf.cxx
 
 HD_CXXFLAGS             = ${HD_STD_CXXFLAGS}
 
-HD_CXXLIBS              = ${HD_LFLAGS} ${GT_STD_CXXLIBS} -lwcs-5.16 -lgsl -lgslcblas -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp
+HD_CXXLIBS              = ${HD_LFLAGS} ${GT_STD_CXXLIBS} -lwcs -lgsl -lgslcblas -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp
 
 HD_INSTALL_TASKS        = ${HD_CXXTASK}
 
