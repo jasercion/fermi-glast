@@ -10,9 +10,9 @@ build:
 
 requirements:
   build:
-    - fermi-heacore
-    - fermi-f2c
-    - fermi-minuit2
+    - heacore
+    - f2c
+    - minuit2
     - python
     - astropy
     - cppunit
@@ -31,8 +31,8 @@ requirements:
     - wcslib
 
   run:
-    - fermi-heacore
-    - fermi-minuit2
+    - heacore
+    - minuit2
     - astropy
     - cppunit
     - clhep
