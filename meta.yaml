@@ -20,7 +20,6 @@ requirements:
     - distribute
     - fftw
     - gsl
-    - healpy
     - matplotlib
     - numpy
     - pmw
@@ -33,21 +32,17 @@ requirements:
 
   run:
     - fermi-heacore
-      # - fermi-f2c
     - fermi-minuit2
     - astropy
     - cppunit
     - clhep
-      # - distribute
     - fftw
     - gsl
-    - healpy
     - matplotlib
     - numpy
     - pmw
     - pyds9
     - scipy
-      # - swig
     - xerces-c
     - healpix_cxx
     - wcslib
