@@ -8,7 +8,7 @@ Authors: Paul S. Ray <paul.ray@nrl.navy.mil>
 """
 
 import numpy as np
-import pyfits
+from astropy.io import fits as pyfits
 import sys
 from uw.utilities import keyword_options
 from timeman import METConverter

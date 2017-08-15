@@ -6,7 +6,7 @@ import BinnedAnalysis
 
 import numpy
 import os,sys, re, glob, shutil, datetime, time
-import pyfits
+from astropy.io import fits as pyfits
 import math
 import pywcs
 from GtApp import GtApp

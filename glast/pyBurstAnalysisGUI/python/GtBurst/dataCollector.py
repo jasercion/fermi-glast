@@ -1,7 +1,8 @@
 #This is a mother class to get GBM and LLE data files (lle, pha and rsp)
 #Author: giacomov@slac.stanford.edu
 
-import os,sys,glob,pyfits,string,errno,shutil
+import os,sys,glob,string,errno,shutil
+from astropy.io import fits as pyfits
 from GtBurst.GtBurstException import GtBurstException
 import ftplib, socket
 import time
@@ -20,31 +21,31 @@ except:
 class dataCollector(object):
   def __init__(self,instrument,grbName,dataRepository=None,localRepository=None,
                     getTTE=True,getCSPEC=True,getRSP=True,getCTIME=True,**kwargs):
-    
+
     self.parent               = None
     for key in kwargs.keys():
       if key.lower()=='parent' :  self.parent    = kwargs['parent']
-    
+
     self.instrument           = instrument
-    
+
     if(grbName.find("bn")==0):
       self.grbName            = grbName[2:]
     else:
-      self.grbName            = grbName  
+      self.grbName            = grbName
     pass
-    
+
     self.trigName             = "bn%s" %(self.grbName)
-    
+
     self.dataRepository       = dataRepository
-        
+
     self.localRepository      = os.path.join(localRepository,self.trigName)
-        
+
     self.getCTIME              = getCTIME
     self.getCSPEC              = getCSPEC
     self.getTTE                = getTTE
-    self.getRSP                = getRSP    
+    self.getRSP                = getRSP
   pass
-  
+
   def makeLocalDir(self):
     try:
       os.makedirs(self.localRepository)
@@ -55,12 +56,12 @@ class dataCollector(object):
         raise
       else:
         #Directory already existed
-        message                = "already existent"  
+        message                = "already existent"
     pass
-    
-    print("Local data repository (destination): %s (%s)" %(self.localRepository,message))    
+
+    print("Local data repository (destination): %s (%s)" %(self.localRepository,message))
   pass
-  
+
   def downloadDirectoryWithFTP(self,address,filenames=None,namefilter=None):
     #Connect to the server
     if(address.find("ftp://")==0):
@@ -76,7 +77,7 @@ class dataCollector(object):
       ftp                       = ftplib.FTP(serverAddress,"anonymous",'','',timeout=60)
     except socket.error as socketerror:
       raise GtBurstException(11,"Error when connecting: %s" % os.strerror(socketerror.errno))
-    
+
     print("Loggin in to %s..." % serverAddress),
     try:
       ftp.login()
@@ -89,7 +90,7 @@ class dataCollector(object):
         raise
       pass
     pass
-          
+
     print("done")
     self.makeLocalDir()
     try:
@@ -100,16 +101,16 @@ class dataCollector(object):
         os.rmdir(self.localRepository)
       except:
         pass
-      raise GtBurstException(5,"The remote directory %s is not accessible. This kind of data is probably not available for trigger %s, or the server is offline." %(serverAddress+directory,self.trigName))      
+      raise GtBurstException(5,"The remote directory %s is not accessible. This kind of data is probably not available for trigger %s, or the server is offline." %(serverAddress+directory,self.trigName))
     pass
-    
+
     if(filenames==None):
       filenames                 = []
       ftp.retrlines('NLST', filenames.append)
     pass
-    
+
     maxTrials                 = 10
-    
+
     #Build the window for the progress
     if(self.parent==None):
       #Do not use any graphical output
@@ -119,7 +120,7 @@ class dataCollector(object):
       #make a transient window
       root                 = Toplevel()
       root.transient(self.parent)
-      root.grab_set()        
+      root.grab_set()
       l                    = Label(root,text='Downloading...')
       l.grid(row=0,column=0)
       m1                    = Meter(root, 500,20,'grey','blue',0,None,None,'white',relief='ridge', bd=3)
@@ -131,12 +132,12 @@ class dataCollector(object):
       m2.grid(row=3,column=0)
       m2.set(0.0,'Download started...')
     pass
-    
+
     for i,filename in enumerate(filenames):
       if(namefilter!=None and filename.find(namefilter)<0):
         #Filename does not match, do not download it
         continue
-      
+
       if(root!=None):
         m2.set((float(i))/len(filenames))
       skip                    = False
@@ -156,23 +157,23 @@ class dataCollector(object):
       #if(filename.find(".pdf")>0 or filename.find("gif") >0 or filename.find(".png")>0):
       #  skip                  = (not self.minimal)
       if(skip):
-        print("Skipping %s ..." %(filename))   
+        print("Skipping %s ..." %(filename))
         continue
       else:
         print("Retrieving %s ..." %(filename)),
-      
+
       if(root!=None):
         l['text']               = "Downloading %s..." % filename
-      
+
       done                      = False
       local_filename          = os.path.join(self.localRepository,filename)
-      
-      while(done==False):        
+
+      while(done==False):
         try:
           f                       = open(local_filename, 'wb')
         except:
           raise IOError("Could not open file %s for writing. Do you have write permission on %s?" %(local_filename,self.localRepository))
-        
+
         g                         = downloadCallback.get_size()
         try:
           ftp.dir(filename,g)
@@ -201,10 +202,10 @@ class dataCollector(object):
           ftp.cwd(directory)
           done                = False
           continue
-        pass  
+        pass
       print(" done")
     pass
-    
+
     ftp.close()
     print("\nDownload files done!")
     if(root!=None):
@@ -212,18 +213,18 @@ class dataCollector(object):
       root.destroy()
     pass
   pass
-  
+
   def getFTP(self,errorCode=None,namefilter=None):
     #Path in the repository is [year]/bn[grbname]/current
-    
+
     #Get the year
     year                      = "20%s" %(self.grbName[0:2])
     #trigger number
     triggerNumber             = "bn%s" %(self.grbName)
-    
+
     remotePath                = "%s/%s/triggers/%s/%s/current" %(self.dataRepository,self.instrument,year,triggerNumber)
-        
+
     self.downloadDirectoryWithFTP(remotePath,None,namefilter)
   pass
-    
+
 pass

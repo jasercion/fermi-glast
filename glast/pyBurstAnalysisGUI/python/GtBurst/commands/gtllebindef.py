@@ -7,7 +7,7 @@ import numpy as np
 import re
 from matplotlib.widgets import SpanSelector
 from matplotlib.patches import Rectangle
-import pyfits
+from astropy.io import fits as pyfits
 
 from GtApp import GtApp
 

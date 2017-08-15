@@ -15,7 +15,7 @@ import matplotlib.pyplot as mpl
 import mpl_toolkits.axes_grid.parasite_axes as mpltk
 
 try:
-    import pyfits
+    from astropy.io import fits as pyfits
 except ImportError:
     raise Exception("pyfits is required for APLpy")
 

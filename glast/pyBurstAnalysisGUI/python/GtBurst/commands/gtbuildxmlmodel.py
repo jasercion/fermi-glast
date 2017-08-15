@@ -3,7 +3,8 @@
 from GtBurst import dataHandling
 from GtBurst import bkge
 import sys, copy
-import os, pyfits, numpy
+import os, numpy
+from astro.io import fits as pyfits
 from GtBurst import commandDefiner
 from GtBurst import LikelihoodComponent
 from GtBurst import dataHandling
@@ -25,7 +26,7 @@ thisCommand.addParameter("filteredeventfile","Input event list (FT1 file)",comma
 thisCommand.addParameter("ra","R.A. of the point source (probably a GRB or the Sun)",commandDefiner.MANDATORY)
 thisCommand.addParameter("dec","Dec of the point source (probably a GRB or the Sun)",commandDefiner.MANDATORY)
 thisCommand.addParameter("triggername","Name of the source",commandDefiner.OPTIONAL,'GRB')
-thisCommand.addParameter("particle_model",'''Model for the particle background (possible values: 
+thisCommand.addParameter("particle_model",'''Model for the particle background (possible values:
                                             'isotr with pow spectrum', 'isotr template', 'none')''',commandDefiner.MANDATORY,
                                          'isotr with pow spectrum',
                                          possiblevalues=possibleParticleModels)
@@ -56,13 +57,13 @@ thisCommand.setGUIdescription(GUIdescription)
 
 ##################################################################
 
-def _yesOrNoToBool(value):      
+def _yesOrNoToBool(value):
   if(value.lower()=="yes"):
     return True
   elif(value.lower()=="no"):
     return False
   else:
-    raise ValueError("Unrecognized clobber option. You can use 'yes' or 'no'")    
+    raise ValueError("Unrecognized clobber option. You can use 'yes' or 'no'")
   pass
 pass
 
@@ -70,11 +71,11 @@ class Message(object):
   def __init__(self,verbose):
     self.verbose              = bool(verbose)
   pass
-  
+
   def __call__(self,string):
     if(self.verbose):
       print(string)
-pass   
+pass
 
 def gtbuildxmlmodel(**kwargs):
   run(**kwargs)
@@ -86,7 +87,7 @@ def run(**kwargs):
     thisCommand.getHelp()
     return
   pass
-  
+
   #Get parameters values
   thisCommand.setParValuesFromDictionary(kwargs)
   try:
@@ -103,25 +104,25 @@ def run(**kwargs):
     verbose                     = _yesOrNoToBool(thisCommand.getParValue('verbose'))
   except KeyError as err:
     print("\n\nERROR: Parameter %s not found or incorrect! \n\n" %(err.args[0]))
-    
+
     #Print help
     print thisCommand.getHelp()
     return
   pass
-  
+
   #Get the IRF from the event file
   try:
     f                             = pyfits.open(filteredeventfile)
   except:
     raise GtBurstException(31,"Could not open filtered event file %s" %(filteredeventfile))
-  
+
   tstart                        = float(f[0].header['_TMIN'])
   tstop                         = float(f[0].header['_TMAX'])
   irf                           = str(f[0].header['_IRF'])
   ra                            = float(f[0].header['_ROI_RA'])
   dec                           = float(f[0].header['_ROI_DEC'])
   roi                           = float(f[0].header['_ROI_RAD'])
-  
+
   #Lookup table for the models
   models = {}
   if(particlemodel=='isotr with pow spectrum'):
@@ -129,43 +130,43 @@ def run(**kwargs):
   elif(particlemodel=='isotr template'):
     models['isotr template']          = LikelihoodComponent.IsotropicTemplate(irf)
   pass
-  
+
   if(galacticmodel=='template'):
     models['template']                = LikelihoodComponent.GalaxyAndExtragalacticDiffuse(irf,ra,dec,2.5*roi)
   elif(galacticmodel=='template (fixed norm.)'):
     models['template (fixed norm.)']  = LikelihoodComponent.GalaxyAndExtragalacticDiffuse(irf,ra,dec,2.5*roi)
     models['template (fixed norm.)'].fixNormalization()
   pass
-  
+
   deltat                        = numpy.sum(f['GTI'].data.field('STOP')-f['GTI'].data.field('START'))
   f.close()
   triggertime                   = dataHandling.getTriggerTime(filteredeventfile)
-  
+
   if(irf.lower().find('source')>=0 and particlemodel!='isotr template'):
-    raise GtBurstException(6,"Do not use '%s' as model for the particle background in SOURCE class. Use '%s' instead." 
+    raise GtBurstException(6,"Do not use '%s' as model for the particle background in SOURCE class. Use '%s' instead."
                      %(particlemodel,'isotropic template'))
-  
+
   modelsToUse                   = [LikelihoodComponent.PointSource(ra,dec,triggername,sourcemodel)]
   if(particlemodel!='none'):
     if(particlemodel=='bkge'):
       if(ft2file==None or ft2file==''):
         raise ValueError("If you want to use the BKGE, you have to provide an FT2 file!")
-      
+
       modelsToUse.append(LikelihoodComponent.BKGETemplate(filteredeventfile,
                                                           ft2file,tstart,tstop,triggername,triggertime))
     else:
       modelsToUse.append(models[particlemodel])
   if(galacticmodel!='none'):
     modelsToUse.append(models[galacticmodel])
-  
+
   xml                          = LikelihoodComponent.LikelihoodModel()
   xml.addSources(*modelsToUse)
   xml.writeXML(xmlmodel)
   xml.add2FGLsources(ra,dec,float(roi)+8.0,xmlmodel,deltat)
-    
-  
+
+
   dataHandling._writeParamIntoXML(xmlmodel,IRF=irf,OBJECT=triggername,RA=ra,DEC=dec)
-    
+
   return 'xmlmodel', xmlmodel
 pass
 

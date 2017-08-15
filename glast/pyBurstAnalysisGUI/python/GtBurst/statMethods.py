@@ -4,7 +4,7 @@
 
 import numpy
 import os,sys
-import pyfits
+from astropy.io import fits as pyfits
 import math
 from GtApp import GtApp
 import scipy.optimize

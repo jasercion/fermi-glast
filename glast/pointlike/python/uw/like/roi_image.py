@@ -12,7 +12,7 @@ author: Joshua Lande
 """
 from skymaps import SkyImage,SkyDir,PythonUtilities,Band,WeightedSkyDirList
 import numpy as np
-import pyfits
+from astropy.io import fits as pyfits
 import scipy
 import scipy.ndimage
 

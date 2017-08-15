@@ -4,7 +4,8 @@ $Header: /glast/ScienceTools/glast/pointlike/python/uw/utilities/Attic/makerec.p
 
 
 """
-import os, pyfits, pickle
+import os, pickle
+from astropy.io import fits as pyfits
 from pylab import mlab
 import numpy as np
 
@@ -21,20 +22,20 @@ def makefits(r, filename=None, **kwargs):
             raise
     def column(n,f):
         if f!='|O4': return pyfits.Column(name=n, format=f, array=r[n])
-        # treat an object as a string, expand to match 
+        # treat an object as a string, expand to match
         maxsize = np.array([len(str(e)) for e in r[n]]).max()
         fmt = '%%-%ds' % maxsize
-        data = [fmt % str(e) for e in r[n]] 
+        data = [fmt % str(e) for e in r[n]]
         return pyfits.Column(name=n, format='%dA'%maxsize, array=data)
     names = r.dtype.names
     formats = [convertformat(t[1]) for t in r.dtype.descr]
     columns = [column(n,f ) for n,f in zip(names, formats)]
-    thdulist = pyfits.HDUList([ pyfits.PrimaryHDU(), 
+    thdulist = pyfits.HDUList([ pyfits.PrimaryHDU(),
                                 pyfits.new_table(pyfits.ColDefs(columns))])
     if filename is not None:
         thdulist.writeto(filename, **kwargs)
     return thdulist
-    
+
 
 def fitsrec(filename, HDU=1, quiet=False):
     " make and return a record array from a FITS file"
@@ -57,7 +58,7 @@ def textrec(filename, quiet=False, insertname=False, delimiter=' '):
     names = [name.lower().strip() for name in nameline.split(delim)]
     if insertname: names.insert(0,'name')
     r = mlab.csv2rec(filename, skiprows=1, delimiter=delimiter, names=names)
-    if not quiet: 
+    if not quiet:
         print 'loaded file %s, found %d entries' %(filename, len(r))
         print r.dtype
 
@@ -91,7 +92,7 @@ class RecArray(object):
         """ return finished recarray"""
         return np.rec.fromarrays(self.fields, names=self.names)
 
-      
+
 def load(filename):
     ext = os.path.splitext(filename)[1]
     if ext=='.txt':

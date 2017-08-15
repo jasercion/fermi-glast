@@ -1,7 +1,8 @@
 #! /usr/bin/env python
 
 import sys
-import os, pyfits, numpy
+import os, numpy
+from astro.io import fits as pyfits
 from GtBurst import commandDefiner
 from GtBurst import xmlModelGUI
 import subprocess
@@ -29,13 +30,13 @@ thisCommand.setGUIdescription(GUIdescription)
 
 ##################################################################
 
-def _yesOrNoToBool(value):      
+def _yesOrNoToBool(value):
   if(value.lower()=="yes"):
     return True
   elif(value.lower()=="no"):
     return False
   else:
-    raise ValueError("Unrecognized option. You can use 'yes' or 'no'")    
+    raise ValueError("Unrecognized option. You can use 'yes' or 'no'")
   pass
 pass
 
@@ -43,11 +44,11 @@ class Message(object):
   def __init__(self,verbose):
     self.verbose              = bool(verbose)
   pass
-  
+
   def __call__(self,string):
     if(self.verbose):
       print(string)
-pass   
+pass
 
 def gteditxmlmodel(**kwargs):
   run(**kwargs)
@@ -59,7 +60,7 @@ def run(**kwargs):
     thisCommand.getHelp()
     return
   pass
-  
+
   #Get parameters values
   thisCommand.setParValuesFromDictionary(kwargs)
   try:
@@ -68,25 +69,25 @@ def run(**kwargs):
     tkwindow                    = thisCommand.getParValue('tkwindow')
   except KeyError as err:
     print("\n\nERROR: Parameter %s not found or incorrect! \n\n" %(err.args[0]))
-    
+
     #Print help
     print thisCommand.getHelp()
     return
   pass
-  
+
   from GtBurst import dataHandling
   irf                         = dataHandling._getParamFromXML(xmlmodel,'IRF')
   ra                          = dataHandling._getParamFromXML(xmlmodel,'RA')
   dec                         = dataHandling._getParamFromXML(xmlmodel,'DEC')
   name                        = dataHandling._getParamFromXML(xmlmodel,'OBJECT')
-  
-  xml                         = xmlModelGUI.xmlModelGUI(xmlmodel,tkwindow)  
-      
+
+  xml                         = xmlModelGUI.xmlModelGUI(xmlmodel,tkwindow)
+
   if(irf!=None):
     dataHandling._writeParamIntoXML(xmlmodel,IRF=irf,OBJECT=name,RA=ra,DEC=dec)
   pass
-  
-  
+
+
   return 'xmlmodel', xmlmodel
 pass
 

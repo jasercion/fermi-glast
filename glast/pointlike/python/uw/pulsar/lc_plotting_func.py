@@ -7,7 +7,8 @@ __version__ = 1.9
 
 import os, sys
 from os.path import join, isfile
-import numpy as np, pyfits
+import numpy as np
+from astro.io import fits as pyfits
 from numpy import array, vectorize, sqrt, exp, log10, power
 from ROOT import *
 
@@ -39,7 +40,7 @@ def find_prof_mean(y):
     for i in xrange(1,nmax):
         t = y[:-i] - (y[:-i]).mean()
         nlo = (t<0).sum()
-        nhi = len(t)-nlo  
+        nhi = len(t)-nlo
         if (nlo-nhi) < len(t)**0.5: break
     print 'Found equality at %d'%i
     return y[:-i].mean()
@@ -65,7 +66,7 @@ def met2mjd(met):
 
 def SetHistoBox(histo,xmin,xmax,color=18):
     xmin_histo = int(histo.GetXaxis().GetBinLowEdge(1))
-    xmax_histo = int(histo.GetXaxis().GetBinUpEdge(histo.GetNbinsX()))   
+    xmax_histo = int(histo.GetXaxis().GetBinUpEdge(histo.GetNbinsX()))
     ymin, ymax = histo.GetMinimum(), histo.GetMaximum()
     boxes = []
     for i in range(xmax_histo-xmin_histo):
@@ -130,11 +131,11 @@ class PulsarLightCurve:
         self.init()
         self.__dict__.update(kwargs)
         self.align_shift = 0
-        
+
         self.ft1name = ft1name
         if not isfile(ft1name):
             raise IOError("Cannot access to the ft1file. Exiting ...")
-       
+
         # time range
         ft1range = utilfits.ft1_time_range(ft1name)
         self.tmin = ft1range['START'] if self.tmin is None else self.tmin
@@ -157,7 +158,7 @@ class PulsarLightCurve:
         # radius selection
         self.radius = utilfits.get_header_position(ft1name)[2] if self.radius is None else self.radius
         self.__radius_range = []
-        
+
         # psf selection
         self.__psf_selection = [5.12,0.8,0.07]
         if self.convtype == -1: self.__psf_selection = [5.12,0.8,0.07]
@@ -184,7 +185,7 @@ class PulsarLightCurve:
         #                Get the events from the FT1 file
         # ===============================================================
         ft1file = pyfits.open(ft1name)
-        hduname = 'EVENTS'        
+        hduname = 'EVENTS'
         ra = ft1file[hduname].data.field('RA')
         dec = ft1file[hduname].data.field('DEC')
         time = ft1file[hduname].data.field('TIME')
@@ -200,7 +201,7 @@ class PulsarLightCurve:
         except KeyError:
             print "\t You need to assign a phase for each event in the fits file. Exiting ..."; exit()
 
-        # get the weight column        
+        # get the weight column
         try:
             weight = ft1file[hduname].data.field(self.weight_colname)
             weight = np.float64(weight)
@@ -252,11 +253,11 @@ class PulsarLightCurve:
     def set_radius_range(self,which=0,radius=100.):
         '''Set the radius (deg) for the histo [which]'''
         if radius>self.radius:
-            print OKRED + "warning: radius (for histo=%i) cannot be larger than PulsarLightCurve RADIUS" %which + ENDC 
+            print OKRED + "warning: radius (for histo=%i) cannot be larger than PulsarLightCurve RADIUS" %which + ENDC
             radius = self.radius
         self.__radius_range[which] = radius
         print "Radius selection for histo=%i has been changed: %.2f deg" %(which,radius)
-        
+
     def modify_loc(self,ra,dec):
         '''Set the source coordinates (ra,dec)'''
         self.ra_src  = ra
@@ -268,7 +269,7 @@ class PulsarLightCurve:
         energy = self.eventlist["ENERGY"]
         theta = get_theta(self.__psf_selection,energy)
         self.eventlist[self.weight_colname] = get_searchpulsation_weights(energy,angsep,theta,logeref,logesig)
-                        
+
     def get_phases(self,which=0):
         '''Returns an array of pulse phases'''
         try: return np.asarray(self.pulse_phase[which][:,0][0])
@@ -278,7 +279,7 @@ class PulsarLightCurve:
         '''Returns an array of counts'''
         histo = self.phaseogram[which]
         return np.asarray([histo.GetBinContent(i+1) for i in range(histo.GetNbinsX()/2)])
-        
+
     def get_weights(self,which=0):
         '''Returns an array of weights'''
         try: return np.asarray(self.pulse_phase[which][:,1][0])
@@ -317,7 +318,7 @@ class PulsarLightCurve:
             root.scale_radio_profile(template,0,1)
 
         return template, ytitle, comment, align_shift#, delta_corr
-            
+
     def fill_phaseogram(self, radius=None, nbins=None, phase_range=[0.,2.], phase_shift=0, weight=False, profile=None, profile_kwargs={},no_shift=False):
         '''Fill phaseograms (pulse profiles)
         ===========    ==================================================
@@ -333,7 +334,7 @@ class PulsarLightCurve:
 
         # NB -- PHASE SHIFT FROM RADIO LIGHT CURVE IS APPLIED TO 'RAW'
         # PHASES FROM FT1, so e.g. \delta is CORRECT AS ESTIMATED
-        
+
         #self.phase_shift         = phase_shift
         self.phase_shift         = 0
         self.binmin, self.binmax = phase_range[0], phase_range[1]
@@ -355,7 +356,7 @@ class PulsarLightCurve:
             print "(radius): (", radius, ") deg"
             for i, item in enumerate(self.__radius_range):
                 self.set_radius_range(i,radius)
-        
+
         if radius>self.radius:
             print OKRED + "warning: radius cannot be larger than PulsarLightCurve RADIUS" + ENDC
             radius = self.radius
@@ -398,7 +399,7 @@ class PulsarLightCurve:
             if (j==0) and (len(W) > 0) and (W.sum() < 1):
                 self.renormalize = True
                 print 'RENORMALIZING WEIGHTS!!!'
-            if self.renormalize and (len(W) > 0): 
+            if self.renormalize and (len(W) > 0):
                 W /= W.max()
             #if len(P)>0:
             self.pulse_phase[j] += [[P,W,T]]
@@ -448,7 +449,7 @@ class PulsarLightCurve:
             # calculate errors for weighted lightcurves
             if self.weight and (self.pulse_phase[i].shape[2] > 0):
                 phases = self.get_phases(i)
-                weights = self.get_weights(i)                
+                weights = self.get_weights(i)
                 bins = np.linspace(0,1,self.nbins+1)
                 counts = np.histogram(phases,bins=bins,normed=False)[0]
                 """
@@ -473,7 +474,7 @@ class PulsarLightCurve:
                 for ibin, err in enumerate(errors):
                     ibin = ibin+1
                     self.phaseogram[i].SetBinError(ibin,err); self.phaseogram[i].SetBinError(ibin+self.nbins,err)
-                    
+
 	# to make a better display due to errorbars
         for histo in self.phaseogram:
             ymax = root.histo_extrema(histo)[1]
@@ -489,7 +490,7 @@ class PulsarLightCurve:
                 #if histo.GetMaximum()%5 == 1: histo.SetMaximum(histo.GetMaximum()*1.04)
                 #if histo.GetMaximum()%5 == 2: histo.SetMaximum(histo.GetMaximum()*1.03)
             else:
-                histo.SetMaximum(1.1)        
+                histo.SetMaximum(1.1)
             if ymax < 0.01:
                 histo.SetMinimum(0)
                 histo.SetMaximum(0.01)
@@ -510,30 +511,30 @@ class PulsarLightCurve:
 
         phmin, phmax   = phase_range
         erange, rrange = self.__energy_range, self.__radius_range
-        
+
         if self.__psf_selection is None and self.psfcut:
             raise Exception("You must fill histograms before. Exiting...")
-            
+
         if self.radius<ring_range[1]:
             raise Exception("Maximum 'ring' radius is larger than PulsarLightCurve RADIUS. Exiting ...")
-        
+
         # initialization of the list of events
         evtlist = self.eventlist
         theta = get_theta(self.__psf_selection, evtlist["ENERGY"])
         ph = evtlist[self.phase_colname]
-        
+
         evtlist[self.phase_colname] += self.phase_shift
         evtlist[self.phase_colname][evtlist[self.phase_colname]>1] -= 1
-        evtlist[self.phase_colname][evtlist[self.phase_colname]<0] += 1                        
+        evtlist[self.phase_colname][evtlist[self.phase_colname]<0] += 1
 
         # Calculate background
         bg_level = []
         for N in range(self.nhisto):
-            
+
             roi_events, psf_events, ring_events = 0., 0., 0.
             radius = self.__radius_range[N]
             theta_radmax = get_theta(self.__psf_selection,self.__energy_range[N][0])
-        
+
             if self.psfcut and radius>theta_radmax:
                 print "Warning your maximum PSF-cut radius is larger than your maximum radius."
                 print "Setting the radius to the maximum PSF-cut radius:", theta_radmax, "deg"
@@ -572,7 +573,7 @@ class PulsarLightCurve:
             else:
                 print "Selected method does not exist!"
                 bg_level += [0]
-                
+
         if which is None: return bg_level
         else: return [bg_level[which]]
 
@@ -587,13 +588,13 @@ class PulsarLightCurve:
         try:
             file['EVENTS'].data.field(colname)[:] = weights
             print 'Clobbered old WEIGHT column.'
-        except KeyError: 
+        except KeyError:
             cols = file['EVENTS'].columns
             newcols = cols.add_col(pyfits.Column(name=colname,format='D',array=weights))
             table = pyfits.new_table(newcols,header=file['EVENTS'].header)
             table.name = 'EVENTS'
             file[1] = table
-            
+
         file.writeto(self.__ft1name,clobber=True)
         file.close()
 
@@ -613,7 +614,7 @@ class PulsarLightCurve:
         print "\tzenith angle (deg) ... %.0f" %self.zenithcut
         if self.psfcut:
             print "\tPSF-cut ..............",
-            self.print_psf()            
+            self.print_psf()
         os = 'Yes' if self.weight else 'No'
         print  "\tweighted counts ...... %s" %os
 
@@ -640,7 +641,7 @@ class PulsarLightCurve:
         for pulse in self.pulse_phase:
             if len(pulse) > 0.:
                 H = hmw(pulse[:,0],pulse[:,1])
-                #prob = h_sig(H)                
+                #prob = h_sig(H)
                 #Hsig = sig2sigma(prob) if prob > 1e-323 else sig2sigma(1e-323)
                 Hsig = h2sig(H)
                 htest += [[H,Hsig]]
@@ -656,7 +657,7 @@ class PulsarLightCurve:
 
     def get_phaseogram(self,emin,emax):
         """ Returns a list of phase centers and a list of
-            counts for a pulsar in a given energy range. 
+            counts for a pulsar in a given energy range.
 
             Allow a tolerance of 1 MeV when finding energy range. """
         i = [j for j,erange in enumerate(self.__energy_range) if
@@ -669,22 +670,22 @@ class PulsarLightCurve:
 
         p = self.phaseogram[i[0]]
 
-        # The +2 adds one bin at the edge with 0 counts in it, 
+        # The +2 adds one bin at the edge with 0 counts in it,
         # nice for plotting in matplotlib.
         phase=np.asarray([p.GetBinCenter(i) for i in range(p.GetNbinsX()+2)])
         counts=np.asarray([p.GetBinContent(i) for i in range(p.GetNbinsX()+2)])
         return phase,counts
 
-    def plot_lightcurve( self, nbands=1, xdim=550, ydim=200, 
-            background=None, 
-            zero_sup=False, inset=None, reg=None, color='black', 
-            outfile=None, xtitle='Pulse Phase', ytitle='Counts/bin', 
+    def plot_lightcurve( self, nbands=1, xdim=550, ydim=200,
+            background=None,
+            zero_sup=False, inset=None, reg=None, color='black',
+            outfile=None, xtitle='Pulse Phase', ytitle='Counts/bin',
             substitute=True,template=None,template_color='black',
             period=None,font=133,outascii=None,line_width=1,
             suppress_template_axis=False,htest=None,delta=None,
             offpulse=[],
             pulsar_class=-1):
-        
+
         '''ROOT function to plot gamma-ray phaseograms + (radio,x-ray)
         ===========   ======================================================
         keyword       description
@@ -695,7 +696,7 @@ class PulsarLightCurve:
         background    add a background level                     [None]
         zero_sup      active the zero-suppress on the top panel  [false]
         inset         add an inset on the xth panel              [None]
-        reg           highlight a phase region                   [None]  
+        reg           highlight a phase region                   [None]
         color         color profile                              [black]
         xtitle        Title for x-axis                           [Pulse Phase]
         ytitle        title for y-axis                           [Counts/bin]
@@ -712,18 +713,18 @@ class PulsarLightCurve:
         phaseogram = self.phaseogram
         erange = self.__energy_range
         if nbands == 1: substitute = False
-        
+
         root.initialization(font=font)
         xdim, ydim = 550, 200    # in pixels
         ydim += 150*nbands
-        
+
         # canvas and pad
         canvas = TCanvas("canvas","canvas",xdim,ydim);
-            
+
         pad = []
         ylow, yup, ystep = 0., 1., 1.
         BottomMarginDefault, TopMarginDefault, RightMarginDefault = 0.12, 0.02, 0.1
-                        
+
         if nbands == 1:
             #OffsetX, OffsetY, BottomMarginDefault = 1.1, 1.05, 0.11
             OffsetX, OffsetY, BottomMarginDefault = 1.1, 0.75, 0.11
@@ -733,10 +734,10 @@ class PulsarLightCurve:
             ylow, ystep = 0.52, 1
         elif nbands == 3:
             OffsetX, OffsetY, BottomMarginDefault = 2.2, 2.1, 0.13
-            ylow, ystep = 0.675, 0.315       
+            ylow, ystep = 0.675, 0.315
         elif nbands == 4:
             OffsetX, OffsetY, BottomMarginDefault = 3.5, 2.6, 0.16
-            ylow, ystep = 0.664, 0.21            
+            ylow, ystep = 0.664, 0.21
         elif nbands == 5:
             OffsetX, OffsetY, BottomMarginDefault = 4.5, 3.1, 0.18
             ylow, ystep = 0.7, 0.17
@@ -744,8 +745,8 @@ class PulsarLightCurve:
             OffsetX, OffsetY, BottomMarginDefault = 5.5, 3.6, 0.2
             ylow, ystep = 0.78, 0.15
         else:
-            raise Exception("Number of energy bands is greater than 6. Not implemented! Exiting ...")            
-            
+            raise Exception("Number of energy bands is greater than 6. Not implemented! Exiting ...")
+
         for N in range(nbands):
             padname = "pad" + str(N)
             pad.append(TPad(padname,padname,0,ylow,1.,yup)); pad[N].Draw()
@@ -753,7 +754,7 @@ class PulsarLightCurve:
             ylow = 0 if nbands-2 == N else ylow - ystep
             pad[N].SetBottomMargin(0.); pad[N].SetTopMargin(0.);
             if nbands == N+1: pad[N].SetBottomMargin(BottomMarginDefault)
-            
+
         # Text and other stuff
         TextSize, LabelSize = 16, 16
         text = TText()
@@ -763,12 +764,12 @@ class PulsarLightCurve:
         bkglevel = []
         bkgbound = []
         pad[0].SetTopMargin(TopMarginDefault)
-        
+
         # ============== G-RAY PANELS ============== #
         for which in range(nbands):
 
             pad[which].cd()
-                    
+
             x1,x2,x3,x4 = [("",0,0,0),(xtitle,TextSize,OffsetX,LabelSize)][which+1==nbands]
             root.SetHistoAxis(phaseogram[which],x1,x2,x3,x4,ytitle,TextSize,OffsetY,LabelSize,color=color,font=font,line_width=line_width)
 
@@ -812,7 +813,7 @@ class PulsarLightCurve:
 
                 phaseogram[which].Draw("HIST E SAME")
                 gPad.RedrawAxis()   #  force a redraw of the axis
-            
+
             # label & highlight offpulse for top panel
             if which==0:
                 if len(offpulse) > 0:
@@ -861,18 +862,18 @@ class PulsarLightCurve:
                     text.SetTextColor(2)
                     text.DrawText(0.1,dylevel,s)
                     text.SetTextColor(1)
-                        
+
                 if profile is not None:
                     histo, rad_ytitle, comment = profile[0]
                     dylevel = root.get_txtlevel(phaseogram[which],0.86)
                     text.SetTextColor(kRed)
                     text.DrawText(self.binmax-0.8,dylevel,comment)
                     text.SetTextColor(1)
-                
+
             # now display comment
             text.DrawText(0.1,ylevel,ecomment)
-            
-            if inset == which:   
+
+            if inset == which:
                 phaseogram[-1].SetFillColor(14)
                 phaseogram[-1].SetLineColor(14)
                 phaseogram[-1].SetFillStyle(3001)
@@ -886,7 +887,7 @@ class PulsarLightCurve:
                 ylevel = root.get_txtlevel(phaseogram[which],0.84)
 
                 text.DrawText(0.1,ylevel,ecomment); text.SetTextColor(1)
-                
+
             # draw a background level
             if (background is not None) and (not self.renormalize):
                 bkg = background[which]
@@ -910,7 +911,7 @@ class PulsarLightCurve:
         if template is not None:
             print 'Drawing template.'
             weights = self.get_weights(which=0)
-            if len(weights)==0: 
+            if len(weights)==0:
                 bg_level = 0
             else:
                 bg_level = 1-(weights**2).sum()/weights.sum()
@@ -924,8 +925,8 @@ class PulsarLightCurve:
             t.GetXaxis().SetLimits(self.binmin,self.binmax)
             t.SetLineColor(4)
             t.Draw("same");# text.DrawText(0.1,histo.GetHistogram().GetMaximum()*0.85,comment)
-                
-            
+
+
         # ============== TEMPLATES ============== #
         # draw radio profile(s)
         if profile is not None:
@@ -939,7 +940,7 @@ class PulsarLightCurve:
                     pad[i].cd()
                     overlay = TPad("overlay","",0,0,1,1)
                     overlay.SetBottomMargin(0)
-                
+
                     for j in xrange(len(pad)):
                         if suppress_template_axis: break
                         if nbands == 1:
@@ -951,7 +952,7 @@ class PulsarLightCurve:
                     overlay.SetTopMargin(TopMarginDefault)
                     overlay.SetFillStyle(0); overlay.SetFrameFillStyle(0)
                     overlay.Draw(""); overlay.cd()
-                    
+
                     xmin, xmax = self.binmin, self.binmax
                     ymin, ymax = histo.GetHistogram().GetMinimum(), histo.GetHistogram().GetMaximum()
                     if background is not None:
@@ -967,12 +968,12 @@ class PulsarLightCurve:
                     hframe = overlay.DrawFrame(xmin,ymin,xmax,ymax)
                     hframe.GetXaxis().SetLabelOffset(99); hframe.GetYaxis().SetLabelOffset(99)
                     hframe.SetTickLength(0,'XY')
-                    
+
                     if len(comment) != 0: ytitle += " (" + comment + ")"
                     axis = TGaxis(xmax,ymin,xmax,ymax,ymin,ymax,510,"+L")
                     axis.SetLineColor(root.map_color(template_color))
                     axis.SetLabelColor(root.map_color(template_color))
-                    if not suppress_template_axis: 
+                    if not suppress_template_axis:
                         root.DrawAxis(axis,ytitle,TextSize,OffsetY+0.05,LabelSize,font=font)
                 else:
                     n = -(i+1)
@@ -1002,44 +1003,44 @@ class PulsarLightCurve:
         if outascii is not None:
             #self.toProfile(outascii,background=background,template=template)
             self.toProfileFITS(outascii,background=background,template=template)
-        
+
     def plot_phase_time( self, which=0, background=None, zero_sup=True, reg=None, xdim=500, ydim=1000,
                          xtitle='Pulse Phase', ytitle='Counts/bin', color='black', outfile=None ):
         '''Plot photon phase vs time
         ===========   ======================================================
         keyword       description
-        ===========   ======================================================  
+        ===========   ======================================================
         which         histogram number                           [0]
         backgroung    add a background level on the phaseogram   [None]
         zero_sup      active the zero-suppress on the top panel  [True]
-        reg           highlight a phase region                   [None]  
+        reg           highlight a phase region                   [None]
         xdim, ydim    plot dimensions in pixels                  [500,1000]
         xtitle        title for x-axis                           [Pulse Phase]
         ytitle        title for y-axis                           [Counts/bin]
-        color         color profile                              ["black"] 
+        color         color profile                              ["black"]
         outfile       output file name
         '''
         root.initialization()
         phaseogram, phaseogram2D = self.phaseogram, self.phaseogram2D
         erange = self.__energy_range
-        
+
         # canvas and pad
         canvas = TCanvas("canvas","canvas",xdim,ydim);
-        pad1 = TPad("pad1","pad1",0,0.7,1,1); pad1.Draw()        
+        pad1 = TPad("pad1","pad1",0,0.7,1,1); pad1.Draw()
         pad2 = TPad("pad2","pad2",0,0,1,0.7); pad2.Draw()
 
         text = TText()
         TextSize, LabelSize, Offset = 16, 16, 5
         text.SetTextSize(TextSize)
-        
+
         LeftMarginDefault, RightMarginDefault = 0.15, 0.11
         BottomMarginDefault, TopMarginDefault = 0.05, 0.03
-        
+
         # PAD1: pulse profile
         pad1.cd()
         pad1.SetBottomMargin(BottomMarginDefault); pad1.SetTopMargin(TopMarginDefault);
         pad1.SetLeftMargin(LeftMarginDefault); pad1.SetRightMargin(RightMarginDefault)
-        
+
         # title size, title offset, label size
         root.SetHistoAxis(phaseogram[which],"",0,0,0,ytitle,TextSize,Offset,TextSize,color=color)
 
@@ -1048,13 +1049,13 @@ class PulsarLightCurve:
 
         # draw histogram
         phaseogram[which].Draw("HIST E")
-        
+
         if reg is not None:
             listbox = SetHistoBox(phaseogram[which],reg[0],reg[1])
-            for box in listbox: box.Draw() 
+            for box in listbox: box.Draw()
             phaseogram[which].Draw("Hist E same")
-            gPad.RedrawAxis()                 
-            
+            gPad.RedrawAxis()
+
         if background is not None:
             line = TLine(0,background,2,background)
             line.SetLineStyle(2)
@@ -1064,8 +1065,8 @@ class PulsarLightCurve:
         ylevel = root.get_txtlevel(phaseogram[which],0.91)
         text.DrawText(0.1,ylevel,tt)
         text.DrawText(1.3,ylevel,self.psrname)
-           
-        # PAD2: phase vs time 
+
+        # PAD2: phase vs time
         pad2.cd()
         pad2.SetTopMargin(TopMarginDefault); pad2.SetBottomMargin(0.06)
         pad2.SetLeftMargin(LeftMarginDefault); pad2.SetRightMargin(RightMarginDefault)
@@ -1091,8 +1092,8 @@ class PulsarLightCurve:
             sig = h2sig(H)
 
             SigTime.SetPoint(i,sig,T)
-            
-        xmin, xmax = SigTime.GetXaxis().GetXmin(), SigTime.GetXaxis().GetXmax()        
+
+        xmin, xmax = SigTime.GetXaxis().GetXmin(), SigTime.GetXaxis().GetXmax()
         ymin, ymax = phaseogram2D[which].GetYaxis().GetXmin(), phaseogram2D[which].GetYaxis().GetXmax()
 
         overlay = TPad("overlay","",0,0,1,1)
@@ -1101,11 +1102,11 @@ class PulsarLightCurve:
         overlay.SetFillStyle(0); overlay.SetFillColor(0)
         overlay.SetFrameFillStyle(0)
         overlay.Draw(""); overlay.cd()
-        
+
         hframe = overlay.DrawFrame(xmin,ymin,xmax,ymax)
         hframe.GetXaxis().SetLabelOffset(99); hframe.GetYaxis().SetLabelOffset(99)
         hframe.SetTickLength(0,'XY')
-        
+
         SigTime.Draw("L")
 
         axis = TGaxis(xmin,ymax,xmax,ymax,xmin,xmax,205,"-")
@@ -1124,10 +1125,10 @@ class PulsarLightCurve:
         ===========   ======================================================
         keyword       description
         ===========   ======================================================
-        which         histogram number                           [0]     
-        outfile       output file name                                
+        which         histogram number                           [0]
+        outfile       output file name
         '''
-        
+
         from scipy.stats import chi2
         root.initialization()
 
@@ -1146,7 +1147,7 @@ class PulsarLightCurve:
         # ==========> canvas and pad
         canvas = TCanvas("canvas","canvas",xdim,ydim);
         TextSize, LabelSize, Offset = 25, 25, 1
-        
+
         pad = TPad("pad","pad",0,0,1,1); pad.Draw()
         pad.cd()
         pad.SetTopMargin(0.05); pad.SetBottomMargin(0.1)
@@ -1157,7 +1158,7 @@ class PulsarLightCurve:
         z2m_test.SetLineWidth(2); z2m_test.Draw("same")
 
         # significance
-        if htest.GetHistogram().GetMaximum()>5: 
+        if htest.GetHistogram().GetMaximum()>5:
             line = TLine(0,5,step,5)
             line.SetLineStyle(4); line.SetLineColor(4)
             line.Draw()
@@ -1198,7 +1199,7 @@ class PulsarLightCurve:
             evtlist = evtlist[evtlist["ANGSEP"]<get_theta(self.__psf_selection, evtlist["ENERGY"])]
             thetamax = get_theta(self.__psf_selection, erange[0])
             if rrange[1]>thetamax: rrange[1]=thetamax
-            
+
         energy  = np.logspace(np.log10(erange[0]),np.log10(erange[1]),ebins)
         radius  = np.linspace(rrange[1],rrange[0],rbins)
         if emax is None: emax = self.emax
@@ -1208,7 +1209,7 @@ class PulsarLightCurve:
 
         print "\nSearching for the optimal cut with R[%.1f,%.1f] deg, Emin[%.0f,%.0f] and Emax[%.0f] MeV"\
               %(rrange[0],rrange[1],erange[0],erange[1],emax)
-        
+
         for it_E in energy:
             for it_R in radius:
                 emask = np.logical_and(it_E<=evtlist["ENERGY"],evtlist["ENERGY"]<=emax)
@@ -1234,7 +1235,7 @@ class PulsarLightCurve:
             print "================================"
 
         return ntrials, sigmax, postsig, bestE, bestR
-        
+
     def toASCII(self, outdir="", err=False, bg=False):
         '''Copy the pulse phase of each phaseogram into an ascii file
            outdir      output directory
@@ -1269,7 +1270,7 @@ class PulsarLightCurve:
                     outfile.write("%.2f\t" %histo.GetBinContent(i+1))
             outfile.write("\n")
 
-        print "INFO:", filename, "has been created." 
+        print "INFO:", filename, "has been created."
         outfile.close()
 
     def toProfile(self, filename, background=None, template=None):
@@ -1321,7 +1322,7 @@ class PulsarLightCurve:
     def toProfileFITS(self, filename, background=None, template=None):
         """ Write out an ASCII profile with the 2PC light curve bands
             and radio profiles.
-            
+
             Revised format for fits output."""
 
         def right_pad(s,n=20):
@@ -1351,7 +1352,7 @@ class PulsarLightCurve:
             output[2*counter,:] = y[self.nbins:]
             output[2*counter+1,:] = yerr[self.nbins:]
             counter += 1
-        
+
         bkg_string = ''
         label_string = 'Phase_Min   Phase_Max   '
         for i in xrange(len(elos)):

@@ -7,7 +7,7 @@ author: M. Kerr
 
 """
 
-import pyfits as pf
+from astropy.io import fits as pf
 import numpy as np
 from os.path import join
 import os
@@ -48,7 +48,7 @@ class Psf(object):
         h0,h1 = self.CALDBhandles = [pf.open(x) for x in self.CALDBManager.get_psf()]
 
         # read in stuff that doesn't depend on conversion type, and set references to front and back data
-        
+
         if len(h0)>=7:
             #New format, front, back in same file (expect h0, h1 to be the same)
             sff = np.asarray(h0['PSF_SCALING_PARAMS_FRONT'].data.field('PSFSCALE')).flatten()
@@ -59,7 +59,7 @@ class Psf(object):
             # old format, separate files for front and back
             sff = np.asarray(h0[2].data.field('PSFSCALE')).flatten()
             self.psf_data = (h0[1].data, h1[1].data)
-            
+
             if len(sff)==5:
                 # even older format, both sets in both PSFSCALE tables
                 sf=self.scale_factors=sff
@@ -69,7 +69,7 @@ class Psf(object):
                 sf=self.scale_factors = [sff[0], sff[1], sfb[0], sfb[1], sff[-1]]
             else:
                 raise Exception('unexpected length of scale factors')
-                
+
         # NB scaling functions in radians
         self.scale_func = [lambda e: ( (sf[0]*(e/100.)**(sf[-1]))**2 + sf[1]**2 )**0.5,
                            lambda e: ( (sf[2]*(e/100.)**(sf[-1]))**2 + sf[3]**2 )**0.5 ]
@@ -89,8 +89,8 @@ class Psf(object):
             ew         = ExposureWeighter(aeffstrs[0],aeffstrs[1],livetimefile, 'EFFECTIVE AREA_FRONT', 'EFFECTIVE AREA_BACK')
         else:
             ew         = ExposureWeighter(aeffstrs[0],aeffstrs[1],livetimefile)
-        
-        dummy     = skydir or SkyDir() 
+
+        dummy     = skydir or SkyDir()
 
         elo,ehi,clo,chi = self.e_los,self.e_his,self.c_los[::-1],self.c_his[::-1]
 
@@ -120,7 +120,7 @@ class Psf(object):
 class CALDBPsf(Psf):
     """Handle reading in the parameters from CALDB for multiple formats and implement the PSF functions."""
 
-    def __read_params__(self):        
+    def __read_params__(self):
         """ Set up the internal tables of PSF parameters."""
 
         h = self.CALDBhandles # tuple with handles to front and back CALDB
@@ -204,9 +204,9 @@ class CALDBPsf(Psf):
             return (w*(y / (TWOPI*si**2 if density else 1.))).sum(axis=1)
 
     def psf_base(self,g,s,delta):
-        """Implement the PSF base function; g = gamma, s = sigma (scaled), 
+        """Implement the PSF base function; g = gamma, s = sigma (scaled),
            delta = deviation in radians.
-           
+
             Operation is vectorized both in parameters and angles; return
             is an array of shape (n_params,n_angles)."""
         u = 0.5 * np.outer(delta,1./s)**2
@@ -222,7 +222,7 @@ class CALDBPsf(Psf):
     def integral(self,e,ct,dmax,dmin=0):
         """ Return integral of PSF at given energy (e) and conversion type (ct)
             from dmin to dmax (radians).
-            
+
             Note -- does *not* take a vector argument right now."""
         if self.newstyle:
             nc,nt,gc,gt,sc,st,w = self.get_p(e,ct)
@@ -279,7 +279,7 @@ class CALDBPsf(Psf):
         else:
             gc,si,w = self.get_p(e,ct)
             return PythonPsf(si*sf,gc,w)
-        
+
 
 class BandPsf(object):
 
@@ -301,7 +301,7 @@ class BandPsf(object):
             # estimate an optimal energy based on the log likelihood
             from scipy.integrate import simps
             f = lambda e: e**-index
-            b = band    
+            b = band
             rad = min(b.radius_in_rad,np.radians(psf.inverse_integral(band.e,band.ct,percent=99,on_axis=True)))
             dom = np.linspace(0,rad**2,101)**0.5
 
@@ -435,7 +435,7 @@ class PsfOverlap(object):
         roi_rad  = radius_in_rad or band.radius_in_rad
         if self.cache_hash != hash(band):
             # fragile due to radius dep.
-            self.set_dir_cache(band,roi_dir,roi_rad) 
+            self.set_dir_cache(band,roi_dir,roi_rad)
         if override_pdf is None:
             band.psf.cpsf.wsdl_val(self.cache_diffs,ps_dir,self.cache_wsdl)
         else:
@@ -447,7 +447,7 @@ class PsfOverlap(object):
     def __call__(self,band,roi_dir,ps_dir,radius_in_rad=None,
                  ragged_edge=0.06,
                  override_pdf=None,override_integral=None):
-        """ Return the fractional overlap for a point source at location 
+        """ Return the fractional overlap for a point source at location
             skydir.
 
             band           an ROIBand object
@@ -469,7 +469,7 @@ class PsfOverlap(object):
 
         # if point source is close to center of ROI, use PSF integral
         if offset < 1e-5:
-            overlap = integral(roi_rad) 
+            overlap = integral(roi_rad)
 
         # if point source within ROI
         elif offset < roi_rad:
@@ -493,7 +493,7 @@ class PsfOverlap(object):
 
         # check to see if ROI is circular enough for above calculation
         # or if we need instead to do a cubature with HEALPix
-        if (((band.b.pixelArea()**0.5/band.radius_in_rad) > ragged_edge) 
+        if (((band.b.pixelArea()**0.5/band.radius_in_rad) > ragged_edge)
             and (band.b.nside() < 200)):
             n_overlap = self.num_overlap(band,roi_dir,ps_dir,roi_rad,override_pdf)
             return n_overlap
@@ -505,7 +505,7 @@ class CPsfOverlap(PsfOverlap):
         overlap integral."""
     def __call__(self,band,roi_dir,ps_dir,radius_in_rad=None,
                  ragged_edge=0.06):
-        """ Return the fractional overlap for a point source at location 
+        """ Return the fractional overlap for a point source at location
             skydir.
 
             band           an ROIBand object
@@ -522,7 +522,7 @@ class CPsfOverlap(PsfOverlap):
 
         # check to see if ROI is circular enough for above calculation
         # or if we need instead to do a cubature with HEALPix
-        if (((band.b.pixelArea()**0.5/band.radius_in_rad) > ragged_edge) 
+        if (((band.b.pixelArea()**0.5/band.radius_in_rad) > ragged_edge)
             and (band.b.nside() < 200)):
             overlap = self.num_overlap(band,roi_dir,ps_dir,roi_rad)
 
@@ -589,7 +589,7 @@ class ConvolutionPsf(object):
 
      def __call__(self,v):
           sd = SkyDir(Hep3Vector(v[0],v[1],v[2]))
-          return self.psf(DEG2RAD*(90. - sd.b()))[0]          
+          return self.psf(DEG2RAD*(90. - sd.b()))[0]
 
      def get_pyskyfun(self):
           return PySkyFunction(self)

@@ -1,6 +1,7 @@
 from GtBurst import aplpy
 import matplotlib.pyplot as plt
-import pyfits, time, numpy
+from astropy.io import fits as pyfits
+import time, numpy
 from GtBurst import dataHandling
 from GtBurst import IRFS
 import matplotlib.colors as col
@@ -20,10 +21,10 @@ class InteractiveFt1Display(object):
       self.empty              = True
       #raise RuntimeError("No events in FT1 file %s" %(ft1file))
     pass
-    
+
     self.obj_ra               = obj_ra
     self.obj_dec              = obj_dec
-    
+
     #Read in the different classes of events
     self.trigtime             = dataHandling.getTriggerTime(ft1file)
     time                      = self.events.field("TIME")
@@ -39,11 +40,11 @@ class InteractiveFt1Display(object):
       self.energyMin          = 100
       self.energyMax          = 1e7
     pass
-    
+
     #Get the reprocessing
     self.reprocVer            = str(ft1[0].header['PROC_VER'])
     self.generateColorMap()
-    
+
     #Print a summary
     irfs                      = numpy.array(map(lambda x:IRFS.fromEvclassToIRF(self.reprocVer,x),self.events.field("EVENT_CLASS")))
     print("")
@@ -55,7 +56,7 @@ class InteractiveFt1Display(object):
       pass
       print("%-50s %s" %("Class %s only:" % irf,n))
 
-    
+
     self.pickerID             = None
     self.oldxmin              = -1e9
     self.oldxmax              = 1e9
@@ -64,7 +65,7 @@ class InteractiveFt1Display(object):
     self.user_ra              = None
     self.user_dec             = None
     self.evtext               = None
-    
+
     self.figure               = figure
     self.figure.clear()
     self.displayImage()
@@ -74,10 +75,10 @@ class InteractiveFt1Display(object):
     self.connectEvents()
     ft1.close()
   pass
-  
-  def generateColorMap(self):    
+
+  def generateColorMap(self):
     #Translate from bitmask to color
-    
+
     #Get all IRFS for this reprocessing
     irfs                      = map(lambda x:IRFS.IRFS[x],IRFS.PROCS[self.reprocVer])
     #Order by evclass
@@ -88,7 +89,7 @@ class InteractiveFt1Display(object):
       self.IRFToColor[ir.shortname] = cpool[i]
     pass
   pass
-    
+
   def unbind(self):
     #Clear all bindings in figures
     #print("UNBINDING")
@@ -97,16 +98,16 @@ class InteractiveFt1Display(object):
     self.figure.canvas.mpl_disconnect(self.pickerID)
     self.figure.canvas.mpl_disconnect(self.clickerID)
   pass
-  
+
   def displayImage(self):
     self.image               = aplpy.FITSFigure(self.skyimage,convention='calabretta',
                                                 figure=self.figure,
                                                 subplot=[0.1,0.10,0.40,0.7],
                                                 label='sky image')
-    
+
     imageFits                = pyfits.open(self.skyimage)
     img                      = imageFits[0].data
-    
+
     # Apply grayscale mapping of image
     if(not self.empty):
       skm                      = self.image.show_colorscale(cmap='gist_heat',vmin=0.1,
@@ -116,11 +117,11 @@ class InteractiveFt1Display(object):
       skm                      = self.image.show_colorscale(cmap='gist_heat',vmin=0,
                                                  vmax=0.1)
     imageFits.close()
-    
+
     # Modify the tick labels for precision and format
     self.image.tick_labels.set_xformat('ddd.dd')
     self.image.tick_labels.set_yformat('ddd.dd')
-    
+
     # Display a grid and tweak the properties
     try:
       self.image.show_grid()
@@ -128,20 +129,20 @@ class InteractiveFt1Display(object):
       #show_grid throw an exception if the grid was already there
       pass
     pass
-    
+
     #Try to plot a cross at the source position
-    
+
     if(self.obj_ra!=None):
       self.image.show_markers([float(self.obj_ra)], [float(self.obj_dec)], edgecolor='cyan', facecolor='cyan',marker='x', s=120, alpha=0.5,linewidth=2)
-    
+
     self.figure.canvas.draw()
   pass
-  
+
   def initEventDisplay(self):
     #This must be called just once!
     self.eventDisplay         = self.figure.add_axes([0.60,0.10,0.35,0.7],label='event display')
   pass
-  
+
   def inRegion(self,ra,dec,xmin,xmax,ymin,ymax):
     #Transform in pixel coordinates then check if ra,dec is contained
     #in the provided rectangular region
@@ -155,28 +156,28 @@ class InteractiveFt1Display(object):
        return False
     pass
   pass
-  
+
   def mapEventClassesColors(self,classes):
     return map(lambda x:self.IRFToColor[IRFS.fromEvclassToIRF(self.reprocVer,x)],classes)
   pass
-  
+
   def displayEvents(self,xmin=-1,xmax=1e9,ymin=-1,ymax=1e9):
     #Filter data
     idx                       = numpy.array(map(lambda x:self.inRegion(x.field("RA"),x.field("DEC"),xmin,xmax,ymin,ymax),
                                                 self.events),'bool')
-    
+
     events                    = self.events[idx]
-    
+
     #Events display
     self.eventDisplay.cla()
     self.eventDisplay.scatter(events.field("TIME")-self.trigtime,
                  events.field("ENERGY"),s=20,c=self.mapEventClassesColors(events.field("EVENT_CLASS")),
                  picker=0,lw=0)
-    
+
     try:
       self.eventDisplay.set_yscale('log')
       self.eventDisplay.set_ylim([self.energyMin*0.8,self.energyMax*1.2])
-      self.eventDisplay.set_xlim([self.tmin-0.3*abs(self.tmin),self.tmax+0.3*abs(self.tmax)])  
+      self.eventDisplay.set_xlim([self.tmin-0.3*abs(self.tmin),self.tmax+0.3*abs(self.tmax)])
     except:
       #no events to display, restore linear mode otherwise "figure.canvas.draw()"
       #will fail (!)
@@ -184,12 +185,12 @@ class InteractiveFt1Display(object):
       pass
     self.eventDisplay.set_ylabel("Energy (MeV)",fontsize='small')
     self.eventDisplay.set_xlabel("Time since trigger (s)",fontsize='small')
-    
+
     #Put the legend on top of the figure
     for k,v in self.IRFToColor.iteritems():
       self.eventDisplay.scatter([],[],s=20,lw=0,label=k,c=v)
     pass
-        
+
     legend                    = self.eventDisplay.legend(scatterpoints=1,
                                             ncol=3,labelspacing=0.01,
                                             columnspacing=0.02,
@@ -198,10 +199,10 @@ class InteractiveFt1Display(object):
                                             bbox_to_anchor=(0.45,1.25),
                                             fancybox=True,)
     ltext                     = legend.get_texts()
-    plt.setp(ltext, fontsize='small') 
+    plt.setp(ltext, fontsize='small')
     legend.get_title().set_fontsize('x-small')
     self.figure.canvas.draw()
-    
+
     #Destroy the callback with previous data, and create a new one with the new data
     if(self.pickerID!=None):
       self.figure.canvas.mpl_disconnect(self.pickerID)
@@ -209,7 +210,7 @@ class InteractiveFt1Display(object):
     self.pickerID             = self.figure.canvas.mpl_connect('pick_event',
                                                                 lambda x:self.on_events_plot_click(x,events))
   pass
-  
+
   def connectEvents(self):
     self.clickerID            = self.figure.canvas.mpl_connect('button_press_event',self.on_click)
     self.timer                = self.figure.canvas.new_timer(interval=200)
@@ -219,19 +220,19 @@ class InteractiveFt1Display(object):
     self.timer.start()
     self.rangerTimer.start()
   pass
-  
+
   def waitClick(self):
     #Put the window in waiting mode, waiting for a click on the sky image
     self.locking              = True
     self.figure.canvas.start_event_loop(0)
   pass
-  
+
   def on_click(self,event):
     if(event.inaxes==None):
       #Click outside any plot, do nothing
       return
     pass
-    
+
     if(event.inaxes.get_label()!='event display'):
       #This is a click on the sky image, get the corresponding ra,dec
       ax                      = self.image._ax1
@@ -248,7 +249,7 @@ class InteractiveFt1Display(object):
       return
     pass
   pass
-  
+
   def clearRanger(self,event,rangerTimer):
     #Verify if the figure has been cleared. If so, remove all bindings
     if(len(self.figure.get_axes())==0):
@@ -256,10 +257,10 @@ class InteractiveFt1Display(object):
       self.unbind()
     pass
   pass
-  
+
   def keep_synch(self,event=None):
     ax                     = self.image._ax1
-    
+
     nx                     = ax.get_xlim()
     ny                     = ax.get_ylim()
     ras, decs              = ax._wcs.wcs_pix2sky(nx,ny,1)
@@ -280,10 +281,10 @@ class InteractiveFt1Display(object):
       #Not changed
       return
   pass
-  
+
   def on_events_plot_click(self,event,events):
     ind                 = event.ind[0]
-    
+
     try:
       ras             = events.field("RA")[ind]
       decs            = events.field("DEC")[ind]
@@ -296,7 +297,7 @@ class InteractiveFt1Display(object):
     except:
       print("Could not get Ra,Dec of your event. Please retry...")
       pass
-    
+
     #Get the width and height (in deg) of the image display
     ax                     = self.image._ax1
     nx                     = ax.get_xlim()
@@ -304,7 +305,7 @@ class InteractiveFt1Display(object):
     rass, decss            = ax._wcs.wcs_pix2sky(nx,ny,1)
     img_width              = min(abs(rass[0]-rass[1]),abs(decss[0]-decss[1]))
     radius_length          = 0.3
-    
+
     self.image.show_circles([ras],[decs],[radius_length],
                            facecolor='white',layer="circle",alpha=0.8)
     if(self.evtext!=None):

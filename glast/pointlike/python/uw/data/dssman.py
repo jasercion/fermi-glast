@@ -8,7 +8,7 @@ author(s): M. Kerr
 __version__ = '$Revision: 1.1.2.1 $'
 #$Header: /glast/ScienceTools/glast/pointlike/python/uw/data/Attic/dssman.py,v 1.1.2.1 2015/08/13 18:03:12 jasercio Exp $
 
-import pyfits
+from astropy.io import fits as pyfits
 from collections import deque
 import numpy as np
 

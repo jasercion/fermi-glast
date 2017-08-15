@@ -4,7 +4,8 @@ Sky maps of various types
 $Header: /glast/ScienceTools/glast/pointlike/python/uw/like2/analyze/Attic/maps.py,v 1.1.2.1 2015/08/13 18:03:04 jasercio Exp $
 
 """
-import os, sys, glob, pyfits
+import os, sys, glob
+from astro.io import fits as pyfits
 import pandas as pd
 import numpy as np
 import pylab as plt
@@ -32,9 +33,9 @@ class Maps(analysis_base.AnalysisBase):
     """
     def setup(self, **kw):
         self.plotfolder='maps'
-    
+
     def ait_plots(self, pattern='hptables*.fits',  **kwargs):
-        show_kw_dict=dict( 
+        show_kw_dict=dict(
             kde=dict(nocolorbar=True, scale='log',vmin=4.5,vmax=7.5, cmap=colormaps.sls),
             ts = dict(nocolorbar=False, vmin=10, vmax=25),
             galactic = dict(nocolorbar=True, scale='log', cmap=colormaps.sls),
@@ -52,45 +53,45 @@ class Maps(analysis_base.AnalysisBase):
             except Exception, msg:
                 raise Exception('Failed to open fits file "%s": %s'% (filename, msg))
             nside = int(np.sqrt(len(t)/12.))
-            
+
             hrow = '\n<table><tr>'
             mrow = '</tr>\n<tr>'
             for table in t.dtype.names:
                 print 'processing table %s, length=%d' % (table, len(table))
                 outfile = self._check_exist(table+'_ait.png')
-                if outfile is not None: 
+                if outfile is not None:
                     dm = display_map.DisplayMap(t.field(table))
                     show_kw=show_kw_dict.get(table, show_kw_default)
                     dm.fill_ait(show_kw=show_kw, **kwargs)
                     plt.savefig(outfile, bbox_inches='tight', dpi=dpi)
                     make_thumbnail(outfile)
                     print 'wrote %s image and thumbnail' % outfile
-                else: 
+                else:
                     print 'using existing %s and thumbnail' % table
-                hrow += '<td>%s</td>' % table 
-                mrow += """\n<td><a href="%(path)s_ait.png"> 
-                        <img alt="%(path)s_ait.png"  
+                hrow += '<td>%s</td>' % table
+                mrow += """\n<td><a href="%(path)s_ait.png">
+                        <img alt="%(path)s_ait.png"
                         src="%(path)s_ait_thumbnail.png" /></a> </td>""" % dict(path=table)
-            
+
         hp += + hrow + mrow +'</tr>\n</table>'
         hp += """<p>These were projected from the nside=%(nside)s HEALPix FITS file <a href="../../%(filename)s?download=true">"%(filename)s"</a>:
            containing %(cols)d images.
            It can be examined with <a href="http://aladin.u-strasbg.fr">Aladin</a>"""% dict(filename=filename, nside=nside, cols=len(t.dtype.names))
         return hp
-        
+
     def hptables(self):
         """Images from HEALPix FITS files
         %(healpix_plots)s
         """
         self.healpix_plots = self.ait_plots('hptables*.fits')
-        
+
     def diffuse_corrections(self, vmin=0.9, vmax=1.1):
         """Images from the diffuse correction
         <p>The maps show the locations of the applied diffuse correction, for the first four bands, from 100 MeV to 1 GeV.
         %(diffuse_corr)s
         """
         self.diffuse_corr = self.ait_plots('diffuse_corr.fits', vmin=vmin, vmax=vmax)
-    
+
     def _check_exist(self, filename, overwrite=False):
         """ return full filename, remove if exists"""
         fn = os.path.join(self.plotfolder, filename)
@@ -100,7 +101,7 @@ class Maps(analysis_base.AnalysisBase):
         return fn
 
 
-        
+
     def all_plots(self):
         self.runfigures([self.hptables, self.diffuse_corrections,])
         pass

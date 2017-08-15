@@ -120,7 +120,7 @@ def makeModelMap():
     like = binnedAnalysis(mode='h', srcmdl=gtlike['sfile'])
     Npred_tot = sum([like.NpredValue(srcname) 
                      for srcname in like.sourceNames()])
-    import pyfits
+    from astropy.io import fits as pyfits
     modelmap = pyfits.open('model_map.fits')
     modelcube = pyfits.open('model_cube.fits')
     delta1 = abs(sum(modelmap[0].data.flat) - Npred_tot)

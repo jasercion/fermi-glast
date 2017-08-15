@@ -12,7 +12,7 @@ author: M. Kerr <matthew.kerr@gmail.com>
 
 import numpy as N
 from math import sin,cos
-import pyfits as pf
+from astropy.io import fits as pf
 import uw.utilities.fitstools as fitstools
 from skymaps import Gti,Band,Healpix,SkyDir
 from os.path import join
@@ -104,7 +104,7 @@ class Livetime(object):
         ft2lens = [handle['SC_DATA'].data.shape[0] for handle in handles]
         fields  = self.fields
         arrays  = [N.empty(sum(ft2lens)) for i in xrange(len(fields))]
-        
+
         counter = 0
         for ihandle,handle in enumerate(handles):
             if self.verbose > 1:
@@ -123,7 +123,7 @@ class Livetime(object):
         self.mask_entries(N.argsort(self.START)) # sort the FT2 file in case it isn't
         if self.verbose > 1:
             print 'Finished loading FT2 files!'
-  
+
     def __process_ft2(self):
         if self.verbose >= 1: print 'Processing the FT2 file (calculating overlap with GTI)...'
         if self.fast_ft2: overlaps = self.__process_ft2_fast(self.gti_starts,self.gti_stops)
@@ -147,7 +147,7 @@ class Livetime(object):
             mini = N.minimum(gti_t2,t2)
             overlaps += N.maximum(0,mini - maxi)
         return overlaps/(t2 - t1)
-        
+
     def __process_ft2_fast(self,gti_starts,gti_stops):
         """Calculate the fraction of each FT2 interval lying within the GTI.
            Use binary search to quickly process the FT2 file.
@@ -192,7 +192,7 @@ class Livetime(object):
     def __call__(self,skydir,intervals = None):
         """Return the exposure at location indicated by skydir.  Intervals is an optional list of time intervals
            that can be used to obtain a time-binned exposure for, e.g., light curves."""
-      
+
         ra,dec = N.radians([skydir.ra(),skydir.dec()])
         if (ra == self.prev_ra) and (dec == self.prev_dec) and (intervals is None):
             return self.prev_val
@@ -214,7 +214,7 @@ class Livetime(object):
 #===============================================================================================#
 class BinnedLivetime(Livetime):
     """See remarks for Livetime class for general information.
-       
+
        This class provides an implementation of the livetime calculation
        in which the FT2 entries for the S/Z z-axis and zenith positions
        are binned onto a Healpix grid, allowing for a faster calculation
@@ -255,7 +255,7 @@ class EfficiencyCorrection(object):
     v2 = [ 1.268, -4.141,  0.752, 2.740,  0.124, 4.625]  # p1, front
     v3 = [-1.527,  6.112, -0.844, 2.877, -0.133, 4.593]  # p0, back
     v4 = [ 1.413, -4.628,  0.773, 2.864,  0.126, 4.592]  # p1, back
-    
+
     def p(self,logE,v):
         a0,b0,a1,logEb1,a2,logEb2 = v
         b1 = (a0 - a1)*logEb1 + b0
@@ -286,14 +286,14 @@ class EffectiveArea(object):
 
     def __init__(self,CALDB,**kwargs):
         """CALDB -- path to CALDB directory"""
-      
+
         self.init()
         self.__dict__.update(kwargs)
         self.CALDB = join(CALDB,'bcf')
         self.__read_data()
 
     def __read_data(self):
-      
+
         ct0_file = join(self.CALDB,'ea','aeff_%s_front.fits'%(self.irf))
         ct1_file = join(self.CALDB,'ea','aeff_%s_back.fits'%(self.irf))
         ea = pf.open(ct0_file)
@@ -368,7 +368,7 @@ class EffectiveArea(object):
         # effarea[-1,:].shape 64
 
         if not interpolate:
-            i,j = j,i      
+            i,j = j,i
             if event_class < 0: return (1e4*self.feffarea[i,j],1e4*self.beffarea[i,j])
             elif event_class == 0: return 1e4*self.feffarea[i,j]
             else: return 1e4*self.beffarea[i,j]
@@ -377,7 +377,7 @@ class EffectiveArea(object):
         j = j if cb[j]<=c and j < nc-1 else j-1
 
         def bilinear(effarea):
-      
+
             c2,c1 = cb[j+1],cb[j]
             e2,e1 = eb[i+1],eb[i]
             f00 = effarea[j,i]
@@ -415,18 +415,18 @@ class Exposure(object):
       if N.all(energies == self.energies) and event_class == self.event_class:
          #print 'using cached values'
          vals = self.vals
-      
+
       else:
 
          e_centers = N.asarray(energies)
          c_centers = (lt[1][1:]+lt[1][:-1])/2.
-         
+
          vals = N.array([[self.ea(e_center,c_center,event_class=event_class) for c_center in c_centers] for e_center in e_centers])
-         self.vals = vals    
+         self.vals = vals
          self.energies = energies
          self.event_class = event_class
 
-      
+
       if event_class == -1:
          return N.append(N.sum(vals[:,:,0]*lt[0],axis=1),N.sum(vals[:,:,1]*lt[0],axis=1))
       else: return N.sum(vals*lt[0],axis=1)
@@ -505,7 +505,7 @@ class SpectralExposureSeries(object):
                     N.asarray([1.] + ([4.,2.]*(nsimps/2))[:-1] + [1.])
         sweights *= (self.e_points/emin)**(-index) # energy weighting
         self.s_weights = sweights / (sweights.sum())# normalization
-    
+
     def get_series(self,skydir):
         ep,ew,ses = self.e_points,self.s_weights,self.ses
         t1,t2,results = ses.get_series(skydir,energy=ep[0])
@@ -513,5 +513,5 @@ class SpectralExposureSeries(object):
         for i in xrange(1,len(ep)):
             results += ses.get_series(skydir,energy=ep[i])[-1]*ew[i]
         return t1,t2,results
-        
-        
+
+

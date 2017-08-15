@@ -11,7 +11,7 @@ from tkFileDialog import Open
 
 # Third-party modules
 import Pmw
-import pyfits
+from astropy.io import fits as pyfits
 import pylab
 
 # Project modules

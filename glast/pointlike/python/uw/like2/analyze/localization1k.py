@@ -8,7 +8,7 @@ $Header: /glast/ScienceTools/glast/pointlike/python/uw/like2/analyze/Attic/local
 import numpy as np
 import pylab as plt
 import pandas as pd
-import pyfits
+from astropy.io import fits as pyfits
 
 from . import localization
 

@@ -12,7 +12,7 @@ from . analysis_base import FloatFormat, html_table
 import numpy as np
 import pandas as pd
 import pylab as plt
-import pyfits
+from astropy.io import fits as pyfits
 
 class Export(sourceinfo.SourceInfo):
     """Export to XML and FITS

@@ -15,7 +15,7 @@ from GtBurst.getDataPath import getDataPath
 from GtBurst import IRFS
 from GtBurst import GtBurstException
 from GtBurst import cutout
-import pyfits
+from astropy.io import fits as pyfits
 import collections
 
 #List of available spectra, and respective constructors

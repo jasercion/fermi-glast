@@ -10,7 +10,7 @@ header keywords.
 #
 import sys
 import numarray as num
-import pyfits
+from astropy.io import fits as pyfits
 from FitsNTuple import FitsNTuple
 
 class Ft1Validator(object):

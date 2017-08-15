@@ -3,8 +3,8 @@
 import sys
 import os
 from GtBurst import commandDefiner
-import pyfits, numpy,math
-import re
+from astropy.io import fits as pyfits
+import re, numpy,math
 
 ################ Command definition #############################
 executableName                = "gtdotsmap"
@@ -41,13 +41,13 @@ thisCommand.setGUIdescription(GUIdescription)
 
 ##################################################################
 
-def _yesOrNoToBool(value):      
+def _yesOrNoToBool(value):
   if(value.lower()=="yes"):
     return True
   elif(value.lower()=="no"):
     return False
   else:
-    raise ValueError("Unrecognized clobber option. You can use 'yes' or 'no'")    
+    raise ValueError("Unrecognized clobber option. You can use 'yes' or 'no'")
   pass
 pass
 
@@ -55,11 +55,11 @@ class Message(object):
   def __init__(self,verbose):
     self.verbose              = bool(verbose)
   pass
-  
+
   def __call__(self,string):
     if(self.verbose):
       print(string)
-pass   
+pass
 
 def gtdotsmap(**kwargs):
   run(**kwargs)
@@ -71,7 +71,7 @@ def run(**kwargs):
     thisCommand.getHelp()
     return
   pass
-  
+
   #Get parameters values
   thisCommand.setParValuesFromDictionary(kwargs)
   try:
@@ -95,19 +95,19 @@ def run(**kwargs):
     figure                      = thisCommand.getParValue('figure')
   except KeyError as err:
     print("\n\nERROR: Parameter %s not found or incorrect! \n\n" %(err.args[0]))
-    
+
     #Print help
     print thisCommand.getHelp()
     return
   pass
-  
+
   from GtBurst import dataHandling
   from GtBurst.angularDistance import getAngularDistance
-  
+
   origra                      = float(dataHandling._getParamFromXML(xmlmodel,'RA'))
   origdec                     = float(dataHandling._getParamFromXML(xmlmodel,'DEC'))
   sourceName                  = dataHandling._getParamFromXML(xmlmodel,'OBJECT')
-  
+
   #Verify that TS map, if provided, is compatible with the position in the XML
   if(tsexpomap!=None and tsexpomap!=''):
     if(os.path.exists(tsexpomap)):
@@ -120,21 +120,21 @@ def run(**kwargs):
     else:
       print("Provided exposure map does not exist. Will compute it again.")
       tsexpomap               = None
-  
+
   LATdata                     = dataHandling.LATData(eventfile,rspfile,ft2file)
   tsmap                       = LATdata.makeTSmap(xmlmodel,sourceName,step,side,tsmap,tsltcube,tsexpomap)
   tsltcube                    = LATdata.livetimeCube
   tsexpomap                   = LATdata.exposureMap
-  
+
   ra,dec,tsmax                = dataHandling.findMaximumTSmap(tsmap,tsexpomap)
-  
+
   print("\nCoordinates of the maximum of the TS map in the allowed region (TS = %.1f):" %(tsmax))
   print("(R.A., Dec.)              = (%6.3f, %6.3f)\n" %(ra,dec))
   print("Distance from ROI center  = %6.3f\n\n" %(getAngularDistance(origra,origdec,ra,dec)))
 
   if(figure!=None):
-    from GtBurst import aplpy   
-    #Display the TS map    
+    from GtBurst import aplpy
+    #Display the TS map
     figure.clear()
     tsfig                       = aplpy.FITSFigure(tsmap,convention='calabretta',figure=figure)
     tsfig.set_tick_labels_font(size='small')
@@ -144,13 +144,13 @@ def run(**kwargs):
     # Modify the tick labels for precision and format
     tsfig.tick_labels.set_xformat('ddd.dd')
     tsfig.tick_labels.set_yformat('ddd.dd')
-    
+
     # Display a grid and tweak the properties
     tsfig.show_grid()
-    
+
     figure.canvas.draw()
   pass
-  
+
   return 'tsmap', tsmap, 'tsmap_ra', ra, 'tsmap_dec', dec, 'tsmap_maxTS', tsmax, 'tsltcube', tsltcube, 'tsexpomap', tsexpomap
 pass
 

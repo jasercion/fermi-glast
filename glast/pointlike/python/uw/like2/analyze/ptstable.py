@@ -5,7 +5,8 @@ $Header: /glast/ScienceTools/glast/pointlike/python/uw/like2/analyze/Attic/ptsta
 
 """
 
-import glob, pyfits
+import glob
+from astro.io import fits as pyfits
 import pandas as pd
 
 from uw.like2.pub import healpix_map
@@ -26,7 +27,7 @@ class PTStable(hptables.HPtables):
         self.seedfile, self.seedroot, self.title = 'pseeds.txt', 'PSEED' ,'pulsar'
         self.bmin=0 ##
         self.make_seeds(kw.pop('refresh', False))
-        
+
     def all_plots(self):
         """ Results of Pulsar seed search """
         self.runfigures([ self.seed_plots, self.ts_map,])

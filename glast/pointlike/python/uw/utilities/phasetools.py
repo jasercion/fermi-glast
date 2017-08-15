@@ -1,7 +1,7 @@
 from os.path import expandvars
 
 import numpy as N
-import pyfits as PF
+from astropy.io import fits as PF
 from types import FunctionType,MethodType
 from skymaps import SkyDir
 from fitstools import rad_extract
@@ -10,10 +10,10 @@ TWOPI = 2*N.pi
 
 def phase_cut(eventfile,outputfile=None,phaseranges=[[0,1]],phase_col_name='PULSE_PHASE'):
     """Select phases within a set of intervals.
-    
+
         outputfile  - set to change the default output (eventfile_PHASECUT.fits)
         phaseranges - a set of ranges on which to make inclusive cuts
-        
+
         NB -- there was a problem with using the mask as below.  Seems to be resolved,
               but check for consistency in output FITS file to be safe."""
 
@@ -21,11 +21,11 @@ def phase_cut(eventfile,outputfile=None,phaseranges=[[0,1]],phase_col_name='PULS
     ef = PF.open(expandvars(eventfile))
     ph = array(ef['EVENTS'].data.field(phase_col_name)).astype(float)
     mask = array([False]*len(ph))
-    
+
     for r in phaseranges:
         for i,myph in enumerate(ph):
             if (r[0]<= myph) and (myph <= r[1]): mask[i]=True
-            
+
     duty_cycle = sum( (x[1] - x[0] for x in phaseranges) )
     print 'Selecting %d / %d photons (duty cycle = %.2f)'%(mask.sum(),len(mask),duty_cycle)
 
@@ -43,7 +43,7 @@ def phase_ltcube(ltcube,outputfile,phase):
     """ Multiply the ltcube by the phase fraction. This is useful for studying
         the DC component in the off pulse window.
 
-        N.B. phase can be a float between 0 and 1 or must be an 
+        N.B. phase can be a float between 0 and 1 or must be an
         instance of uw.pulsar.phase_range.PhaseRange
 
         Also, the 'EXPOSURE' and 'WEIGHTED_EXPOUSRE' table's header
@@ -121,12 +121,12 @@ class PulsarLightCurve(object):
             return N.where(event_class,self.cookie_cutter_radius[1],self.cookie_cutter_radius[0])
 
       else:
-         from psf import PSF         
+         from psf import PSF
          psf_obj = PSF(psf_irf = self.psf_irf)
 
          b = N.logspace(N.log10(self.energy_range[0]),N.log10(self.energy_range[1]))
          bin_cents = (b[:-1]*b[1:])**0.5
-      
+
          radii = N.append([psf_obj.conf_region(e,event_class=0,percentage=self.percentage) for e in bin_cents],\
                  [psf_obj.conf_region(e,event_class=1) for e in bin_cents])
 
@@ -137,14 +137,14 @@ class PulsarLightCurve(object):
                   if b[j]<= e[i] and e[i] < b[j+1]:
                      rads[i] = radii[j*(1+event_class[i])]
                      break
-                     
+
             rads = N.minimum(N.where(event_class,self.max_radius[1],self.max_radius[0]),rads)
             return rads
       self.radius_function = r
 
    def get_phases(self,event_files,skydir):
 
-      self.event_files = event_files #what is this used for?   
+      self.event_files = event_files #what is this used for?
       results = rad_extract(event_files,skydir,self.radius_function,return_cols=['PULSE_PHASE','TIME','ENERGY'])
       ens = results['ENERGY']
       mask = N.logical_and(ens >= self.energy_range[0], ens < self.energy_range[1])
@@ -161,7 +161,7 @@ class PulsarLightCurve(object):
       if 'linecolor' not in kwargs: kwargs['linecolor'] = 'black'
       if 'errorcolor' not in kwargs: kwargs['errorcolor']='red'
       if 'fill' not in kwargs: kwargs['fill'] = False
-      
+
       import pylab as P
       #if show_trend: P.figure(fignum,(6,10))
       if show_trend: P.figure(fignum, (10,6))
@@ -185,7 +185,7 @@ class PulsarLightCurve(object):
 
       ax = ax1.axis()
       ax1.axis([0,1,0,ax[3]])
-      
+
       if two_cycles:
          ax1.step(N.append(phases,1)+1,N.append(rates[0],rates),where='pre',color=kwargs['linecolor'])
          ax1.axis([0,2,0,ax[3]])
@@ -238,9 +238,9 @@ class PulsarLightCurve(object):
          sig = r'>5\sigma' if hs[-1] > 50 else '%.1f\sigma'%(sig2sigma(h_sig(hs[-1])))
          if point_source is not None:
             wh,wsig = self.weighted_h(point_source)
-            tit = '$\mathrm{Aperture\ H:\ %s,\ Weighted\ H:\ %.1f\sigma}$'%(sig,wsig) 
+            tit = '$\mathrm{Aperture\ H:\ %s,\ Weighted\ H:\ %.1f\sigma}$'%(sig,wsig)
          else:
-            tit = '$\mathrm{Aperture\ H:\ %s}$'%(sig) 
+            tit = '$\mathrm{Aperture\ H:\ %s}$'%(sig)
          ax3.axhline(hs[-1],linestyle='-',color='blue',label='$\mathrm{Aperture\ H=%.1f\ (%s)}$'%(hs[-1],sig),lw=2)
          ax3.set_ylabel('H Test Statistic',color='blue')
          ax = ax3.axis()
@@ -263,14 +263,14 @@ class PulsarLightCurve(object):
          hs += [h_statistic(self.phases[self.times <= t]) ]
       P.figure(fignum)
       ts = (ts - ts[0])/(24.*3600.)
-      
+
       #fit a trend line
       from scipy import polyval,polyfit
       pfit = polyfit(ts[1:],hs,1)
 
       if point_source is not None:
          wh,wsig = self.weighted_h(point_source)
-      
+
       P.plot(ts[1:],hs,marker='o',color='k',label='$\mathrm{Observed}$',ls=' ',ms=9)
       P.xlabel('Integration Time (Days)')
       P.ylabel('H Test Statistic')
@@ -377,7 +377,7 @@ def z2mw(phases,weights,m=2):
 
 def em_four(phases,m=2,weights=None):
    """ Return the empirical Fourier coefficients up to the mth harmonic."""
-   
+
    phases = N.asarray(phases)*TWOPI #phase in radians
 
    n = len(phases) if weights is None else weights.sum()
