@@ -6,7 +6,8 @@ Manage data and livetime information for an analysis
 
 """
 version='$Revision: 1.1.2.3 $'.split()[1]
-import os, math, pyfits, types, glob
+import os, math , types, glob
+from astro.io import fits as pyfits
 import numpy as N; np = N
 import libpointlike, skymaps
 
@@ -15,7 +16,7 @@ from uw.utilities import path
 class NsideMapper(object):
     """
     Manage the mapping between energy bands and pixel size, as parameterized
-    by nside, the number of subdivisions of the base pixels in HEALPix 
+    by nside, the number of subdivisions of the base pixels in HEALPix
     scheme.
 
     Roughly, the side of a (quadrilateral) pixel is 1/Nside radians, or
@@ -143,7 +144,7 @@ Create a new PixelData instance, managing data and livetime.
         if type(self.ft2files)== types.StringType:
             self.ft2files = glob.glob(path.expand(self.ft2files))
             self.ft2files.sort()
-            
+
         # check explicit files
         for filelist in [self.ft1files, self.ft2files] :
             if filelist is not None and len(filelist)>0 and not os.path.exists(filelist[0]):
@@ -197,8 +198,8 @@ Create a new PixelData instance, managing data and livetime.
             print """
             ###################WARNING!!!##########################
             It is STRONGLY recommended that you use a binning comm-
-            ensurate with CALDB binning.  This can be achieved by 
-            making sure 100 MeV appears in the bin edges (an easy 
+            ensurate with CALDB binning.  This can be achieved by
+            making sure 100 MeV appears in the bin edges (an easy
             way is to set emin=100) and that binsperdec is a multi-
             ple of 4.  You can choose a subset of these bins in the
             likelihood fitting if you want to narrow the energy
@@ -273,7 +274,7 @@ Create a new PixelData instance, managing data and livetime.
 
             self._Data_setup(my_bins)
 
-            if not self.quiet: 
+            if not self.quiet:
                 print 'loading %d FT1 file(s) %s...%s' % (len(self.ft1files), self.ft1files[0], self.ft1files[-1])
                 if self.event_class>-1: print 'selecting event_class %d' %self.event_class
             src_id = -1 if 'mc_src_id' not in self.__dict__ else self.mc_src_id

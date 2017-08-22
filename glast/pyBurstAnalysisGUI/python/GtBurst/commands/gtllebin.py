@@ -101,7 +101,7 @@ def run(**kwargs):
 
   # if you input a cspec file it will clone the time binning:
   if cspec_in is not None:
-    import pyfits
+    from astropy.io import fits as pyfits
     tmpFile=pyfits.open(cspec_in)
     message('=> Copying the binning from: %s' % cspec_in)
     _SPECTRUM=tmpFile['SPECTRUM'].data

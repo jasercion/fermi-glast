@@ -5,7 +5,7 @@ $Header: /glast/ScienceTools/glast/pointlike/python/uw/like2/pub/Attic/source_pi
 """
 
 import os, pickle
-import pyfits
+from astropy.io import fits as pyfits
 import numpy as np
 from . import roi_pivot, pivot
 from skymaps import SkyDir, Band 

@@ -16,7 +16,8 @@ class FitsNTupleError(RuntimeError):
 
 class FitsNTuple:
     def __init__(self, fitsfiles, extension=1):
-        import sys, pyfits
+        import sys
+        from astro.io import fits as pyfits
         #
         # If fitsfile is not a list or tuple of file names, assume
         # it's a single file name and put it into a single element

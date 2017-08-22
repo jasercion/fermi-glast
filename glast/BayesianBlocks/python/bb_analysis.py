@@ -8,7 +8,7 @@ file processed by gtexposure.
 # $Header: /glast/ScienceTools/glast/BayesianBlocks/python/bb_analysis.py,v 1.1.2.2 2017/02/01 04:27:30 jasercio Exp $
 #
 import numpy as num
-import pyfits
+from astropy.io import fits as pyfits
 from BayesianBlocks import BayesianBlocks
 from FitsNTuple import FitsNTuple
 

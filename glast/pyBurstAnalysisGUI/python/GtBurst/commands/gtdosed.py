@@ -5,8 +5,8 @@ import os
 from GtBurst import commandDefiner
 from GtBurst import LikelihoodComponent
 from GtBurst.GtBurstException import GtBurstException
-import pyfits, numpy,math
-import scipy.integrate
+from astropy.io import fits as pyfits
+import scipy.integrate, numpy,math
 import re
 import xml.etree.ElementTree as ET
 
@@ -40,13 +40,13 @@ thisCommand.setGUIdescription(GUIdescription)
 
 ##################################################################
 
-def _yesOrNoToBool(value):      
+def _yesOrNoToBool(value):
   if(value.lower()=="yes"):
     return True
   elif(value.lower()=="no"):
     return False
   else:
-    raise ValueError("Unrecognized clobber option. You can use 'yes' or 'no'")    
+    raise ValueError("Unrecognized clobber option. You can use 'yes' or 'no'")
   pass
 pass
 
@@ -54,11 +54,11 @@ class Message(object):
   def __init__(self,verbose):
     self.verbose              = bool(verbose)
   pass
-  
+
   def __call__(self,string):
     if(self.verbose):
       print(string)
-pass   
+pass
 
 def gtdosed(**kwargs):
   run(**kwargs)
@@ -70,7 +70,7 @@ def run(**kwargs):
     thisCommand.getHelp()
     return
   pass
-  
+
   #Get parameters values
   thisCommand.setParValuesFromDictionary(kwargs)
   try:
@@ -89,43 +89,43 @@ def run(**kwargs):
     figure                      = thisCommand.getParValue('figure')
   except KeyError as err:
     print("\n\nERROR: Parameter %s not found or incorrect! \n\n" %(err.args[0]))
-    
+
     #Print help
     print thisCommand.getHelp()
     return
   pass
-  
+
   from GtBurst import dataHandling
   from GtBurst.angularDistance import getAngularDistance
-  
+
   LATdata                     = dataHandling.LATData(eventfile,rspfile,ft2file)
-  
+
   try:
     outfilelike, sources        = LATdata.doUnbinnedLikelihoodAnalysis(xmlmodel,tsmin=20,expomap=expomap,ltcube=ltcube)
   except GtBurstException as gt:
     raise gt
   except:
     raise
-    
+
   #Now produce a pha1 file (just to compute the total exposure)
   pha1file                    = LATdata.binByEnergy(2)
-  
+
   totalExposure               = pyfits.getheader(pha1file,'SPECTRUM').get("EXPOSURE")
-  
+
   print("\nTotal exposure: %s s" %(totalExposure))
-  
+
   #Transfer information on the source from the input to the output XML
   irf                         = dataHandling._getParamFromXML(xmlmodel,'IRF')
   ra                          = dataHandling._getParamFromXML(xmlmodel,'RA')
   dec                         = dataHandling._getParamFromXML(xmlmodel,'DEC')
   sourceName                  = dataHandling._getParamFromXML(xmlmodel,'OBJECT')
-  
+
   if(irf==None):
     print("\n\nWARNING: could not read IRF from XML file. Be sure you know what you are doing...")
   else:
     dataHandling._writeParamIntoXML(outfilelike,IRF=irf,OBJECT=sourceName,RA=ra,DEC=dec)
   pass
-    
+
   #Make a copy of the output XML file and freeze all parameters except the source
   tree                        = ET.parse(outfilelike)
   root                        = tree.getroot()
@@ -165,30 +165,30 @@ def run(**kwargs):
 <!-- DEC=%s -->
 <!-- RA=%s -->
 <!-- IRF=%s -->\n''' %(sourceName,ra,dec,irf))
-  f.close()  
-  
-  
-  
+  f.close()
+
+
+
   #Now for each energy band, make a likelihood and compute the flux
   f                           = pyfits.open(eventfile)
-  
+
   #Take the list in inverse order so I will rebin at low energies, instead that at high energies
   energies                    = numpy.array(sorted(f['EVENTS'].data.ENERGY)[::-1])
   totalInputCounts            = len(energies)
   f.close()
-  
+
   if(energybins!=None):
     energyBoundaries            = map(lambda x:float(x),energybins.split(','))
   else:
     energyBoundaries          = LikelihoodComponent.optimizeBins(LATdata.like1,energies,sourceName,minTs=tsmin,minEvt=3)
-  
+
   print("\nEnergy boundaries:")
   for i,ee1,ee2 in zip(range(len(energyBoundaries)-1),energyBoundaries[:-1],energyBoundaries[1:]):
     print("%02i: %10s - %10s" %(i+1,ee1,ee2))
   pass
   print("\n")
   print("\nNumber of energy bins: %s\n" %(len(energyBoundaries)-1))
-    
+
   fluxes                      = numpy.zeros(len(energyBoundaries)-1)
   fluxes_errors               = numpy.zeros(len(energyBoundaries)-1)
   phfluxes                    = numpy.zeros(len(energyBoundaries)-1)
@@ -225,11 +225,11 @@ def run(**kwargs):
     TSs[i]                    = float(source.TS)
     phIndexes[i]              = float(source.photonIndex)
   pass
-  
+
   if(totalCounts!=totalInputCounts):
     raise RuntimeError("We have losted somewhere %s counts!" %(totalInputCounts-totalCounts))
   pass
-  
+
   #Now compute the SED points
   MeV2Erg                     = 1.60217657e-6
   ee1                         = numpy.array(energyBoundaries[:-1])
@@ -242,7 +242,7 @@ def run(**kwargs):
   nuFnu                       = phfluxes / de * pow(meanEnergies,2.0) * MeV2Erg
   nuFnuError                  = phfluxes_errors / de * pow(meanEnergies,2.0) * MeV2Erg
 
-  
+
   #Print the results of the SED
   fw                           = open(sedtxt,'w+')
   fw.write("#Energy_min Energy_Max Flux Flux_error PhotonFlux PhotonFluxError TS nuFnu_energy nuFnu_energy_negerr nuFnu_energy_poserr nuFnu_value nuFnu_value_error\n")
@@ -253,25 +253,25 @@ def run(**kwargs):
     print("%10s - %10s MeV -> %g +/- %g erg/cm2/s, %g +/- %g ph/cm2/s, TS = %s" %(e1,e2,f,fe,ph,phe,ts))
   pass
   fw.close()
-  
-  if(figure!=None):  
+
+  if(figure!=None):
     #Display the SED
     if(os.environ.get('DISPLAY')==None):
       os.environ.set('DISPLAY','/dev/null')
       import matplotlib
       matplotlib.use('Agg')
     pass
-    
+
     import matplotlib.pyplot as plt
     try:
       figure.clear()
     except:
       print("Creating new figure...")
       try:
-        figure                = plt.figure()  
+        figure                = plt.figure()
       except:
         plt.switch_backend('Agg')
-        figure                = plt.figure() 
+        figure                = plt.figure()
     pass
     sub                       = figure.add_subplot(111)
     sub.errorbar(meanEnergies,nuFnu,xerr=[meanEnergies-ee1,ee2-meanEnergies],yerr=nuFnuError,fmt='.')
@@ -279,11 +279,11 @@ def run(**kwargs):
     sub.set_ylabel("Flux (erg/cm2/s)")
     sub.loglog()
     sub.set_xlim(0.9*min(ee1),1.1*max(ee2))
-    
+
     figure.canvas.draw()
     figure.savefig("%s.png" % ".".join(sedtxt.split(".")[0:-1]))
   pass
-    
+
   return 'sedtxt', sedtxt
 pass
 

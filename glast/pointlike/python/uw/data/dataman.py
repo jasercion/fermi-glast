@@ -14,7 +14,7 @@ import warnings
 from cPickle import dump,load
 
 import numpy as np
-import pyfits
+from astropy.io import fits as pyfits
 
 import libpointlike
 import skymaps

@@ -1,7 +1,8 @@
 #! /usr/bin/env python
 
 import sys
-import os, pyfits, numpy, shutil
+import os, numpy, shutil
+from astro.io import fits as pyfits
 from GtBurst import commandDefiner
 available                     = True
 try:
@@ -9,8 +10,8 @@ try:
   import uw.like.roi_monte_carlo
 except:
   available                   = False
-  
-  
+
+
 ################ Command definition #############################
 executableName                = "gtconvertxmlmodel"
 version                       = "1.0.0"
@@ -34,13 +35,13 @@ thisCommand.setGUIdescription(GUIdescription)
 
 ##################################################################
 
-def _yesOrNoToBool(value):      
+def _yesOrNoToBool(value):
   if(value.lower()=="yes"):
     return True
   elif(value.lower()=="no"):
     return False
   else:
-    raise ValueError("Unrecognized clobber option. You can use 'yes' or 'no'")    
+    raise ValueError("Unrecognized clobber option. You can use 'yes' or 'no'")
   pass
 pass
 
@@ -48,11 +49,11 @@ class Message(object):
   def __init__(self,verbose):
     self.verbose              = bool(verbose)
   pass
-  
+
   def __call__(self,string):
     if(self.verbose):
       print(string)
-pass   
+pass
 
 def gtconvertxmlmodel(**kwargs):
   run(**kwargs)
@@ -66,33 +67,33 @@ def run(**kwargs):
     thisCommand.getHelp()
     return
   pass
-  
+
   #Get parameters values
   thisCommand.setParValuesFromDictionary(kwargs)
   try:
     xmlmodel                    = thisCommand.getParValue('likexmlresults')
     Emin                        = float(thisCommand.getParValue('emin'))
     Emax                        = float(thisCommand.getParValue('emax'))
-    xmlsimmodel                 = thisCommand.getParValue('xmlsimmodel')  
+    xmlsimmodel                 = thisCommand.getParValue('xmlsimmodel')
     clobber                     = _yesOrNoToBool(thisCommand.getParValue('clobber'))
     verbose                     = _yesOrNoToBool(thisCommand.getParValue('verbose'))
   except KeyError as err:
-    print("\n\nERROR: Parameter %s not found or incorrect! \n\n" %(err.args[0]))    
+    print("\n\nERROR: Parameter %s not found or incorrect! \n\n" %(err.args[0]))
     #Print help
     print thisCommand.getHelp()
     return
-  
+
   from GtBurst import dataHandling
   irf                         = dataHandling._getParamFromXML(xmlmodel,'IRF')
   ra                          = dataHandling._getParamFromXML(xmlmodel,'RA')
   dec                         = dataHandling._getParamFromXML(xmlmodel,'DEC')
   name                        = dataHandling._getParamFromXML(xmlmodel,'OBJECT')
-  
+
   if(irf==None):
     print("\n\nWARNING: could not read IRF from XML file. Be sure you know what you are doing...")
-  
+
   sourceList                  = xmlmodel.replace('.xml','.txt')
-  
+
   #Quick fix: MCModelBuilder cannot integrate a isotropic model if it has not a normalization of 1
   #We will edit the XML model, put temporarily the normalization of the IsotropicTemplate to 1,
   #convert the XML, then multiply the output normalization by the factor contained at the beginning
@@ -106,22 +107,22 @@ def run(**kwargs):
     #or it is already 1, nothing to do
     originalNorm              = 1
   pass
-  
+
   ps,ds                       = parse_sources(tmpxml)
   sources                     = ps
   sources.extend(ds)
-  
+
   mc                          = uw.like.roi_monte_carlo.MCModelBuilder(sources,savedir='.',emin=Emin,emax=Emax)
   mc.build(xmlsimmodel)
-  
+
   dataHandling.multiplyIsotropicTemplateFluxSim(xmlsimmodel,originalNorm)
-  
+
   os.remove(tmpxml)
-  
+
   txt=''
   for x in sources:
     txt                      += x.name.replace('2FGL ','_2FGL_').replace('-','m').replace('.','')+'\n'
-  
+
   file(sourceList,'w').writelines(txt)
   lines                       = file(xmlsimmodel,'r').readlines()
   newlines                    =''
@@ -129,13 +130,13 @@ def run(**kwargs):
   for l in lines:
     newlines                 += l.replace('$($SIMDIR)',pwd)
   pass
-  
+
   file(xmlsimmodel,'w').writelines(newlines)
-  
+
   if(irf!=None):
     dataHandling._writeParamIntoXML(xmlsimmodel,IRF=irf,OBJECT=name,RA=ra,DEC=dec)
-  pass    
-  
+  pass
+
   return 'xmlsimmodel', xmlsimmodel, 'srclist', sourceList
 pass
 

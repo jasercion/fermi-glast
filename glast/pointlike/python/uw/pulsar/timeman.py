@@ -8,7 +8,7 @@ Author: Paul S. Ray <paul.ray@nrl.navy.mil>
 
 import os
 import numpy as np
-import pyfits
+from astropy.io import fits as pyfits
 import warnings
 
 SECSPERDAY = 86400.0

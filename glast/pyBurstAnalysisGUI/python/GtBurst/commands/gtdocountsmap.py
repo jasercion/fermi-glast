@@ -5,7 +5,8 @@ import os
 from GtBurst import commandDefiner
 from GtBurst import IRFS
 from GtBurst.GtBurstException import GtBurstException
-import pyfits, numpy
+from astropy.io import fits as pyfits
+import numpy
 
 ################ Command definition #############################
 executableName                = "gtdocountsmap"
@@ -46,13 +47,13 @@ thisCommand.setGUIdescription(GUIdescription)
 
 ##################################################################
 
-def _yesOrNoToBool(value):      
+def _yesOrNoToBool(value):
   if(value.lower()=="yes"):
     return True
   elif(value.lower()=="no"):
     return False
   else:
-    raise ValueError("Unrecognized clobber option. You can use 'yes' or 'no'")    
+    raise ValueError("Unrecognized clobber option. You can use 'yes' or 'no'")
   pass
 pass
 
@@ -60,11 +61,11 @@ class Message(object):
   def __init__(self,verbose):
     self.verbose              = bool(verbose)
   pass
-  
+
   def __call__(self,string):
     if(self.verbose):
       print(string)
-pass   
+pass
 
 def gtdocountsmap(**kwargs):
   run(**kwargs)
@@ -81,7 +82,7 @@ def run(**kwargs):
     thisCommand.getHelp()
     return
   pass
-  
+
   #Get parameters values
   thisCommand.setParValuesFromDictionary(kwargs)
   try:
@@ -97,7 +98,7 @@ def run(**kwargs):
     tstop                       = thisCommand.getParValue('tstop')
     emin                        = thisCommand.getParValue('emin')
     emax                        = thisCommand.getParValue('emax')
-    skybinsize                  = thisCommand.getParValue('skybinsize')    
+    skybinsize                  = thisCommand.getParValue('skybinsize')
     outfile                     = thisCommand.getParValue('skymap')
     strategy                    = thisCommand.getParValue('strategy')
     thetamax                    = float(thisCommand.getParValue('thetamax'))
@@ -107,17 +108,17 @@ def run(**kwargs):
     figure                      = thisCommand.getParValue('figure')
   except KeyError as err:
     print("\n\nERROR: Parameter %s not found or incorrect! \n\n" %(err.args[0]))
-    
+
     #Print help
     print thisCommand.getHelp()
     return
   pass
-  
+
   from GtBurst import dataHandling
   global lastDisplay
-  
+
   LATdata                     = dataHandling.LATData(eventfile,rspfile,ft2file)
-  
+
   if(strategy.lower()=="time"):
     #gtmktime cut
     filteredFile,nEvents      = LATdata.performStandardCut(ra,dec,rad,irf,tstart,tstop,emin,emax,zmax,thetamax,True,strategy='time')
@@ -125,9 +126,9 @@ def run(**kwargs):
     #no gtmktime cut, Zenith cut applied directly to the events
     filteredFile,nEvents      = LATdata.performStandardCut(ra,dec,rad,irf,tstart,tstop,emin,emax,zmax,thetamax,True,strategy='events')
   pass
-  
+
   LATdata.doSkyMap(outfile,skybinsize)
-    
+
   #Now open the output file and get exposure and total number of events
   skymap                      = pyfits.open(outfile)
   totalNumberOfEvents         = numpy.sum(skymap[0].data)
@@ -140,17 +141,17 @@ def run(**kwargs):
                              " Loose your cuts, or enlarge the time interval. You might want to "+
                              " check also the navigation plots (in the Tools menu) to make sure "+
                              " that the ROI is within the LAT FOV in the desired time interval.")
-  
+
   displ                       = None
-    
-  if(figure!=None):     
+
+  if(figure!=None):
     if(lastDisplay!=None):
       lastDisplay.unbind()
     pass
     from GtBurst.InteractiveFt1Display import InteractiveFt1Display
     lastDisplay               = InteractiveFt1Display(filteredFile,outfile,figure,ra,dec)
-  pass  
-  
+  pass
+
   return 'skymap', outfile, 'filteredeventfile', filteredFile, 'irf', irf, 'eventDisplay', lastDisplay
 pass
 

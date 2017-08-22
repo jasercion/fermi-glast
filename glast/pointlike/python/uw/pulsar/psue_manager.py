@@ -14,7 +14,8 @@ from sys import exit
 import cPickle, glob
 from shutil import copy, copyfile, move
 import time, random
-import numpy as np, pyfits
+import numpy as np
+from astro.io import fits as pyfits
 from GtApp import GtApp
 
 import matplotlib
@@ -29,7 +30,7 @@ from uw.pulsar.stats import sf_h20_dj2010 as h_sig, hmw, sigma_trials, sig2sigma
 def SelectPhase(infile,outfile=None,phmin=0,phmax=1,phcolname='PULSE_PHASE'):
     '''Select a phase range into a FT1 file'''
 
-    ft1file = pyfits.open(infile)    
+    ft1file = pyfits.open(infile)
     try:
         ft1file['EVENTS'].data.field(phcolname)
 
@@ -40,7 +41,7 @@ def SelectPhase(infile,outfile=None,phmin=0,phmax=1,phcolname='PULSE_PHASE'):
             if phmin>phmax:
                 expr = expr.replace('&&','||')
                 phfactor = (1-phmin)+phmax
-            
+
         elif isinstance(phmin,list) and isinstance(phmax,list):
             phname = '_%s_%s_%s_%s_phase.fits' %(phmin[0],phmin[1],phmax[0],phmax[1])
             if phmax[0]<phmax[1]:
@@ -54,7 +55,7 @@ def SelectPhase(infile,outfile=None,phmin=0,phmax=1,phcolname='PULSE_PHASE'):
         fselect = GtApp('fselect')
         fselect.run(infile=infile,outfile=outfile,expr=expr,clobber='yes')
         return outfile, phfactor
-        
+
     except KeyError:
         from sys import exit
         print "No %s column. Exiting ..." %phcolname; exit()
@@ -156,7 +157,7 @@ class PSUEAnalysis():
         self.pulsar_class     = 0
 
         assert(self.radius>=self.lc_radius)
-        
+
     def __init__( self, parfile=None, **kwargs ):
         '''
         ============    ===============================================
@@ -180,7 +181,7 @@ class PSUEAnalysis():
         irfs            IRFs version                     [P7SOURCE_V6]
         psfpar          PSF parameters                   [5.3,0.745,0.09]
         pulsar_class    0=unid,1=RL,2=RL-MSP,3=RQ        [0]
-        '''        
+        '''
 
         self.init()
         self.__dict__.update(kwargs)
@@ -197,7 +198,7 @@ class PSUEAnalysis():
         self.period = ephem.p()
 
         # outdir
-        if self.outdir is None: self.outdir = abspath(join(getcwd(),self.psrname))            
+        if self.outdir is None: self.outdir = abspath(join(getcwd(),self.psrname))
         self.outdir_local = self.outdir
         if not access(self.outdir_local,F_OK): mkdir(self.outdir_local)
 
@@ -217,7 +218,7 @@ class PSUEAnalysis():
 
         if not isfile(self.ft2file):
             print "Error. Cannot open %s! Exiting ..." %self.ft2file; exit()
-        
+
         # BATCH mode
         if self.batch:
             self.outdir = '/scratch/psue' + str(random.randint(1,99999))
@@ -227,12 +228,12 @@ class PSUEAnalysis():
             # setup pfiles
             gtselect  = join(environ['INST_DIR'],'syspfiles','gtselect.par'); copy(gtselect,self.outdir)
             gtmktime  = join(environ['INST_DIR'],'syspfiles','gtmktime.par'); copy(gtmktime,self.outdir)
-            gtsrcprob = join(environ['INST_DIR'],'syspfiles','gtsrcprob.par'); copy(gtsrcprob,self.outdir) 
+            gtsrcprob = join(environ['INST_DIR'],'syspfiles','gtsrcprob.par'); copy(gtsrcprob,self.outdir)
             gtdiffrsp = join(environ['INST_DIR'],'syspfiles','gtdiffrsp.par'); copy(gtdiffrsp,self.outdir)
             fselect   = join(environ['HEADAS'],'syspfiles','fselect.par'); copy(fselect,self.outdir)
             environ['PFILES'] = self.outdir
-            chdir(self.outdir) # for tempo2            
-                
+            chdir(self.outdir) # for tempo2
+
         # PSUE output
         filename = join(self.outdir_local,'%s_psue.txt' %(self.psrname))
         self.PSUEoutfile = PSUEFile(filename)
@@ -243,14 +244,14 @@ class PSUEAnalysis():
         self.PSUEoutfile.set('TMAX',[self.tmax,'MET'])
         self.PSUEoutfile.set('PULSAR_CLASS',self.pulsar_class)
         [self.PSUEoutfile.set('PARFILE'+str(i),basename(p)) for i, p in enumerate(self.parfile)]
-        
+
     def WritePSUE(self):
         self.PSUEoutfile.write(join(self.outdir_local,self.psrname+'_psue.txt'))
 
     def CleanFiles(self):
         '''Clean scratch directory'''
         from shutil import rmtree
-        if self.batch: rmtree(self.outdir)        
+        if self.batch: rmtree(self.outdir)
 
     def CreateFT1file(self,fullft1file=None):
         '''Download a FT1 file from the astroserver or
@@ -270,20 +271,20 @@ class PSUEAnalysis():
 
             GtApp('gtselect').run(infile=infile,outfile=ft1file,rad=self.radius,ra=self.ra,dec=self.dec,
                                   emin=self.emin,emax=self.emax,tmin=self.tmin,tmax=self.tmax,zmax=self.zmax)
-            
+
             if astro: remove(infile)  # clean astroft1file
             if self.batch: copy(ft1file,self.outdir_local) # copy the ft1 file to the local directory
-                
+
     def FoldEvents(self,forceFolding=False):
         '''Fold gamma-rays using the TEMPO2 plugin
         ============    =========================================
         keyword         description
-        ============    ========================================= 
+        ============    =========================================
         forceFolding    If True, the phases will be replaced '''
 
         if not isfile(self.ft1file):
             print "Error. Cannot open %s! Must create FT1file. Exiting ..." %self.ft1file; exit()
-            
+
         phase_exists = False
         file = pyfits.open(self.ft1file)
         for c in file['EVENTS'].get_coldefs():
@@ -299,7 +300,7 @@ class PSUEAnalysis():
                     print 'Copying %s to %s'%(self.ft1file,self.outdir)
                     copy(self.ft1file,self.outdir)
                 if not isfile(ft2file): copy(self.ft2file,self.outdir)
-                
+
             # run TEMPO2
             for p in self.parfile:
                 start, finish = ParFile(p).get("START",type=float), ParFile(p).get("FINISH",type=float)
@@ -310,7 +311,7 @@ class PSUEAnalysis():
                 system(cmd)
 
             # copy the ft1 file to the local directory
-            if self.batch: 
+            if self.batch:
                 print 'Copying %s to %s'%(ft1file,self.outdir_local)
                 copy(ft1file,self.outdir_local)
 
@@ -319,7 +320,7 @@ class PSUEAnalysis():
             #if isfile(ft1file_gtis):
             filter = "DATA_QUAL==1 && LAT_CONFIG==1 && ABS(ROCK_ANGLE)<52"
             GtApp('gtmktime').run(evfile=ft1file,outfile=ft1file_gtis,scfile=self.ft2file,filter=filter,roicut='no',chatter=4)
-            if self.batch: 
+            if self.batch:
                 print 'Copying %s to %s'%(ft1file,self.outdir_local)
                 copy(ft1file_gtis,self.outdir_local)
 
@@ -328,8 +329,8 @@ class PSUEAnalysis():
 
         ft1file = self.ft1file
         if not isfile(ft1file): print "Cannot open %s!" %ft1file
-            
-        self.PSUEoutfile.set('#SEARCH_PULSATION','................')        
+
+        self.PSUEoutfile.set('#SEARCH_PULSATION','................')
         spfile = join(self.outdir_local,"searchpulsation_%s_%s.txt"%(self.psrname,self.evtclass))
         system("SearchPulsation -b fitsfile=%s psrtitle='%s' ra=%.6f dec=%.6f nbint=20 zenithcut=%.1f ephemfile=%s outfile=%s psfpar0=%.3f psfpar1=%.3f psfpar2=%.3f radialdistmax=5" \
                %(ft1file,self.psrname,self.ra,self.dec,self.zmax,self.parfile[0],spfile.split('.txt')[0],self.psfpar[0],self.psfpar[1],self.psfpar[2]) )
@@ -339,7 +340,7 @@ class PSUEAnalysis():
             if p['name'] == 'sig_2D': val = float(p['value']); self.PSUEoutfile.set('2D',['%.1f'%val,'sig'])
             if p['name'] == 'sig_W' : val = float(p['value']); self.PSUEoutfile.set('W',['%.1f'%val,'sig'])
             if p['name'] == 'sig_allW' : val = float(p['value']); self.PSUEoutfile.set('allW',['%.1f'%val,'sig'])
-            
+
     def GetSearchPulsationParams(self, filename):
         names, params = ['method','prob','sig','tref','loge','logr','alpha'], []
         if isfile(filename):
@@ -349,13 +350,13 @@ class PSUEAnalysis():
                 else: params += [{'name':n+"_"+tok[0],'value':val} for (n,val) in zip(names,tok)]
             return params
 
-    def TimingAnalysis( self, nbins=None, weight=False, offmin=0, offmax=1, background=None, 
-                        profile=None, peakShape=None, peakPos=None, 
+    def TimingAnalysis( self, nbins=None, weight=False, offmin=0, offmax=1, background=None,
+                        profile=None, peakShape=None, peakPos=None,
                         use_spw=False, dm_unc=0, phaseShift=0):
         '''Generate gamma-ray pulse profiles.
         ============    =============================================
         keyword         description
-        ============    ============================================= 
+        ============    =============================================
         weight          if True, plot weighted counts       [False]
         nbins           Number of bins for phaso            [None]
         profile         Name of the radio template          [None]
@@ -367,10 +368,10 @@ class PSUEAnalysis():
         if weight: ft1file = self.ft1file_weights
         else: ft1file = self.ft1file
         if not isfile(ft1file): print "Cannot open %s!" %ft1file
-        
+
         self.PSUEoutfile.set("#PULSE_PROFILE",'................')
         self.PSUEoutfile.set('OFF_RANGE',['%.2f'%offmin,'%.2f'%offmax])
-    
+
         # ============ PulsarLightCurve Object =========
         #   initiatilize the PulsarLightCurve object
         # ==============================================
@@ -384,7 +385,7 @@ class PSUEAnalysis():
         plc.set_energy_range(4,1e2,3e2)
         plc.set_energy_range(-1,1e4,1e5)
 
-        if not weight:  # counts 
+        if not weight:  # counts
             plc.psfcut=True
             for i in range(plc.nhisto):
                 emin, emax = plc.get_energy_range(which=i)
@@ -397,7 +398,7 @@ class PSUEAnalysis():
             [plc.set_radius_range(which=i,radius=self.lc_radius) for i in range(plc.nhisto)]
             pulse_profile = ft1file.replace('.fits','_pulse_profile_wc.eps')
             phaseogram2d = ft1file.replace('.fits','_phaseogram2D_wc.eps')
-            
+
         if weight and use_spw:  # weighted counts from Philippe's method
             logeref, logesig = 2., 0.5
             infile = join(self.outdir_local,"searchpulsation_%s_%s.txt"%(self.psrname,self.evtclass))
@@ -428,15 +429,15 @@ class PSUEAnalysis():
         elif background == 'weight':
             bkg = plc.get_background(method='weight')
         else: bkg = None
-        
+
         # off-pulse region
         if offmin==0 and offmax==1: reg=None
         else: reg=[offmin,offmax]
-                        
+
         # phase vs time
         plc.plot_phase_time(which=0,outfile=phaseogram2d)
         plc.plot_phase_time(which=0,outfile=phaseogram2d.replace('.eps','.png'))
-        
+
         # ascii
         plc.toASCII(outdir=self.outdir_local)
 
@@ -452,7 +453,7 @@ class PSUEAnalysis():
         if (peakShape is not None) and (peakPos is not None):
 
             peakPos = np.mod([x+phase_shift for x in peakPos],1)
-            
+
             import uw.pulsar.lcprimitives as lp
             import uw.pulsar.lcfitters as lf
             import uw.pulsar.lctemplate as lt
@@ -543,7 +544,7 @@ class PSUEAnalysis():
                     w_r = ['%.4f'%w[0],'%.4f'%w[1]]
                     return ( ['%s_%s'%(x,postfix) for x in ['LOC','HWHM_L','HWHM_R']],
                              [loc, w_l, w_r] )
-            
+
                 if (loglike < lcf.ll) or (loglike==-np.inf): # always write at least one model
                     # only calculate errors for models we're saving
                     if lcf.hess_errors():
@@ -577,10 +578,10 @@ class PSUEAnalysis():
                         keys,vals = primitive_string(peak,postfix)
                         for k,v in zip(keys,vals):
                             self.PSUEoutfile.set(k,v)
-                    
+
                     try: loc_p1, err_loc_p1 = self.PSUEoutfile.get('LOC_P1',first_elem=False,type=float)
                     except (KeyError,TypeError): loc_p1, err_loc_p1 = 0, 0
-                    
+
                     try: loc_p2, err_loc_p2 = self.PSUEoutfile.get('LOC_P2',first_elem=False,type=float)
                     except (KeyError,TypeError): loc_p2, err_loc_p2 = 0, 0
 
@@ -662,13 +663,13 @@ class PSUEAnalysis():
         phase_range      Phase selection (e.g [0.2,0.4] or [[0.2,0.3],[0.8,0.1]])
         plot             If True: generate SED, TSmap, residuals            [False]
         '''
-        
+
         from uw.like.pointspec import DataSpecification, SpectralAnalysis
         from skymaps import SkyDir, SkyImage, PySkyFunction
         from uw.like.Models import PLSuperExpCutoff, PowerLaw
 
         if not isfile(self.ft1file):
-            print "Error. Cannot open %s! Must create FT1file. Exiting ..." %self.ft1file; exit()                        
+            print "Error. Cannot open %s! Must create FT1file. Exiting ..." %self.ft1file; exit()
 
         ft1file = join(self.outdir,basename(self.ft1file))
         ft1file_gtis = join(self.outdir,basename(self.ft1file_gtis))
@@ -682,23 +683,23 @@ class PSUEAnalysis():
         filter = "DATA_QUAL==1 && LAT_CONFIG==1 && ABS(ROCK_ANGLE)<52"
         GtApp('gtmktime').run(evfile=ft1file,outfile=ft1file_gtis,scfile=self.ft2file,filter=filter,roicut='no',chatter=4)
         if self.batch: copy(ft1file_gtis,self.outdir_local)
-        
+
         phase_factor = 1
         if phase_range is not None:
             ft1file_gtis, phase_factor = SelectPhase(ft1file_gtis,phmin=phase_range[0],phmax=phase_range[1])
             phname = "_OFF"
-            print "phase factor = %.2f" %phase_factor            
+            print "phase factor = %.2f" %phase_factor
 
         ltcube = ft1file_gtis.replace('.fits','_ltcube.fits')
         if self.batch and isfile(join(self.outdir_local,basename(ltcube))):
             copyfile(join(self.outdir_local,basename(ltcube)),ltcube)
-        
+
         # binfile
         binfile = ft1file_gtis.replace('.fits','_binned.fits')
         if isfile(binfile): print "remove binfile ..."; remove(binfile)
 
         # Create DataSpecification Object
-        from uw.like.pointspec import DataSpecification 
+        from uw.like.pointspec import DataSpecification
         ds = DataSpecification( ft1files=ft1file_gtis, ft2files=self.ft2file, ltcube=ltcube, binfile=binfile )
 
         # Create a SpectralAnalysis Object
@@ -717,17 +718,17 @@ class PSUEAnalysis():
 
         # copy ltcube to the local directory
         if self.batch: copy(ltcube,self.outdir_local)
-        
+
         # Generate a xml source model
         xml = xml_manager(self.xmlcat,template_dir=self.template_dir)
 
         self.srcmdl_in = ft1file_gtis.replace('.fits','_srcmdl_input.xml')
         xml.fill_srclist( ra=self.ra, dec=self.dec, max_roi=self.radius+5, free_roi=free_roi,
-                          galactic=self.galdiff, isotropic=self.isotropic )    
+                          galactic=self.galdiff, isotropic=self.isotropic )
         xml.write_srcmdl(filename=self.srcmdl_in)
         xml.print_srclist()
-        if self.batch: copy(self.srcmdl_in,self.outdir_local)        
-        
+        if self.batch: copy(self.srcmdl_in,self.outdir_local)
+
         # Create a ROI object
         roi = sa.roi_from_xml( roi_dir      = roi_center,
                                xmlfile      = self.srcmdl_in,
@@ -737,7 +738,7 @@ class PSUEAnalysis():
 
         # ======> FIT <=======
         srcname = xml.get_srcname()
-        
+
         for i, name in enumerate(roi.get_names()):
             if name == srcname: which = i
 
@@ -745,7 +746,7 @@ class PSUEAnalysis():
 
         # fix the position to the timing position
         roi.modify_loc(skydir=SkyDir(self.ra,self.dec),which=srcname)
-        
+
         if model.name != 'PLSuperExpCutoff':
             roi.modify_model(which=srcname,model=PLSuperExpCutoff())
             model = roi.get_model(srcname)
@@ -755,12 +756,12 @@ class PSUEAnalysis():
         print "SPECTRUM: POWER LAW"
         model['Cutoff'] = 500000.; model.freeze('Cutoff')        # fix the energy cutoff
         roi.fit(use_gradient=True)
-        ll_pl = -1*roi.logLikelihood(roi.parameters())        
+        ll_pl = -1*roi.logLikelihood(roi.parameters())
         print roi
-        
+
         # fit using a plexpcutoff
         print "SPECTRUM: POWER LAW WITH EXPCUTOFF"
-        model['Cutoff'] = 5000. ; model.freeze('Cutoff',False) 
+        model['Cutoff'] = 5000. ; model.freeze('Cutoff',False)
         roi.fit(use_gradient=True)
         ll_plec = -1*roi.logLikelihood(roi.parameters())
         print roi
@@ -774,7 +775,7 @@ class PSUEAnalysis():
         angsep = xml.get(which=0,key='angsep')
         self.PSUEoutfile.set("ANGSEP",['%.2f'%angsep,'deg'])
         phflux, err_phflux = xml.get(which=0,key='phflux'), xml.get(which=0,key='err_phflux')
-        self.PSUEoutfile.set("2FGL_F100",['%.2e'%phflux,'%.2e'%err_phflux,'ph/cm2/s'])                       
+        self.PSUEoutfile.set("2FGL_F100",['%.2e'%phflux,'%.2e'%err_phflux,'ph/cm2/s'])
         eflux, err_eflux = xml.get(which=0,key='eflux')/6.2415e5, xml.get(which=0,key='err_eflux')/6.2415e5
         self.PSUEoutfile.set("2FGL_G100",['%.2e'%eflux,'%.2e'%err_eflux,'erg/cm2/s'])
         self.PSUEoutfile.set("EMIN",['%.0f'%self.fit_emin,'MeV'])
@@ -785,17 +786,17 @@ class PSUEAnalysis():
         if phase_range is None:
             self.PSUEoutfile.set("#PHASE-AVERAGED",'................')
         else:
-            self.PSUEoutfile.set("#OFFPULSE",'................')        
-        
+            self.PSUEoutfile.set("#OFFPULSE",'................')
+
         for i, pname in enumerate(model.param_names):
             val = model.statistical()[0][i]
             eval = val * model.statistical()[1][i]**0.5
             pname += phname
             self.PSUEoutfile.set(pname,['%.2e'%val,'%.2e'%eval])
-            
+
         flux = model.i_flux
         phflux = flux(e_weight=0,error=True,emax=3e5)
-        self.PSUEoutfile.set('F100'+phname,['%.2e'%(phflux[0]*phase_factor),'%.2e'%(phflux[1]*phase_factor),'ph/cm2/s'])        
+        self.PSUEoutfile.set('F100'+phname,['%.2e'%(phflux[0]*phase_factor),'%.2e'%(phflux[1]*phase_factor),'ph/cm2/s'])
         eflux = flux(e_weight=1,error=True,emax=3e5,cgs=True)
         self.PSUEoutfile.set('G100'+phname,['%.2e'%(eflux[0]*phase_factor),'%.2e'%(eflux[1]*phase_factor),'erg/cm2/s'])
         TS = roi.TS(which=srcname)
@@ -829,7 +830,7 @@ class PSUEAnalysis():
             tsp.cross(roi_center,size=0.01,label=self.psrname,color='blue')
             tsp.show()
             pl.savefig(outfile.replace('.fits','_tsmap.png')); pl.clf()
-        
+
             # make a SED
             from uw.like.sed_plotter import plot_sed
             # from pointlike_utils import plot_all_seds
@@ -838,19 +839,19 @@ class PSUEAnalysis():
             plot_sed(roi,which=srcname,fignum=2,use_ergs=True,axis=(90,1.1e5,1e-13,eflux[0]))
             pl.savefig(outfile.replace('.fits','_sed.png'))
             # plot_all_seds(roi,fignum=3,filename=ft1file.split('.fits')[0] + '_allseds.png')
-            
+
             # make counts map
             print "making count map ..."
             roi.plot_counts_map(filename=outfile.replace('.fits','_count_map.png'))
-            
+
             # make counts spectra
             print "making count spectra ..."
             roi.plot_counts_spectra(filename=outfile.replace('.fits','_count_spectra.png'))
-            
+
             # make a residual TS map
             print "make a residual ts map ..."
             roi.plot_tsmap(filename=join(outfile.replace('.fits','_residual_tsmap.png')),figsize=(5.5,4.5))
-            
+
             # smoothed counts
             print "make a smoothed count map ..."
             roi.plot_source(which=srcname,filename=outfile.replace('.fits','_smoothed_counts.png'))
@@ -885,15 +886,15 @@ class PSUEAnalysis():
         else:
             if not isfile(ozlem_xml):
                 print "Error. Cannot find %s! Exiting ..." %(ozlem_xml); exit()
-            
+
         # Generate a new xml source model
-        xml = xml_manager(ozlem_xml or self.srcmdl_out,template_dir=self.template_dir)        
+        xml = xml_manager(ozlem_xml or self.srcmdl_out,template_dir=self.template_dir)
         srcmdl = ozlem_xml or join(self.outdir_local,basename(self.ft1file_gtis.replace('.fits','_srcmdl_weights.xml')))
         xml.fill_srclist(ra=self.ra,dec=self.dec,max_roi=self.w_radius)
         if ozlem_xml is None:
             xml.write_srcmdl(filename=srcmdl)
             xml.print_srclist()
-        srcname = xml.get_srcname(which=0)        
+        srcname = xml.get_srcname(which=0)
 
         print 'Using this for diffuse response'
         print self.ft1file_diffrsp
@@ -918,19 +919,19 @@ class PSUEAnalysis():
                 emax=self.w_emax,tmin=self.tmin,tmax=self.tmax,zmax=self.zmax)
         elif self.batch:
             copy(self.ft1file_diffrsp,ft1file_diffrsp)
-            
+
         # check the diffuse response columns
         GtApp('gtdiffrsp').run(convert='yes',evfile=ft1file_diffrsp,evtable="EVENTS",
             scfile=self.ft2file,srcmdl=srcmdl,irfs=self.irfs,edisp='no')
         if self.batch:
             copy(ft1file_diffrsp,self.ft1file_diffrsp)
-        
+
         # create a source list
         srclist = join(self.outdir_local,'srclist.txt')
         srclist_file = open(srclist,'w')
         srclist_file.write(srcname)
         srclist_file.close()
-        
+
         print 'Using this for weights'
         print self.ft1file_weights
         # run gsrcprob

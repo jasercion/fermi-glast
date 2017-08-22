@@ -1,9 +1,9 @@
 #! /usr/bin/env python
 
 import sys
-import os
+import os, numpy
 from GtBurst import commandDefiner
-import pyfits, numpy
+from astropy.io import fits as pyfits
 
 ################ Command definition #############################
 executableName                = "gtinteractiveRaDec"
@@ -24,13 +24,13 @@ thisCommand.setGUIdescription(GUIdescription)
 
 ##################################################################
 
-def _yesOrNoToBool(value):      
+def _yesOrNoToBool(value):
   if(value.lower()=="yes"):
     return True
   elif(value.lower()=="no"):
     return False
   else:
-    raise ValueError("Unrecognized clobber option. You can use 'yes' or 'no'")    
+    raise ValueError("Unrecognized clobber option. You can use 'yes' or 'no'")
   pass
 pass
 
@@ -38,11 +38,11 @@ class Message(object):
   def __init__(self,verbose):
     self.verbose              = bool(verbose)
   pass
-  
+
   def __call__(self,string):
     if(self.verbose):
       print(string)
-pass   
+pass
 
 def gtinteractiveRaDec(**kwargs):
   run(**kwargs)
@@ -58,7 +58,7 @@ def run(**kwargs):
     thisCommand.getHelp()
     return
   pass
-  
+
   #Get parameters values
   thisCommand.setParValuesFromDictionary(kwargs)
   try:
@@ -67,20 +67,20 @@ def run(**kwargs):
     figure                      = thisCommand.getParValue('figure')
   except KeyError as err:
     print("\n\nERROR: Parameter %s not found or incorrect! \n\n" %(err.args[0]))
-    
+
     #Print help
     print thisCommand.getHelp()
     return
   pass
   from GtBurst.InteractiveFt1Display import InteractiveFt1Display
-  
+
   displ                     = InteractiveFt1Display(filteredeventfile,skymap,figure)
   displ.waitClick()
   print("\nSelected (R.A., Dec): (%s,%s)" %(displ.user_ra,displ.user_dec))
   user_ra                   = float(displ.user_ra)
   user_dec                  = float(displ.user_dec)
   displ.unbind()
-  
+
   return 'user_ra', user_ra, 'user_dec', user_dec
 pass
 

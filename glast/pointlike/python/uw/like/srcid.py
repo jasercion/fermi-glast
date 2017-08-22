@@ -15,7 +15,7 @@ import glob
 
 
 import numpy as np
-import pyfits as pf
+from astropy.io import fits as pf
 
 import skymaps
 from uw.utilities import fitstools,keyword_options,path
@@ -90,7 +90,7 @@ class SourceAssociation(object):
                           use all availabile classes.
             name[None]: string, key under which to save association information
                         in self.sources. If None, don't save.
-            unique[False]: bool, if True, compute probabilities for unique 
+            unique[False]: bool, if True, compute probabilities for unique
                            associations (one counterpart per LAT source)
             trap_mask[False]: bool, if True, use a trapezoidal mask for
                               computing local counterpart densities.
@@ -163,7 +163,7 @@ class SourceAssociation(object):
                           use all availabile classes.
             name[None]: string, key under which to save association information
                         in self.sources. If None, don't save.
-            unique[False]: bool, if True, compute probabilities for unique 
+            unique[False]: bool, if True, compute probabilities for unique
                            associations (one counterpart per LAT source)
             trap_mask[False]: bool, if True, use a trapezoidal mask for
                               computing local counterpart densities.
@@ -217,7 +217,7 @@ class SourceAssociation(object):
                     vcs galaxies pulsar_lat snr snr_ext pulsar_high pulsar_low pulsar_fom
                     msp pwn hmxb lmxb globular
                    '''.split()
-        ass_class = ['bzb','bzcat']+['bzq']*3+['agn']*6+['LAT psr']+['snr']*2 + ['psr']*4 + ['pwn'] + ['hmxb'] + ['lmxb']+ ['glc'] 
+        ass_class = ['bzb','bzcat']+['bzq']*3+['agn']*6+['LAT psr']+['snr']*2 + ['psr']*4 + ['pwn'] + ['hmxb'] + ['lmxb']+ ['glc']
         cls = None
         for c,a in zip(priority,ass_class):
             if c in cat_list:
@@ -301,7 +301,7 @@ class Catalog(object):
             return self.sources[self.names.index(name)]
         except:
             raise Exception('Source %s not in catalog %s'%(name, self.cat_name))
-    
+
     def _get_class_module(self,class_module):
         """Import and return module class_file"""
         return __import__(class_module)
@@ -657,7 +657,7 @@ class CatalogSource(object):
 
         norm = 2.*math.pi*operator.mul(*error_ellipse[:2])
         return math.exp(-self.delta_logl(position,error_ellipse))/norm
-        
+
     def chance_probability(self,position,radius = 4,trap_mask=False):
         """Probability of chance association"""
         return self.catalog.local_density(position,radius=radius,
@@ -762,6 +762,6 @@ def test():
     #Test for correct failure for wrong length list
     #error = [.5]*4
     #print(assoc.id(pos,error,'obj-agn',.039,.9735))
-    
+
 if __name__=='__main__':
     test()

@@ -8,7 +8,7 @@ from GtBurst import dataHandling
 from GtBurst.commands.gtllebin import gtllebin
 from GtBurst.GtBurstException import *
 import numpy
-import pyfits
+from astropy.io import fits as pyfits
 from GtBurst import html2text
 
 #Set a global timeout of 10 seconds for all web connections

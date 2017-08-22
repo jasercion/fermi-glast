@@ -5,7 +5,7 @@
 import os
 from os.path import join
 
-import pyfits
+from astropy.io import fits as pyfits
 import numpy as N
 
 from uw.utilities import keyword_options

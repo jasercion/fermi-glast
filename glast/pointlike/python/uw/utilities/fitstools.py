@@ -9,7 +9,7 @@
 INT_TYPES  = ['EVENT_CLASS','CONVERSION_TYPE']
 
 
-import pyfits as pf; import pyfits
+from astropy.io import fits as pf; from astropy.io import fits as pyfits
 import numpy as N; import numpy as np
 from types import ListType,FunctionType,MethodType
 from math import cos,sin,pi
@@ -65,11 +65,11 @@ def get_gti_mask(ft1file,times):
     return accept
 
 def rad_extract(eventfiles,center,radius_function,return_cols=['PULSE_PHASE'],cuts=None,apply_GTI=True,theta_cut=66.4,zenith_cut=105,return_indices=False):
-    """ Extract events with a radial cut.  
+    """ Extract events with a radial cut.
         Return specified columns and perform additional boolean cuts.
 
-        Return is in form of a dictionary whose keys are column names 
-        (and 'DIFFERENCES') and values are numpy arrays with the column 
+        Return is in form of a dictionary whose keys are column names
+        (and 'DIFFERENCES') and values are numpy arrays with the column
         values.  These will have been concatenated if there are multiple
         FT1 files.
 
@@ -78,8 +78,8 @@ def rad_extract(eventfiles,center,radius_function,return_cols=['PULSE_PHASE'],cu
     =========   =======================================================
     eventfiles  -- a list of FT1 filenames
     center      -- a SkyDir giving the center of the radial cut
-    radius_function -- can be either a float specifying a cookier cutter 
-                radial cut, or a function taking as arguments the energy 
+    radius_function -- can be either a float specifying a cookier cutter
+                radial cut, or a function taking as arguments the energy
                 and event_class and speciying the radius in degrees, e.g.
 
               def radius(energy,event_class):
@@ -88,16 +88,16 @@ def rad_extract(eventfiles,center,radius_function,return_cols=['PULSE_PHASE'],cu
     =========   =======================================================
     Keyword     Description
     =========   =======================================================
-    return_cols ['RA','DEC','ENERGY','EVENT_CLASS','PULSE_PHASE'] - 
+    return_cols ['RA','DEC','ENERGY','EVENT_CLASS','PULSE_PHASE'] -
                 a list of FT1 column names to return
-    cuts        None - an optional list of boolean cuts to apply, 
+    cuts        None - an optional list of boolean cuts to apply,
                 e.g., ['ENERGY > 100']
                 NB -- cuts not yet implemented!!
     no_cuts     [False] do not apply default zenith and incidence angle cuts
-    apply_GTI   [True] accept or reject an event based on GTI if True; 
+    apply_GTI   [True] accept or reject an event based on GTI if True;
                 else ignore GTI
     return_indices [False] if True, return an array giving the index in the
-                original file of each event; obviously only useful in the 
+                original file of each event; obviously only useful in the
                 case of a single event file
     =========   =======================================================
     """
@@ -322,12 +322,12 @@ def sum_ltcubes(files,outputfile = 'summed_ltcube.fits'):
     try:
         f = pf.open(files[0])
         header = f['EXPOSURE'].header
-        exposures = [f['EXPOSURE'].data.field('COSBINS')] 
+        exposures = [f['EXPOSURE'].data.field('COSBINS')]
     except KeyError:
         print('file %s has no EXPOSURE table: aborting'%files[0])
         return
     finally:
-        f.close() 
+        f.close()
 
     for file in files[1:]:
         try:
@@ -368,7 +368,7 @@ def merge_gti(files,table_name = 'GTI',interval = None):
 
 def merge_bpd(bpd_files,outfile = None):
     """Merge a set of BinnedPhotonData files.
-    
+
     outfile: File to write the merged BinnedPhotonData to.  If None, don't save it."""
     bpds = [BinnedPhotonData(bf) for bf in bpd_files]
     bpds = [bpd for bpd in bpds if bpd.gti().computeOntime()>0] #Ignore entries with empty GTIs
@@ -405,7 +405,7 @@ def merge_lt(lt_files,outfile = 'merged_lt.fits',weighted = True):
         print('file %s has no %s table: aborting'%(files[0],ext))
         return
     finally:
-        f.close() 
+        f.close()
 
     for file in files[1:]:
         try:

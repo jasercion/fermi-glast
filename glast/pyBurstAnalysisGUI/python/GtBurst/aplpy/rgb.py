@@ -5,7 +5,7 @@ import warnings
 import tempfile
 import shutil
 
-import pyfits
+from astropy.io import fits as pyfits
 import numpy as np
 
 from .logger import logger

@@ -16,7 +16,7 @@ import collections
 from tempfile import mkdtemp,NamedTemporaryFile
 from GtApp import GtApp
 
-import pyfits
+from astropy.io import fits as pyfits
 import numpy as np
 import pywcs
 

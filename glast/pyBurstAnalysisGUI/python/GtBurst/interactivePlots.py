@@ -1,6 +1,6 @@
 import math
 import numpy as np
-import pyfits
+from astropy.io import fits as pyfits
 import matplotlib.pyplot as plt
 plt.ion()
 from Tkinter import *

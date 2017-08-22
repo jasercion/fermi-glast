@@ -4,7 +4,7 @@ also, see to_xml, to generate XML for the sources
 $Header: /glast/ScienceTools/glast/pointlike/python/uw/like2/pub/Attic/makecat.py,v 1.1.2.1 2015/08/13 18:03:10 jasercio Exp $
 """
 import os, argparse
-import pyfits
+from astropy.io import fits as pyfits
 from skymaps import SkyDir
 import numpy as np
 import pandas as pd

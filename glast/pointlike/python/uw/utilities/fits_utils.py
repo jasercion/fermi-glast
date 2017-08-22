@@ -1,5 +1,6 @@
 from __future__ import division
-import os, sys, pyfits
+import os, sys
+from astro.io import fits as pyfits
 
 """
 NAME: fits_utils.py
@@ -35,7 +36,7 @@ def check_file(fname,display=False):
         if display:
             print '\tReading file: ', fname
         return True
-                              
+
 
 def add_angsep_column(filename,ra=0.,dec=0.):
   '''Add a angular separation column between the photon direction and (ra,dec).
@@ -60,24 +61,24 @@ def add_angsep_column(filename,ra=0.,dec=0.):
   except:
     cols = file['EVENTS'].columns
     newcols = cols.add_col(pyfits.Column(name=colname,format='D',array=angsep))
-    
+
     table = pyfits.new_table(newcols,header=file['EVENTS'].header)
     table.name = 'EVENTS'
     file[1] = table
-    
+
   file.writeto(filename,clobber=True)
 
-     
+
 def get_header_position(filename):
   '''return the Position keyword in the FT1 header and extract the ra, dec, and radius values.
   ___arguments___: filename (name of FITS file)
   '''
-  
+
   file   = pyfits.open(filename)
   num    = file[1].header['NDSKEYS']; header = file[1].header
   right  = 'POS(RA,DEC)'
   i=1; keynum=0
-  
+
   while i<=num:  #this step is necessary since it is not clear that the POS key word will have the same number always
     word='DSTYP%i' %i
     test=file[1].header[word]
@@ -88,7 +89,7 @@ def get_header_position(filename):
   if keynum == 0:  #DSKEYS start numbering at 1, if this value hasn't been updated, KEYword doesn't exist
     print 'Error: No position keyword found in fits header (assuming position is RA and DEC.  Exiting...'
     exit()
-                
+
   keyword='DSVAL%i' %keynum
 
   try:
@@ -103,7 +104,7 @@ def get_header_erange(filename):
   '''Return the FT1 energy range from the HEADER: emin, emax.
   ___arguments___: filename (name of FITS file)
   '''
-  
+
   file  = pyfits.open(filename)
   num   = file[1].header['NDSKEYS']; header=file[1].header
   right = 'ENERGY'
@@ -161,7 +162,7 @@ def ft2_time_range( ft2filename ):
   # NOTE: header information unreliable if using ftmerge, so we need to look into the data for FT2.
   #ft2start=ft2file[0].header['TSTART']
   #ft2stop=ft2file[0].header['TSTOP']
-  # NOTE: using Aous's method of getting information from the data fields for FT2       
+  # NOTE: using Aous's method of getting information from the data fields for FT2
   sc_data = ft2file[1].data
   ft2start = sc_data.field('START')[0]
   ft2stop = sc_data.field('STOP')[-1]
@@ -177,7 +178,7 @@ def time_check( ft1range, ft2range ):
 
   ft2start = ft2range['START']
   ft2stop  = ft2range['STOP']
-    
+
   print "\tFT1: ", ft1start, " ", ft1stop
   print "\tFT2: ", ft2start, " ", ft2stop
 
@@ -223,5 +224,5 @@ def load_photon_mjds( ft1name ):
   mjds = ft1dat.field('TIME')/86400.0 + MJDREF + TIMEZERO
 
   return mjds
-    
+
 

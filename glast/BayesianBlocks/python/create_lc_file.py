@@ -9,7 +9,7 @@ used in BayesianBlocks analysis.
 #
 import os
 import numpy as num
-import pyfits
+from astropy.io import fits as pyfits
 from FitsNTuple import FitsNTuple
 from GtApp import GtApp
 

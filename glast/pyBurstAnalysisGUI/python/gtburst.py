@@ -24,7 +24,8 @@ import collections
 import glob
 import shelve
 import webbrowser
-import pyfits,numpy
+from astropy.io import fits as pyfits
+import numpy
 sys.stderr.write(".")
 
 import matplotlib.pyplot as plt
@@ -65,7 +66,7 @@ from GtBurst.commands.gteditxmlmodel import thisCommand as gteditxmlmodel
 from GtBurst.commands.gteditxmlmodelsim import thisCommand as gteditxmlmodelsim
 from GtBurst.commands.gtinteractiveRaDec import thisCommand as gtinteractiveRaDec
 
-  
+
 from GtBurst import angularDistance
 from GtBurst.InteractiveFt1Display import InteractiveFt1Display
 sys.stderr.write(".")
@@ -107,28 +108,28 @@ class MetaForExceptions(type):
     @classmethod
     def exceptionHandlerDecorator(cls,method):
       def handle_exception(*args,**kwargs):
-        
+
         try:
-          
+
           return method(*args,**kwargs)
-        
+
         except GtBurstException as gte:
-        
+
           # My exception handling:
           #Flush stdout so the exception is always shown at the end
           sys.stdout.flush()
           showerror("Error","%s" % (gte.longMessage))
-        
+
         except:
           filename, line, dummy, dummy = traceback.extract_stack().pop()
           filename                     = os.path.basename( filename )
-                
+
           msg                          = ("Snap! An unhandled exception has occurred at line %s of file %s.\n\n" %(line,filename) +
                                           "The program will try to continue running. If you think this is a bug, send a message" +
                                           " to fermihelp@milkyway.gsfc.nasa.gov attaching your gtburst.log file.\n\n"+
                                           "The full traceback has been saved to the log and printed in the console.")
           showerror("Unhandled exception",msg)
-          
+
           dataHandling.exceptionPrinter(msg,traceback.format_exc(None))
         pass
       return handle_exception
@@ -137,7 +138,7 @@ pass
 
 class GUI(object):
   __metaclass__               = MetaForExceptions
-  
+
   def __init__(self):
     self.configuration        = Configuration()
     #Figure out where are the data
@@ -152,12 +153,12 @@ class GUI(object):
     self.addrmfWarning        = True
     self.main()
   pass
-  
-  def _findOtherFiles(self,cspecFile,parent):    
+
+  def _findOtherFiles(self,cspecFile,parent):
     #Get the root (something like bn100724009_v03)
     filename                  = os.path.abspath(os.path.expanduser(cspecFile))
     directory                 = os.path.dirname(os.path.abspath(filename))
-    
+
     #LLE or GBM?
     prefix                    = os.path.basename(filename).split("_")[0]
     if(prefix=="gll"):
@@ -176,7 +177,7 @@ class GUI(object):
         detector              = "LAT-LLE"
         trigger                 = rootName.split("_")[0]
       pass
-            
+
       triggered               = True
       triggerTime             = dataHandling.getTriggerTime(filename)
     elif(prefix=="glg"):
@@ -184,7 +185,7 @@ class GUI(object):
       rootName                = "_".join(os.path.basename(filename).split("_")[2:5]).split(".")[0]
       detector                = rootName.split("_")[0]
       trigger                 = rootName.split("_")[1]
-      
+
       #Open the trigdat file and check if this detector was triggered or not
       try:
         trigdat                 = pyfits.open(_getLatestVersion(os.path.join(directory,"glg_trigdat_all_%s.fit" % "_".join(rootName.split("_")[1:]))))
@@ -201,14 +202,14 @@ class GUI(object):
         #Use a placeholder for the moment, later on I will check again on the
         #data files
         triggerTime             = -1
-        triggered               = False  
+        triggered               = False
     else:
       showerror("Unknown file", "The file %s is neither a LLE file nor a GBM file. You have to manually select other data." % lleFile,parent=parent)
       raise ValueError("Unknown file")
     pass
-    
+
     dataset                   = Dataset(detector,trigger,triggerTime,triggered)
-    
+
     try:
       dataset['cspecfile']    = _getLatestVersion(os.path.join(directory,"%s_cspec_%s.pha" %(prefix,rootName)))
     except:
@@ -218,7 +219,7 @@ class GUI(object):
     if(trigTime!=-1):
       dataset.triggerTime     = trigTime
     pass
-      
+
     if(prefix=="gll"):
       if(detector=="LAT"):
         dataset['eventfile']    = _getLatestVersion(os.path.join(directory,"%s_ft1_%s.fit" %(prefix,rootName)))
@@ -234,7 +235,7 @@ class GUI(object):
       except:
         dataset.status        = "noTTE"
         dataset['eventfile']  = dataset['cspecfile']
-      pass  
+      pass
       dataset['ft2file']      = 'None'
       try:
         dataset['trigdat']    = _getLatestVersion(os.path.join(directory,"glg_trigdat_all_%s.fit" % "_".join(rootName.split("_")[1:])))
@@ -253,7 +254,7 @@ class GUI(object):
                                      " spectral analysis, the results of the spectral analysis might be slightly off.\n\n"
                                      "If you want to perform spectral analysis with GBM data, installing"
                                      " the FTOOLS is strongly advised. You can find them here: "
-                                     "http://heasarc.nasa.gov/lheasoft/\n\nThis message will be displayed once per session."), 
+                                     "http://heasarc.nasa.gov/lheasoft/\n\nThis message will be displayed once per session."),
                                      parent=parent)
             self.addrmfWarning  = False
           pass
@@ -271,28 +272,28 @@ class GUI(object):
           #I did not find any .rsp file nor any .rsp2 file
           dataset.status        = "noRESP"
         pass
-      pass       
+      pass
     pass
-    
+
     #Check that the file exists
     for key,f in dataset.iteritems():
       if(key=='ft2file' and prefix=='glg'):
         #It's ok not having the FT2 file with GBM data
         continue
       if(os.path.exists(f)==False):
-        showerror("I/O error", "Cannot open this file\n %s \nFile does not exist or it is not readable." % f,parent=parent)      
+        showerror("I/O error", "Cannot open this file\n %s \nFile does not exist or it is not readable." % f,parent=parent)
       pass
     pass
-        
+
     return dataset,trigger,triggered
   pass
-  
+
   def openWebLink(self,url):
     webbrowser.open(url,2)
   pass
-  
-  
-  def updateRootStatusbar(self,message,hint=None):   
+
+
+  def updateRootStatusbar(self,message,hint=None):
     if(message.find("TIP")>=0):
       message,hint            = message.split("TIP")
     self.bottomtext.config(state=NORMAL)
@@ -304,15 +305,15 @@ class GUI(object):
       self.bottomtext.insert(END,hint)
     pass
     self.bottomtext.config(state=DISABLED)
-  pass  
-  
+  pass
+
   def fillObjectInfo(self):
     #Read info of the objects from datafiles
     f                         = pyfits.open(self.datasets[0]['rspfile'])
     header                    = f[0].header
-    
+
     for key in self.objectInfoEntries.keys():
-      self.objectInfoEntries[key].entry.config(state='normal')      
+      self.objectInfoEntries[key].entry.config(state='normal')
       if(key=='name'):
         #Workaround for the OBJECT keyword, which is wrong in some files
         self.objectInfoEntries[key].variable.set(self.datasets[0].triggerName)
@@ -325,9 +326,9 @@ class GUI(object):
           self.objectInfoEntries[key].variable.set('not available')
       #self.objectInfoEntries[key].entry.config(state='readonly')
     pass
-    f.close()    
+    f.close()
   pass
-  
+
   def loadCustomDataset(self):
     customWindow              = SubWindow(self.root,transient=True,title="Custom dataset",
                                           initialHint="")
@@ -338,49 +339,49 @@ class GUI(object):
 
     customWindow.window.geometry("800x450+20+20")
 
-    entries                   = {}    
+    entries                   = {}
     entryFrame                = Frame(customWindow.frame)
     entryFrame.grid(column=0,row=0)
     entries['detname']        = EntryPoint(entryFrame,labeltext="Detector",
                                            textwidth=40,possibleValues=knownDetectors,initvalue='LAT')
-    
+
     entries['triggerName']    = EntryPoint(entryFrame,labeltext="Source name (optional)",
                                            textwidth=40)
-    
+
     entries['triggerTime']    = EntryPoint(entryFrame,labeltext="Trigger time (required if not in the file)",
                                            textwidth=40,initvalue=str(self.objectInfoEntries['date'].get()))
-    
+
     entries['cspecfile']      = EntryPoint(entryFrame,labeltext="CSPEC file (required)",
                                            textwidth=40,initvalue='',
                                            directory=False,browser=True)
-    
+
     entries['rspfile']        = EntryPoint(entryFrame,labeltext="Response file (RSP or RSP2)",
                                            textwidth=40,initvalue='',
                                            directory=False,browser=True)
-    
+
     entries['eventfile']      = EntryPoint(entryFrame,labeltext="Event file (TTE or LLE, optional)",
                                            textwidth=40,initvalue='',
                                            directory=False,browser=True)
-    
+
     entries['ft2file']        = EntryPoint(entryFrame,labeltext="FT2 file (needed for LAT data)",
                                            textwidth=40,initvalue='',
                                            directory=False,browser=True)
-    
+
     buttonFrame               = Frame(customWindow.frame)
     buttonFrame.grid(column=0,row=1)
     saveButton                = Button(buttonFrame,text="Load", font=NORMALFONT,
                                        command=lambda: self._registerCustomDataset(entries,customWindow.window))
     saveButton.grid(row=0,column=0,sticky="NSWE")
-    
+
     cancelButton              = Button(buttonFrame,text="Cancel", font=NORMALFONT,
                                   command=customWindow.window.destroy)
     cancelButton.grid(row=0,column=1,sticky="NSWE")
   pass
-  
+
   def _registerCustomDataset(self,entries,parent):
     detector                  = entries['detname'].get()
     trigger                   = entries['triggerName'].get()
-    
+
     #Check that files exists
     if not dataHandling._fileExists(entries['cspecfile'].get()):
       showerror("No CSPEC file","CSPEC file unspecified or not existent. Please correct it.")
@@ -394,9 +395,9 @@ class GUI(object):
     if entries['detname'].get().find("LAT")>=0 and (not dataHandling._fileExists(entries['ft2file'].get())):
       showerror("No FT2 file","If these are LAT data, you HAVE to provide an FT2 file.")
       return
-    
+
     triggerTime               = None
-    
+
     try:
       triggerTime               = float(entries['triggerTime'].get())
     except:
@@ -411,7 +412,7 @@ class GUI(object):
       pass
       f.close()
     pass
-    
+
     if(trigger==''):
       try:
         trigger                 = pyfits.getval(entries['eventfile'].get(),'OBJECT')
@@ -420,7 +421,7 @@ class GUI(object):
           trigger               = 'bn%s' % trigger
       except:
         trigger                 = "Unknown"
-    
+
     dataset                   = Dataset(detector,trigger,triggerTime,True)
     dataset['eventfile']      = entries['eventfile'].get()
     dataset['rspfile']        = entries['rspfile'].get()
@@ -436,7 +437,7 @@ class GUI(object):
       parValues[-1].set(int(1))
     self.registerDatasets(datasets,parValues,parent,False)
   pass
-  
+
   def changeTriggerTime(self):
     #No trigger time information at all!
     triggerTime = askfloat("Change trigger time","Please specify the new trigger time:",parent=self.root)
@@ -448,8 +449,8 @@ class GUI(object):
                                                                         dataset.triggerName))
       dataset.triggerTime = triggerTime
     pass
-    
-    #Write the keyword UREFTIME in all the input data files, which I will use as 
+
+    #Write the keyword UREFTIME in all the input data files, which I will use as
     #reference time, to avoid overwriting the TRIGTIME keyword
     for dataset in self.datasets:
       for key in ['rspfile','cspecfile','eventfile']:
@@ -457,14 +458,14 @@ class GUI(object):
         f[0].header.set("UREFTIME",triggerTime)
         f.close()
       pass
-    pass  
-    
+    pass
+
     #Update the status bar in the main window
-    if(len(self.datasets)>0):     
+    if(len(self.datasets)>0):
       #Update the information on the object
       self.fillObjectInfo()
   pass
-  
+
   def quit(self):
     try:
       self.console.stop()
@@ -472,7 +473,7 @@ class GUI(object):
       pass
     self.root.quit()
   pass
-  
+
   def makeNavigationPlots(self):
     #Find if there is any available ft2 file
     #Search for LAT standard data
@@ -491,15 +492,15 @@ class GUI(object):
       pass
     pass
     #If we are here, we have an ft2 file
-    
+
     ra_obj                    = float(self.objectInfoEntries['ra'].variable.get())
     dec_obj                   = float(self.objectInfoEntries['dec'].variable.get())
     triggerTime               = float(self.datasets[0].triggerTime)
-    
+
     figure                    = dataHandling.makeNavigationPlots(ft2file,ra_obj,dec_obj,triggerTime)
-    figure.canvas.draw()   
+    figure.canvas.draw()
   pass
-  
+
   def updateGtBurst(self):
     cwd                     = os.getcwd()
     os.chdir(self.installationPath)
@@ -520,29 +521,29 @@ class GUI(object):
       pass
     pass
   pass
-  
+
   def OnFrameConfigure2(self,event):
     self.helptextCanvas.configure(scrollregion=self.helptextCanvas.bbox("all"))
   pass
-  
+
   def OnFrameConfigure(self,event):
     self._canvas.configure(scrollregion=self._canvas.bbox("all"))
   pass
-  
+
   def main(self):
     self.root                 = Tk()
-    
+
     #Update $auto_path Tcl variable, so tcl will find my custom tcl scripts
     tclPath                   = os.path.join(self.dataPath,'tcl_extensions')
     path                      = os.path.join(tclPath,'msgcat')
     self.root.tk.eval("set auto_path [linsert $auto_path 0 %s]" %(path))
     path                      = os.path.join(tclPath,'fsdialog')
     self.root.tk.eval("set auto_path [linsert $auto_path 0 %s]" %(path))
-    
+
     self.root.iconify()
     #self.root.geometry("1024x768+0+0")
     self.root.title("Fermi bursts analysis GUI")
-    
+
     #Add the menubar
     menubar                   = Menu(self.root)
     filemenu                  = Menu(menubar, tearoff=0)
@@ -558,11 +559,11 @@ class GUI(object):
                                command=reset)
     filemenu.add_command(label="Configuration...", command=self.configure)
     filemenu.add_command(label="Quit", command=self.quit)
-    
+
     self.tasksmenu                 = Menu(menubar,tearoff=0)
     self.tasksmenu.add_command(label="Make likelihood analysis",
                           command=self.likelihoodAnalysis,
-                          state=DISABLED) 
+                          state=DISABLED)
     self.tasksmenu.add_command(label="Find source with TS map",
                           command=self.tsmap,
                           state=DISABLED)
@@ -574,25 +575,25 @@ class GUI(object):
     #                      state=DISABLED)
     self.tasksmenu.add_command(label="Make spectra for XSPEC",
                           command=self.commandInterface,
-                          state=DISABLED) 
-                          
+                          state=DISABLED)
+
     toolsmenu                 = Menu(menubar,tearoff=0)
     toolsmenu.add_command(label="Make navigation plots (you need to load either LLE or standard LAT data)",
-                          command=self.makeNavigationPlots) 
+                          command=self.makeNavigationPlots)
     updatemenu                = Menu(menubar,tearoff=0)
     updatemenu.add_command(label="Update to the latest version",command=self.updateGtBurst)
-    
+
     menubar.add_cascade(label="File",menu=filemenu)
     menubar.add_cascade(label="Tasks",menu=self.tasksmenu)
     menubar.add_cascade(label="Tools",menu=toolsmenu)
     menubar.add_cascade(label="Update",menu=updatemenu)
-    
+
     self.root.config(menu=menubar)
-    
+
     #Load some icons
     self.lightbulb            = PhotoImage(file=os.path.join(self.dataPath,"lightbulb.gif"))
     self.exlamationmark       = PhotoImage(file=os.path.join(self.dataPath,"warning.gif"))
-    
+
     #Fill the bottom frame
     #Canvas for the Fermi logo
     logoFilename              = os.path.join(self.dataPath,"fermiLogo.gif")
@@ -628,22 +629,22 @@ class GUI(object):
                                        xscrollcommand=hscrollbar.set)
     self._canvas.grid(row=0, column=0,sticky=N+S+E+W)
     vscrollbar.config(command=self._canvas.yview)
-    hscrollbar.config(command=self._canvas.xview)   
+    hscrollbar.config(command=self._canvas.xview)
     self.root.grid_rowconfigure(0, weight=1)
     self.root.grid_columnconfigure(0, weight=1)
     bigFrame.grid_rowconfigure(0,weight=1)
     bigFrame.grid_columnconfigure(0,weight=1)
-    
+
     self.userInteractionFrame = Frame(self._canvas,bd=0)
     self.userInteractionFrame.bind("<Configure>", self.OnFrameConfigure)
-    
-    
+
+
     #Help text
     self.bottomtextFrame      = Frame(self.root)
     self.bottomtextFrame.grid(row=2,column=0,sticky=W+E+N+S)
     helpscrollbar             = AutoHideScrollbar.AutoHideScrollbar(self.bottomtextFrame)
     self.helptextCanvas       = Canvas(self.bottomtextFrame,yscrollcommand=helpscrollbar.set)
-    self.bottomtext           = Text(self.helptextCanvas, wrap='word', 
+    self.bottomtext           = Text(self.helptextCanvas, wrap='word',
                                      font=COMMENTFONT,height=8,width=45,
                                      yscrollcommand=helpscrollbar.set)
     helpscrollbar.config(command=self.bottomtext.yview)
@@ -651,17 +652,17 @@ class GUI(object):
     self.helptextCanvas.grid(row=0,column=0)
     helpscrollbar.grid(row=0,column=1,sticky=W+E+N+S)
     self.hyperlink            = HyperlinkManager(self.bottomtext)
-    self.bottomtext.config(state=DISABLED) 
-    
+    self.bottomtext.config(state=DISABLED)
+
     descr = '''
-    With this application you can download Fermi data for GRBs and Solar Flares, 
+    With this application you can download Fermi data for GRBs and Solar Flares,
     compute source and background spectra for GBM and LAT/LLE data,
-    perform likelihood analysis and 
+    perform likelihood analysis and
     observation simulation with standard LAT data.'''
-    
+
     self.updateRootStatusbar(" ".join(descr.split()),"To begin, click on the File menu.")
     self.userInteractionFrame.bind("<Configure>", self.OnFrameConfigure2)
-    
+
     self.figureFrame          = Frame(self.root)
     self.figureFrame.grid(row=0,column=1,rowspan=2,sticky='nsew')
     self.figure               = Figure(dpi=100,figsize=(7.0,4))
@@ -672,22 +673,22 @@ class GUI(object):
     axes                      = self.figure.add_subplot(111)
     axes.set_axis_off()
     axes.imshow(bigLogo)
-    self.canvas.show()    
+    self.canvas.show()
     self.figToolbar           = NavigationToolbar2TkAgg(self.canvas,self.figureFrame)
     self.figToolbar.update()
     self.canvas._tkcanvas.pack(side=TOP,fill=BOTH,expand=True)
-    
+
     #Set up the form for the dataset
     rightSubFrames            = []
     rightLabels               = []
     parValues                 = {}
     rightEntries              = []
     colWidth                  = 20
-    
+
     self.objectInfoFrame      = Frame(self.userInteractionFrame)
     self.objectInfoFrame.grid(row=0,column=0,sticky=N+S+E+W)
     self.objectInfoEntries    = {}
-    
+
     for parname,description in self.object.descriptions.iteritems():
       self.objectInfoEntries[parname] = EntryPoint(self.objectInfoFrame,
                                                    labeltext=description,
@@ -697,7 +698,7 @@ class GUI(object):
                                                    browser=False,
                                                    inactive=True)
     pass
-    
+
     self.displayDetFrame      = None
     self._canvas.create_window(0, 0, anchor=NW, window=self.userInteractionFrame,height=400)
     self.userInteractionFrame.grid_rowconfigure(0, weight=1)
@@ -706,39 +707,39 @@ class GUI(object):
 
     self.saveUserInteractionFrame()
   pass
-  
+
   def tsmap(self):
     datasetsFilter            = lambda x:x.detector=="LAT"
-    
+
     gtdocountsmap.definedParameters['ra'].type = commandDefiner.HIDDEN
     gtdocountsmap.definedParameters['ra'].value = self.objectInfoEntries['ra'].variable.get()
-    
+
     gtdocountsmap.definedParameters['dec'].type = commandDefiner.HIDDEN
     gtdocountsmap.definedParameters['dec'].value = self.objectInfoEntries['dec'].variable.get()
-    
+
     #gtdocountsmap.definedParameters['skybinsize'].type = commandDefiner.HIDDEN
     gtbuildxmlmodel.definedParameters['ra'].type = commandDefiner.HIDDEN
     gtbuildxmlmodel.definedParameters['ra'].value = self.objectInfoEntries['ra'].variable.get()
-    
+
     gtbuildxmlmodel.definedParameters['dec'].type = commandDefiner.HIDDEN
     gtbuildxmlmodel.definedParameters['dec'].value = self.objectInfoEntries['dec'].variable.get()
-    
+
     gtbuildxmlmodel.definedParameters['triggername'].type = commandDefiner.HIDDEN
     gtbuildxmlmodel.definedParameters['triggername'].value = self.objectInfoEntries['name'].variable.get()
-    
+
     gteditxmlmodel.definedParameters['tkwindow'].value = self.root
     gteditxmlmodel.definedParameters['tkwindow'].type = commandDefiner.HIDDEN
-    
+
     #Define commands and help string
     commands                  = []
     commands.append(gtdocountsmap)
     commands.append(gtbuildxmlmodel)
     commands.append(gteditxmlmodel)
     commands.append(gtdotsmap)
-        
+
     finalProducts              = {}
     self.cleanUserInteractionFrame()
-        
+
     self.stepByStep            = CommandPipeline(self.userInteractionFrame,
                                                  self.updateRootStatusbar,
                                                  commands,
@@ -750,35 +751,35 @@ class GUI(object):
                                                  self.figureFrame,
                                                  self.canvas,
                                                  datasetsfilter=datasetsFilter)
-    
+
   pass
-  
+
   def afterTSmap(self,datasetsFilter=lambda x:True):
     self.fillUserInteractionFrame()
     self.writeDefaultHelpMessage()
     showinfo("Info","Note that the coordinates of the maximum of the TS map will NOT be used automatically.\n\nIf you want to use them, copy RA and Dec from the Console to the 'R.A. (J2000)' and 'Dec. (J2000)' entry on the upper left corner.")
     self.makeLightCurves()
   pass
-  
+
   pass
-  
+
   def recenterROI(self):
     datasetsFilter            = lambda x:x.detector=="LAT"
-    
+
     gtdocountsmap.definedParameters['ra'].type = commandDefiner.HIDDEN
     gtdocountsmap.definedParameters['ra'].value = self.objectInfoEntries['ra'].variable.get()
-    
+
     gtdocountsmap.definedParameters['dec'].type = commandDefiner.HIDDEN
     gtdocountsmap.definedParameters['dec'].value = self.objectInfoEntries['dec'].variable.get()
-    
+
     #Define commands and help string
     commands                  = []
     commands.append(gtdocountsmap)
     commands.append(gtinteractiveRaDec)
-        
+
     finalProducts              = {}
     self.cleanUserInteractionFrame()
-        
+
     self.stepByStep            = CommandPipeline(self.userInteractionFrame,
                                                  self.updateRootStatusbar,
                                                  commands,
@@ -790,16 +791,16 @@ class GUI(object):
                                                  self.figureFrame,
                                                  self.canvas,
                                                  datasetsfilter=datasetsFilter)
-    
+
   pass
-  
+
   def recenterROIafterSkymap(self,datasetsFilter=lambda x:True):
     #Update RA and DEC
     dataset                   = filter(datasetsFilter,self.datasets)[0]
     if('user_ra' in dataset.keys()):
       user_ra                   = dataset['user_ra']
       user_dec                  = dataset['user_dec']
-      
+
       self.objectInfoEntries['ra'].variable.set(str(user_ra))
       self.objectInfoEntries['dec'].variable.set(str(user_dec))
     else:
@@ -809,30 +810,30 @@ class GUI(object):
     self.writeDefaultHelpMessage()
     self.makeLightCurves()
   pass
-  
+
   def saveUserInteractionFrame(self):
     #Save all the fields in the userInteraction frame
     self.userInteractionFrameContent = []
     for child in self.userInteractionFrame.grid_slaves():
       self.userInteractionFrameContent.append(child)
-    pass 
+    pass
   pass
-  
+
   def simulateObservation(self):
     datasetsFilter            = lambda x:x.detector=="LAT"
     datasets                  = filter(datasetsFilter,self.datasets)
-    
+
     triggernamesim                     = "%ssim" % self.objectInfoEntries['name'].variable.get()
-         
+
     #gtconvertxmlmodel.definedParameters['xmlmodel'].type = commandDefiner.HIDDEN
-    #gtconvertxmlmodel.definedParameters['emin'].type     = commandDefiner.HIDDEN 
-    #gtconvertxmlmodel.definedParameters['emax'].type     = commandDefiner.HIDDEN   
-    gtdosimulation.definedParameters['triggertime'].type = commandDefiner.HIDDEN  
+    #gtconvertxmlmodel.definedParameters['emin'].type     = commandDefiner.HIDDEN
+    #gtconvertxmlmodel.definedParameters['emax'].type     = commandDefiner.HIDDEN
+    gtdosimulation.definedParameters['triggertime'].type = commandDefiner.HIDDEN
     gtdosimulation.definedParameters['triggertime'].value = self.objectInfoEntries['date'].variable.get()
-    
-    gtdosimulation.definedParameters['irf'].type         = commandDefiner.HIDDEN        
+
+    gtdosimulation.definedParameters['irf'].type         = commandDefiner.HIDDEN
     gtdosimulation.definedParameters['outdir'].value     = os.path.join(self.configuration.get('dataRepository'),triggernamesim)
-    
+
     #Add a predefined name for the simulated FT1 file
     for i,d in enumerate(self.datasets):
       if(not datasetsFilter(d)):
@@ -840,24 +841,24 @@ class GUI(object):
       else:
         self.datasets[i]['simeventfile'] = 'gll_ft1_tr_%s_v00.fit' %(triggernamesim)
     pass
-    
+
     latdataset                = datasets[0]
     if('likexmlresults' in latdataset.keys()):
       gteditxmlmodelsim.definedParameters['likexmlresults'].value = latdataset['likexmlresults']
-    
+
     gteditxmlmodelsim.definedParameters['tkwindow'].value = self.root
     gteditxmlmodelsim.definedParameters['tkwindow'].type = commandDefiner.HIDDEN
-    
+
 
     #Define commands and help string
     commands                  = []
     commands.append(gteditxmlmodelsim)
     commands.append(gtconvertxmlmodel)
     commands.append(gtdosimulation)
-            
+
     finalProducts              = {"Simulated ft1 file": 'simeventfile'}
     self.cleanUserInteractionFrame()
-        
+
     self.stepByStep            = CommandPipeline(self.userInteractionFrame,
                                                  self.updateRootStatusbar,
                                                  commands,
@@ -869,54 +870,54 @@ class GUI(object):
                                                  self.figureFrame,
                                                  self.canvas,
                                                  datasetsfilter=datasetsFilter)
-    
+
   pass
-  
+
   def afterSimulation(self,datasetsFilter=lambda x:True):
     self.fillUserInteractionFrame()
     self.writeDefaultHelpMessage()
     self.makeLightCurves()
   pass
-  
+
   def likelihoodAnalysis(self):
     datasetsFilter            = lambda x:x.detector=="LAT"
-    
+
     #Get the processing version for this LAT data
     reproc                    = pyfits.getval(filter(datasetsFilter,self.datasets)[0]['eventfile'],'PROC_VER',ext=0)
-    
+
     gtdocountsmap.definedParameters['irf'].possibleValues = IRFS.PROCS[str(reproc)]
-    
+
     gtdocountsmap.definedParameters['ra'].type = commandDefiner.HIDDEN
     gtdocountsmap.definedParameters['ra'].value = self.objectInfoEntries['ra'].variable.get()
-    
+
     gtdocountsmap.definedParameters['dec'].type = commandDefiner.HIDDEN
     gtdocountsmap.definedParameters['dec'].value = self.objectInfoEntries['dec'].variable.get()
-    
+
     #gtdocountsmap.definedParameters['skybinsize'].type = commandDefiner.HIDDEN
     gtbuildxmlmodel.definedParameters['ra'].type = commandDefiner.HIDDEN
     gtbuildxmlmodel.definedParameters['ra'].value = self.objectInfoEntries['ra'].variable.get()
-    
+
     gtbuildxmlmodel.definedParameters['dec'].type = commandDefiner.HIDDEN
     gtbuildxmlmodel.definedParameters['dec'].value = self.objectInfoEntries['dec'].variable.get()
-    
+
     gtbuildxmlmodel.definedParameters['triggername'].type = commandDefiner.HIDDEN
     gtbuildxmlmodel.definedParameters['triggername'].value = self.objectInfoEntries['name'].variable.get()
-    
+
     gteditxmlmodel.definedParameters['tkwindow'].value = self.root
     gteditxmlmodel.definedParameters['tkwindow'].type = commandDefiner.HIDDEN
-    
+
     #Define commands and help string
     commands                  = []
     commands.append(gtdocountsmap)
     commands.append(gtbuildxmlmodel)
     commands.append(gteditxmlmodel)
     commands.append(gtdolike)
-        
+
     finalProducts              = {"Sky map": 'skymap',
                                   "Input XML model": 'xmlmodel',
                                   "Likelihood results (XML)": 'likexmlresults'}
     self.cleanUserInteractionFrame()
-        
+
     self.stepByStep            = CommandPipeline(self.userInteractionFrame,
                                                  self.updateRootStatusbar,
                                                  commands,
@@ -928,31 +929,31 @@ class GUI(object):
                                                  self.figureFrame,
                                                  self.canvas,
                                                  datasetsfilter=datasetsFilter)
-    
+
   pass
-  
+
   def afterLikelihood(self,datasetsFilter=lambda x:True):
     self.fillUserInteractionFrame()
     self.writeDefaultHelpMessage()
     self.makeLightCurves()
   pass
-  
+
   def run(self):
     #self.root.resizable(0,0)
-    
+
     #Center the window on the screen
     self.root.update_idletasks()
     xp = (self.root.winfo_screenwidth() / 2) - (self.root.winfo_width() / 2)
     yp = (self.root.winfo_screenheight() / 2) - (self.root.winfo_height() / 2)
     self.root.geometry('{0}x{1}+{2}+{3}'.format(self.root.winfo_width(), self.root.winfo_height(),
                                                                         xp, yp))
-    
+
     #If the user try to expand the window, only the canvas will expand
     Grid.rowconfigure(self.root,0,weight=1)
     Grid.columnconfigure(self.root,1,weight=1)
     Grid.rowconfigure(self.figureFrame,0,weight=1)
     Grid.columnconfigure(self.figureFrame,0,weight=1)
-    
+
     Grid.rowconfigure(self.root,1,weight=0)
     Grid.columnconfigure(self.root,0,weight=0)
     Grid.rowconfigure(self.root,2,weight=0)
@@ -962,38 +963,38 @@ class GUI(object):
     #self.root.grid_rowconfigure(self.figureFrame,row=0,weight=1)
     #self.figureFrame.grid_columnconfigure(self.figureFrame,column=0,weight=1)
     #self.figureFrame.grid_rowconfigure(self.figureFrame,row=0,weight=1)
-    
+
     self.root.deiconify()
     try:
       self.root.mainloop()
     except:
       print("HEY!")
   pass
-  
+
   def cleanUserInteractionFrame(self):
     for child in self.userInteractionFrame.grid_slaves():
       child.grid_remove()
     pass
   pass
-  
+
   def fillUserInteractionFrame(self):
     self.cleanUserInteractionFrame()
     for child in self.userInteractionFrameContent:
       child.grid()
     pass
   pass
-    
+
   def commandInterface(self):
     #Remove LAT Transient data from the datasets used for the spectral analysis,
     #since there is no point in doing the polynomial fit for those data
     datasetsFilter             = lambda x:x.detector!="LAT"
-    
+
     datasets                   = filter(datasetsFilter,self.datasets)
-    
+
     if(len(datasets)==0):
       showinfo("No suitable datasets","No suitable datasets for spectral analysis. You have to load either GBM or LAT/LLE data.",parent=self.root)
       return
-      
+
     #Define commands and help string
     commands                  = []
     #Add the data selector for gtllescrbindef
@@ -1006,13 +1007,13 @@ class GUI(object):
     commands.append(gtllesrcbindef)
     commands.append(gtllebkgGUI)
     commands.append(gtllesrc)
-        
+
     finalProducts              = {"Observed spectrum": 'srcspectra',
                                   "Backgr. spectrum": 'bkgspectra',
                                   "Response": 'weightedrsp'}
     self.cleanUserInteractionFrame()
-    
-    
+
+
     self.stepByStep            = CommandPipeline(self.userInteractionFrame,
                                                  self.updateRootStatusbar,
                                                  commands,
@@ -1039,11 +1040,11 @@ class GUI(object):
     except:
       showerror("Error","Something went wrong when producing spectra.")
       return
-    else:      
+    else:
       for intID in range(1,nIntervals+1):
         #This method is called after the CommandPipeline has terminated
         f                         = open("loadData_%s_int%02i.xcm" %(self.datasets[0].triggerName,intID),"w+")
-        
+
         for i,dataset in enumerate(self.datasets):
           if(not datasetsFilter(dataset)):
             continue
@@ -1068,7 +1069,7 @@ class GUI(object):
         header                = f['SPECTRUM',1].header.copy()
         nIntervals            = len(f['SPECTRUM',1].data)
         f.close()
-        
+
         #Get the maximum length of a line
         maxDim                = max(len(dataset['bkgspectra']),len(dataset['rspfile']))+20
         frmt                  = "%sA" % (maxDim)
@@ -1082,13 +1083,13 @@ class GUI(object):
           respfileArr         = numpy.array(map(lambda x:"%s{%i}" %(dataset['rspfile'],x+1),range(nIntervals)))
         pass
         respfileCol           = pyfits.Column(name='RESPFILE',format=frmt,
-                                              array=respfileArr)        
+                                              array=respfileArr)
         #Make a fake table
         newtable       = pyfits.new_table(pyfits.ColDefs([backfileCol,respfileCol]))
-        
+
         #Reopen the file and append the columns
         f              = pyfits.open(dataset['srcspectra'])
-        
+
         if('RESPFILE' in f['SPECTRUM',1].data.names):
           finalTable   = pyfits.BinTableHDU(f['SPECTRUM',1].data,f['SPECTRUM',1].header)
           for i in range(len(finalTable.data)):
@@ -1100,24 +1101,24 @@ class GUI(object):
           finalTable     = pyfits.new_table(coldef,header=header)
         pass
         finalTable.header.set("POISSERR",True)
-        
+
         #Copy also GTI and EBOUNDS
         primary        = f[0].copy()
         ebounds        = f['EBOUNDS'].copy()
         gti            = f['GTI'].copy()
         f.close()
-        
+
         #Create the new file
         hdulist        = pyfits.HDUList([primary,finalTable,ebounds,gti])
         hdulist.writeto("%s__" %(dataset['srcspectra']))
         os.remove(dataset['srcspectra'])
         os.rename("%s__" %(dataset['srcspectra']),dataset['srcspectra'])
-      pass  
+      pass
     pass
-    
+
     self.updateRootStatusbar("The scripts loadData_%s_int*.xcm have been produced." %(self.datasets[0].triggerName,),"You can use them in Xspec to load data, entering for example:\n\n XSPEC>@loadData_%s_int01.xcm\n\n at the XSPEC prompt." %(self.datasets[0].triggerName))
   pass
-  
+
   def browseTriggers(self,window,triggerNameVar,triggerTimeVar,raVar,decVar):
      browser                  = TriggerSelector(window)
      try:
@@ -1130,12 +1131,12 @@ class GUI(object):
        #Problem with the download (most probably)
        return
   pass
-  
+
   def downloadDataSet(self):
     #self.cleanUserInteractionFrame()
     thisWindow                = SubWindow(self.root,
                                           transient=True,title="Download data",
-                                          initialHint="Please insert a trigger name/number, and select which data you want to download.")    
+                                          initialHint="Please insert a trigger name/number, and select which data you want to download.")
     thisWindow.bottomtext.config(state="normal")
     thisWindow.hyperlinkManager= HyperlinkManager(thisWindow.bottomtext)
     thisWindow.bottomtext.insert(END,"You can also download trigger data directly from the HEASARC clicking on these links:  ")
@@ -1153,7 +1154,7 @@ class GUI(object):
     thisWindow.bottomtext.config(state="disabled")
     #Create two labels and two entries
     #colWidth                  = 60
-    
+
     #Trigger form
     triggerFrame              = Frame(thisWindow.frame)
     triggerFrame.grid(row=0,column=0)
@@ -1166,7 +1167,7 @@ class GUI(object):
     browserButton             = Button(triggerFrame,text="Browse triggers",font=NORMALFONT,
                                        command=lambda: self.browseTriggers(thisWindow.window,triggerForm.variable,triggerTimeForm.variable,raForm.variable,decForm.variable))
     browserButton.grid(row=0,column=3)
-    
+
     triggerTimeForm           = EntryPoint(triggerFrame,
                                            labeltext="Trigger time:",
                                            helptext="Trigger time in MET",
@@ -1188,25 +1189,25 @@ class GUI(object):
     #Data to download: GBM, LLE or both?
     checkButtonsFrame         = Frame(thisWindow.frame)
     checkButtonsFrame.grid(row=2,column=0)
-    
+
     downloadGBM               = IntVar(0)
     GBMcheckbutton            = Checkbutton(checkButtonsFrame,
                                    text="Download GBM data",
                                    variable=downloadGBM)
     GBMcheckbutton.grid(row=0,column=0,sticky=W)
-    
+
     downloadLLE               = IntVar(0)
     LLEcheckbutton            = Checkbutton(checkButtonsFrame,
                                   text="Download LLE data",
                                   variable=downloadLLE)
     LLEcheckbutton.grid(row=1,column=0,sticky=W)
-    
+
     downloadLAT               = IntVar(0)
     LATcheckbutton            = Checkbutton(checkButtonsFrame,
                                   text="Download LAT standard data (Transient and cleaner classes)",
                                   variable=downloadLAT)
     LATcheckbutton.grid(row=2,column=0,sticky=W)
-    
+
     buttonFrame               = Frame(thisWindow.frame)
     buttonFrame.grid(row=3,column=0)
     #Download button
@@ -1227,18 +1228,18 @@ class GUI(object):
                                   text="Cancel", font=NORMALFONT,
                                   command=thisWindow.window.destroy)
     cancelButton.grid(row=0,column=1)
-    
+
     #Now launch the browser
     #self.browseTriggers(thisWindow.window,triggerForm.variable,triggerTimeForm.variable,raForm.variable,decForm.variable)
   pass
-  
+
   def downloadDataSetFromFTP(self,triggerName,triggerTime,ra,dec,thisWindow,downloadLLE,downloadGBM,downloadTransient):
     if((downloadLLE==0 and downloadGBM==0 and downloadTransient==0) or triggerName==''):
       #nothing to do!
       self.fillUserInteractionFrame()
       return
     pass
-        
+
     if(triggerName.find("GRB")==0):
       triggerName             = triggerName[3:]
     elif(triggerName.find("SF")==0):
@@ -1246,9 +1247,9 @@ class GUI(object):
     elif(triggerName.find("bn")==0):
       triggerName             = triggerName[2:]
     pass
-    
+
     downloaders               = []
-    
+
     if(downloadTransient==1):
       LATdownloader           = downloadTransientData.DownloadTransientData(triggerName,self.configuration.get('ftpWebsite'),
                                                                self.configuration.get('dataRepository'),
@@ -1261,7 +1262,7 @@ class GUI(object):
         showerror("Error downloading data from FTP","Could not download data for trigger %s. Reason:\n\n '%s' \n\n." %(triggerName,sys.exc_info()[1]),parent=self.root)
       else:
         downloaders.append(LATdownloader)
-    
+
     if(downloadLLE==1):
       downloaders.append(getLLEfiles.LLEdataCollector(triggerName,self.configuration.get('ftpWebsite'),
                                                                self.configuration.get('dataRepository'),
@@ -1270,14 +1271,14 @@ class GUI(object):
       #Ask the user which kind of file he/she wants to download (CSPEC,TTE,RSP and CTIME)
       gbmDataSelWindow          = SubWindow(thisWindow,transient=True,title="Select GBM data to download",
                                           initialHint="Please select which GBM data you want to download",
-                                          geometry="500x200+20+20")  
+                                          geometry="500x200+20+20")
       #Create two labels and two entries
       colWidth                  = 60
-            
+
       #Data to download: GBM, LLE or both?
       checkButtonsFrame         = Frame(gbmDataSelWindow.frame,width=gbmDataSelWindow.frame.cget('width'))
       checkButtonsFrame.grid(row=0,column=0)
-      
+
       variables                 = [IntVar(),IntVar(),IntVar(),IntVar()]
       for v in variables:
         v.set(1)
@@ -1291,7 +1292,7 @@ class GUI(object):
       checks[1].config(state=DISABLED)
       checks[2].config(state=DISABLED)
       #Download button
-      
+
       def go():
         gbmDataSelWindow.window.destroy()
         downloaders.append(getGBMfiles.GBMdataCollector(triggerName,self.configuration.get('ftpWebsite'),
@@ -1299,19 +1300,19 @@ class GUI(object):
                                                                variables[0].get(),variables[1].get(),
                                                                variables[2].get(),variables[3].get(),
                                                                parent=self.root))
-      
+
       goButton                  = Button(gbmDataSelWindow.frame,text="Go", font=NORMALFONT,
                                          command=go)
       goButton.grid(row=1,column=0)
-      
+
       cancelButton              = Button(gbmDataSelWindow.frame,text="Cancel", font=NORMALFONT,
                                          command=lambda: gbmDataSelWindow.window.destroy)
       cancelButton.grid(row=1,column=1)
-      thisWindow.wait_window(gbmDataSelWindow.window)      
+      thisWindow.wait_window(gbmDataSelWindow.window)
     pass
-    
+
     thisWindow.destroy()
-    
+
     downloadedSomething       = False
     for downloader in downloaders:
       try:
@@ -1322,19 +1323,19 @@ class GUI(object):
           continue
       except:
         if(downloadedSomething):
-          self.loadDataSetsFromAdirectory(os.path.join(self.configuration.get('dataRepository'),"bn%s" %(triggerName)))      
+          self.loadDataSetsFromAdirectory(os.path.join(self.configuration.get('dataRepository'),"bn%s" %(triggerName)))
         pass
         self.fillUserInteractionFrame()
         raise
       finally:
         downloadedSomething     = True
     pass
-    
+
     if(downloadedSomething):
-      self.loadDataSetsFromAdirectory(os.path.join(self.configuration.get('dataRepository'),"bn%s" %(triggerName)))      
+      self.loadDataSetsFromAdirectory(os.path.join(self.configuration.get('dataRepository'),"bn%s" %(triggerName)))
     self.fillUserInteractionFrame()
   pass
-  
+
   def configure(self):
     configureWindow           = SubWindow(self.root,transient=True,title="Configuration",
                                           initialHint="Please fill the form, then click save.")
@@ -1344,12 +1345,12 @@ class GUI(object):
     configureWindow.bottomtext.image_create(END, image=self.lightbulb)
     configureWindow.bottomtext.insert(END,"If you want to restore the original configuration, simply remove the file:\n        %s\n\n" %(self.configuration.configurationFile))
     configureWindow.bottomtext.config(state="disabled")
-    
-    
+
+
     #Read and write a configuration file
     entries                   = {}
     sortedKeys                = sorted(self.configuration.keys())
-    
+
     for key in self.configuration.keys():
       if(key!='maxNumberOfCPUs'):
         directory             = True
@@ -1361,19 +1362,19 @@ class GUI(object):
       entries[key]            = EntryPoint(configureWindow.frame,labeltext=self.configuration.getDescription(key)+":",
                                              textwidth=40,initvalue=self.configuration.get(key),
                                              directory=directory,browser=browser)
-    
+
     #entries['ftpWebsite']     = EntryPoint(configureWindow.frame,labeltext=self.configuration.getDescription('ftpWebsite')+":",
     #                                       textwidth=40,initvalue=self.configuration.get('ftpWebsite'))
-    # 
+    #
     buttonFrame               = Frame(configureWindow.frame)
-    buttonFrame.grid(columnspan=3)    
+    buttonFrame.grid(columnspan=3)
     saveButton                = Button(buttonFrame,text="Save", font=NORMALFONT,
                                  command=lambda: self.saveConfiguration(entries,configureWindow.window))
     saveButton.grid(row=0,column=0)
     cancelButton              = Button(buttonFrame,text="Cancel",font=NORMALFONT,command=configureWindow.window.destroy)
     cancelButton.grid(row=0,column=1)
   pass
-  
+
   def saveConfiguration(self,entries,window):
     for key in entries.keys():
       self.configuration.set(key,entries[key].get())
@@ -1382,7 +1383,7 @@ class GUI(object):
     showinfo("Configuration saved!","Configuration saved! If you want to restore the default configuration\nsimply remove the file\n%s" %(self.configuration.configurationFile),parent=window)
     window.destroy()
   pass
-  
+
   def loadDataSetsFromAdirectory(self,directory=None):
     #Load a dataset
     #Select a file from a browser and change correspondingly the given entry
@@ -1391,19 +1392,19 @@ class GUI(object):
                                                 title="Please select a directory containing data files",
                                                 initialdir=self.configuration.get('dataRepository'))
     pass
-        
+
     if(directory==None or directory=='' or directory==()):
       #Cancel button, do nothing
       return
     pass
-    
+
     #Find GBM and LLE datasets in this directory
     #Find all CSPEC files
     cspecFiles                = glob.glob(os.path.join(os.path.abspath(directory),"*cspec*.pha"))
     if(len(cspecFiles)==0):
       showerror("Error","No data available in directory %s.\n" %(os.path.abspath(directory)),parent=self.root)
       return
-      
+
     datasets                  = []
     triggers                  = []
     for cspec in cspecFiles:
@@ -1414,7 +1415,7 @@ class GUI(object):
         showerror("Inconsistent data","Directory %s contains data from different triggers! Please clean it, and retry." %(directory))
         return
     pass
-    
+
     #Sort the detectors by energy (NaIs, BGOs, LAT)
     def my_sorter(dataset):
       try:
@@ -1422,7 +1423,7 @@ class GUI(object):
       except:
         return 9999
     datasets.sort(key=my_sorter)
-    
+
     #Open a window
     datasetsWindow            = SubWindow(self.root,transient=True,title="Select datasets",
                                           initialHint="Select datasets to use for your analysis. Pre-selected detectors are NaIs closer than 50 deg to the source, the closest BGO and the LAT (if present).")
@@ -1431,31 +1432,31 @@ class GUI(object):
     datasetsWindow.bottomtext.insert(1.0,"In parenthesis you can find the angle between each detector and the source.\n\n")
     datasetsWindow.bottomtext.config(state="disabled")
     datasetsWindow.bottomtext.image_create(1.0, image=self.lightbulb)
-    
-    #One check button for each detector   
+
+    #One check button for each detector
     detFrame                  = Frame(datasetsWindow.frame)
     detFrame.grid(row=0,column=0)
-    
+
     #Horizontal line
     line                      = Frame(datasetsWindow.frame,height=2,bg="black",width=200)
     line.grid(row=1,column=0,sticky='NSWE')
-    
+
     #Place a check button to use only CSPEC file (when TTE files are saturated, for example)
     useOnlyCSPEC              = IntVar()
     onlyCSPECbutton           = Checkbutton(datasetsWindow.frame,text="Do NOT use GBM TTE files (you loose time resolution!)",
                                             variable=useOnlyCSPEC,height=4,wraplength=140)
     onlyCSPECbutton.grid(row=2,column=0)
-    
+
     line2                     = Frame(datasetsWindow.frame,height=2,bg="black",width=200)
     line2.grid(row=3,column=0,sticky='NSWE')
-    
+
     okButton                  = Button(datasetsWindow.frame,text="Ok", font=NORMALFONT,
                                  command=lambda: self.registerDatasets(datasets,parValues,datasetsWindow.window,bool(useOnlyCSPEC.get())))
     okButton.grid(row=4,column=0)
-    
+
     checkButtons              = []
     parValues                 = []
-    
+
     col                        = 0
     row                        = 0
     for i,dataset in enumerate(datasets):
@@ -1472,7 +1473,7 @@ class GUI(object):
           RA_OBJ              = 'not available'
           DEC_OBJ             = 'not available'
       pass
-      
+
       angle                   = 99999
       angleString             = 'n.a.'
       #Compute the angle between this detector and the object
@@ -1498,7 +1499,7 @@ class GUI(object):
           pass
         pass
       pass
-            
+
       parValues.append(IntVar())
       if(angleString!='n.a.'):
         if(dataset.detector.find('b')==0):
@@ -1507,7 +1508,7 @@ class GUI(object):
           if(dataset.detector=='b0'):
             other             = 'b1'
           else:
-            other             = 'b0'  
+            other             = 'b0'
           otherAngle          = angularDistance.getDetectorAngle(RA_SCX,DEC_SCX,RA_SCZ,DEC_SCZ,RA_OBJ,DEC_OBJ,other)
           if(otherAngle < angle):
             parValues[-1].set(int(0))
@@ -1524,7 +1525,7 @@ class GUI(object):
             parValues[-1].set(int(0))
       else:
         parValues[-1].set(int(0))
-      pass  
+      pass
       checkButtons.append(Checkbutton(detFrame,text="%-5s (%s deg)  " % (dataset.detector,angleString),
                                       variable=parValues[-1]))
       checkButtons[-1].grid(row=row,column=col,sticky='W')
@@ -1538,9 +1539,9 @@ class GUI(object):
     datasetsWindow.frame.columnconfigure(0,weight=1,minsize=200)
     detFrame.columnconfigure(0,weight=1,minsize=50)
     detFrame.columnconfigure(1,weight=1,minsize=50)
-    
+
   pass
-  
+
   def registerDatasets(self,datasets,parValues,parent,useOnlyCSPEC=False):
     self.datasets             = []
     self.useOnlyCSPEC         = useOnlyCSPEC
@@ -1576,28 +1577,28 @@ class GUI(object):
             showerror("No rsp provided","You did not provide a RSP file, ignoring detector %s" %(dataset.detector),parent=parent)
             continue
           else:
-            dataset['rspfile'] = os.path.abspath(os.path.expanduser(userResponse))                                    
+            dataset['rspfile'] = os.path.abspath(os.path.expanduser(userResponse))
         pass
         if(dataset.status=="noTTE" and useOnlyCSPEC==False):
           showinfo("No TTE file for detector %s" %(dataset.detector),"No TTE file found for detector %s, using CSPEC file (you loose time resolution)." %(dataset.detector),parent=parent)
           dataset['eventfile'] = dataset['cspecfile']
         pass
-        
+
         self.datasets.append(dataset)
         names.append(dataset.detector)
       pass
-    pass    
-    parent.destroy()   
-    
+    pass
+    parent.destroy()
+
     #Safety checks on the loaded datasets
-    
+
     #Check for the coordinates of the source
     if((max(RAs)-min(RAs) > 0.2) or (max(DECs)-min(DECs) > 0.2)):
       string                  = map(lambda x:"%s -> (%s,%s); " %(x[0],x[1],x[2]),zip(names,RAs,DECs))
       showerror("Inconsistent coordinates","The selected datasets have been generated with inconsistent coordinates for the source.\n%s\n Please write to the FSSC." %(string),
                 parent=self.root)
       self.datasets           = []
-     
+
     #Check that all datasets have the same trigger time, otherwise ask the user for one
     if(max(triggerTimes)==-1):
       #No trigger time information at all!
@@ -1622,8 +1623,8 @@ class GUI(object):
     else:
       triggerTime           = datasets[0].triggerTime
     pass
-        
-    #Write the keyword UREFTIME in all the input data files, which I will use as 
+
+    #Write the keyword UREFTIME in all the input data files, which I will use as
     #reference time, to avoid overwriting the TRIGTIME keyword
     for dataset in datasets:
       for key in ['rspfile','cspecfile']:
@@ -1631,14 +1632,14 @@ class GUI(object):
         f[0].header.set("UREFTIME",float(triggerTime))
         f.close()
       pass
-    pass  
-    
+    pass
+
     #Update the status bar in the main window
-    if(len(self.datasets)>0):     
+    if(len(self.datasets)>0):
       #Update the information on the object
       self.fillObjectInfo()
-      
-      #If the user do not want to use TTE files, overwrite the 'eventfile' element 
+
+      #If the user do not want to use TTE files, overwrite the 'eventfile' element
       #in all GBM datasets
       if(useOnlyCSPEC):
         for dataset in self.datasets:
@@ -1647,11 +1648,11 @@ class GUI(object):
           pass
         pass
       pass
-        
+
       #Activate the Make spectra button in the main window if there is either a GBM or a LLE dataset
       if(len(filter(lambda x:x.detector!="LAT",self.datasets))>0):
         self.tasksmenu.entryconfig(4,state=NORMAL)
-      
+
       #If there is a LAT dataset, activate also the likelihood and the simulations button
       if(len(filter(lambda x:x.detector=="LAT",self.datasets))>0):
         for i in range(4):
@@ -1665,21 +1666,21 @@ class GUI(object):
         elif(dataset.detector.find("LAT-LLE")==0):
           return 2
         elif(dataset.detector.find("LAT")==0):
-          return 3 
+          return 3
       self.datasets.sort(key=my_sorter)
-      
+
       #Display check buttons
       if(self.displayDetFrame!=None):
         self.displayDetFrame.destroy()
       pass
-      
+
       self.displayDetFrame         = Frame(self.userInteractionFrame)
       self.displayDetFrame.grid(column=0,sticky='NSWE')
       lab                     = Label(self.displayDetFrame,
                                       text='\n\n\nDetectors to display in the LC:',
                                       anchor=SW)
       lab.grid(column=0,row=0,columnspan=3,sticky=SW)
-      
+
       self.displayDatasetVars = []
       self.displayCheckButtons = []
       for i,dataset in enumerate(self.datasets):
@@ -1691,7 +1692,7 @@ class GUI(object):
                                       command=self.makeLightCurves))
         row                   = i/3+1
         col                   = i-(row-1)*3
-        
+
         self.displayCheckButtons[-1].grid(column=col,row=row,sticky=SW)
       pass
       self.saveUserInteractionFrame()
@@ -1706,16 +1707,16 @@ class GUI(object):
     pass
     return
   pass
-  
+
   def writeDefaultHelpMessage(self):
       message                 = "Loaded datasets: %s" % ','.join(map(lambda x:x.detector,self.datasets))
       if(self.useOnlyCSPEC):
         message              += " (NOT using GBM TTE data, as per user request)"
       self.updateRootStatusbar(message,"You can zoom/pan the light curve using the toolbar at the bottom of the figure. For help on the use of the toolbar, see ")
-      self.bottomtext.config(state=NORMAL) 
+      self.bottomtext.config(state=NORMAL)
       self.bottomtext.insert(END,"http://matplotlib.org/users/navigation_toolbar.html",self.hyperlink.add(lambda: self.openWebLink("http://matplotlib.org/users/navigation_toolbar.html")))
-      self.bottomtext.config(state=DISABLED) 
-  
+      self.bottomtext.config(state=DISABLED)
+
   def makeLightCurves(self):
     self.root.update_idletasks()
     if(self.eventLock):
@@ -1724,20 +1725,20 @@ class GUI(object):
     else:
       self.eventLock            = True
     pass
-    
+
     detToDisplay                = filter(lambda x:x[0].get()==1,zip(self.displayDatasetVars,self.datasets))
     detToDisplay                = map(lambda x:x[1],detToDisplay)
 
     nDatasets                   = len(detToDisplay)
-    
+
     if(nDatasets==0):
       self.eventLock            = False
       return
-    
+
     print("Making the light curve...")
-    
+
     self.figure.clear()
-    
+
     #Create figure
     xlabel                      = "Time since trigger"
     ylabel                      = "Counts/s"
@@ -1745,7 +1746,7 @@ class GUI(object):
     self.subfigures             = []
     left                        = True
     for i,dataset in enumerate(detToDisplay):
-      f                           = pyfits.open(dataset['cspecfile'])  
+      f                           = pyfits.open(dataset['cspecfile'])
       s                           = f['SPECTRUM']
       d                           = s.data[(s.data.field('QUALITY')==0)]
       trigTime                    = dataset.triggerTime
@@ -1754,18 +1755,18 @@ class GUI(object):
       exposure                    = d.field('EXPOSURE')
       N                           = len(met)
       LC                          = N*[0]
-      
-      for j in range(N): 
+
+      for j in range(N):
         if(exposure[j]>0):
           LC[j]                     = counts[j].sum()/exposure[j]
       pass
-      
+
       if(i==0):
-        self.subfigures.append(self.figure.add_subplot(nDatasets,1,i+1))      
+        self.subfigures.append(self.figure.add_subplot(nDatasets,1,i+1))
       else:
         self.subfigures.append(self.figure.add_subplot(nDatasets,1,i+1,
                                                sharex=self.subfigures[0],
-                                                         xlabel=xlabel))        
+                                                         xlabel=xlabel))
       if(i!=nDatasets-1):
         self.subfigures[-1].xaxis.set_visible(False)
       self.subfigures[-1].step(met,LC,where='post')

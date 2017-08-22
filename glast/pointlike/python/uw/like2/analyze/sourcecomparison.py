@@ -5,7 +5,8 @@ $Header: /glast/ScienceTools/glast/pointlike/python/uw/like2/analyze/Attic/sourc
 
 """
 
-import os, pyfits
+import os
+from astro.io import fits as pyfits
 import numpy as np
 import pylab as plt
 import pandas as pd
@@ -17,7 +18,7 @@ class SourceComparison(sourceinfo.SourceInfo):
     """Comparison with a FITS catalog, 2FGL or beyond
     """
 
-    def setup(self, cat='3FGL-v13r3_v6r9p1_3lacv12p1_v7.fits', #'gll_psc4yearsource_v9_assoc_v6r3p0.fit', #gll_psc_v06.fit', 
+    def setup(self, cat='3FGL-v13r3_v6r9p1_3lacv12p1_v7.fits', #'gll_psc4yearsource_v9_assoc_v6r3p0.fit', #gll_psc_v06.fit',
             catname='3FGL', **kw):
         super(SourceComparison, self).setup(**kw)
         self.catname=catname
@@ -33,27 +34,27 @@ class SourceComparison(sourceinfo.SourceInfo):
         id_prob = [np.nan]*len(ft)
         try:
             id_prob = ft.ID_Probability_v6r9p1[:,0] ## should find that suffix
-        except: 
-            print 'warning: id_prob not set' 
+        except:
+            print 'warning: id_prob not set'
         cat_skydirs = map (lambda x,y: SkyDir(float(x),float(y)), ft.RAJ2000, ft.DEJ2000)
-        
+
         glat = [s.b() for s in cat_skydirs]
         glon = [s.l() for s in cat_skydirs]
         def nickfix(n):
             return n if n[:3]!='PSR' else 'PSR '+n[3:]
-        index = map(nickfix, [x.strip() for x in ft.NickName_3FGL]) #Source_Name 
-        self.cat = pd.DataFrame(dict(name3=ft.Source_Name_3FGL_1, 
-                nickname=map(nickfix, ft.NickName_3FGL), 
-                ra=ft.RAJ2000,dec= ft.DEJ2000, 
-                ts=ft.Test_Statistic, 
+        index = map(nickfix, [x.strip() for x in ft.NickName_3FGL]) #Source_Name
+        self.cat = pd.DataFrame(dict(name3=ft.Source_Name_3FGL_1,
+                nickname=map(nickfix, ft.NickName_3FGL),
+                ra=ft.RAJ2000,dec= ft.DEJ2000,
+                ts=ft.Test_Statistic,
                 skydir=cat_skydirs,
-                glat=glat, glon=glon, 
-                #pivot=ft.Pivot_Energy, flux=ft.Flux_Density, 
-                #modelname=ft.SpectrumType, 
+                glat=glat, glon=glon,
+                #pivot=ft.Pivot_Energy, flux=ft.Flux_Density,
+                #modelname=ft.SpectrumType,
                 id_prob=id_prob,
                 a95=ft.Conf_95_SemiMajor, b95=ft.Conf_95_SemiMinor, ang95=ft.Conf_95_PosAng,
                 flags=np.asarray(ft.Flags_3FGL, int),
-                ), 
+                ),
             columns = 'name3 nickname ra dec glat glon skydir ts a95 b95 ang95 id_prob flags'.split(), # this to order them
             index=index, )
         self.cat.index.name='name'
@@ -61,7 +62,7 @@ class SourceComparison(sourceinfo.SourceInfo):
         self.cat['pt_ts'] = self.df.ts
         self.cat['pt_ra'] = self.df.ra
         self.cat['pt_dec'] = self.df.dec
-        
+
         def find_close(A,B):
             """ helper function: make a DataFrame with A index containg columns of the
             name of the closest entry in B, and its distance
@@ -73,7 +74,7 @@ class SourceComparison(sourceinfo.SourceInfo):
                 return (B.index[n], np.degrees(d[n]))
             return pd.DataFrame( map(mindist,  A.skydir.values),
                 index=A.index, columns=('otherid','distance'))
-                
+
         if catname=='2FGL' or catname=='3FGL':
             print 'generating closest distance to catalog "%s"' % cat
             closedf= find_close(self.df, self.cat)
@@ -84,11 +85,11 @@ class SourceComparison(sourceinfo.SourceInfo):
             closedf.to_csv(os.path.join('plots', self.plotfolder, 'comparison_%s.csv'%catname))
             closest2 = np.degrees(np.array([min(map(sdir.difference, self.df.skydir.values)) for sdir in cat_skydirs]))
             self.cat['closest']= closest2
-        
-            
+
+
     def distance_to_cat(self, maxdist=0.5, tscuts=[10,50,500], nbins=26):
         """Associations of sources with 2FGL
-        
+
         """
         fig,ax = plt.subplots( figsize=(4,4))
         for tscut in tscuts:
@@ -98,14 +99,14 @@ class SourceComparison(sourceinfo.SourceInfo):
         ax.legend(prop=dict(size=10))
         plt.setp(ax, xlabel='closest distance to %s source'%self.catname)
         return fig
-    
+
     def lost_plots(self, close_cut=0.25, minassocprob=0.8, maxts=250):
         """3FGL sources not present in new list
-        Histogram of the 3FGL catalog TS and Galactic latitude for those sources more than %(close_cut).2f deg from a skymodel source. 
+        Histogram of the 3FGL catalog TS and Galactic latitude for those sources more than %(close_cut).2f deg from a skymodel source.
         The subset of sources with associations (prob>%(minassocprob)s) is shown. <br>
         Left: Distribution vs. TS.<br>
         Right: Distribution vs sine of Galactic latitude.
-        """ 
+        """
         self.minassocprob=minassocprob
         self.close_cut = close_cut
         fig,axx = plt.subplots(1,2, figsize=(8,4))
@@ -133,18 +134,18 @@ class SourceComparison(sourceinfo.SourceInfo):
             ax.grid()
             plt.setp(ax, xlabel='sin(glat) of %s source' %self.catname, xlim=(-1,1))
             return fig
-        for f, ax in zip((left,right), axx.flatten()): 
+        for f, ax in zip((left,right), axx.flatten()):
             f(ax)
         return fig
-        
+
     def poorly_localized(self):
         pass
-    
+
     def all_plots(self):
         """Results of comparison with 3FGL catalog
         """
         self.runfigures([ self.distance_to_cat, self.lost_plots])
-        
+
     def lookup_3fgl(self, name3):
         if name3[-1]!=' ' and name3[-1]!='c': name3=name3+' '
         fglnames = list(self.cat.name3)
