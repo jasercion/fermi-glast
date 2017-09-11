@@ -23,10 +23,11 @@ HdCaldb::HdCaldb(const std::string & telescope, const std::string & instrument)
 
 // Check that CALDB files exist.
    st_facilities::Util::file_ok(
-      st_facilities::Environment::getEnv("CALDBALIAS"));
+//      st_facilities::Environment::getEnv("CALDBALIAS"));
+        st_facilities::Environment::getEnv("CONDA_PREFIX")/refdata/fermi/caldb/CALDB/software/tools/alias_config.fits);
    st_facilities::Util::file_ok(
-      st_facilities::Environment::getEnv("CALDBCONFIG"));
-
+//      st_facilities::Environment::getEnv("CALDBCONFIG"));
+        st_facilities::Environment::getEnv("CONDA_PREFIX")/refdata/fermi/caldb/CALDB/software/tools/caldb.config);
    for (int i = 0; i < s_maxret; i++) {
       m_filenames[i] = new char[m_filenamesize];
       m_online[i] = new char[m_filenamesize];
