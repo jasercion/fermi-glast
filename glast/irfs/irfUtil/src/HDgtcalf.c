@@ -572,8 +572,10 @@ static int gtcalidx (char* mode, char* missn,
 /* Get CALDB index */
 {
 
-     const char* caldbvar="CALDB";
-     const char* cnfgvar="CALDBCONFIG";
+     //const char* caldbvar="CALDB";
+     //const char* cnfgvar="CALDBCONFIG";
+	 const char* caldbvar="CONDA_PREFIX";
+	 const char* cnfgvar="CONDA_PREFIX"
 
      char *caldb;
      char *config;
@@ -587,7 +589,7 @@ static int gtcalidx (char* mode, char* missn,
      
      if(*status) return *status;  
   
-     caldb = getenv(caldbvar);
+     caldb = getenv(caldbvar)+"/refdata/fermi/caldb/CALDB";
 
      if( caldb == NULL || caldb[0] == '\0' ) {
          *status = HD_ERR_NULL_POINTER;
@@ -596,7 +598,7 @@ static int gtcalidx (char* mode, char* missn,
          goto cleanup;
      }
 
-     config = getenv(cnfgvar);
+     config = getenv(cnfgvar) + ""/refdata/fermi/caldb/CALDB/software/tools/caldb.config";
 
      if( config == NULL || config[0] =='\0') {
          *status = HD_ERR_NULL_POINTER;
