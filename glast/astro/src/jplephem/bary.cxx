@@ -17,7 +17,7 @@ fitsfile *openFFile (const char *name)
    fitsfile *FF = NULL;
    int error = 0;
    
-   const char* extfiles_root = ::getenv("TIMING_DIR"); 
+   const char* extfiles_root = ::getenv("CONDA_PREFIX") + "/refdata";
    sprintf(fileName, "%s/%s", extfiles_root,  name);
 
    fits_open_file(&FF, fileName, READONLY, &error);
