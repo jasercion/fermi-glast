@@ -228,7 +228,8 @@ namespace facilities {
 
 #else
 #ifdef HEADAS
-    const char *env = getenv("FERMI_INST_DIR");
+    //const char *env = getenv("FERMI_INST_DIR");
+    const char *env = getenv("CONDA_PREFIX");
     if(env != NULL)
       packageRoot = env;
 #else
