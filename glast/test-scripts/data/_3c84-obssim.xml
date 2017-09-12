@@ -21,7 +21,8 @@
 <source name="Galactic_diffuse">
    <spectrum escale="MeV">
 <!-- Total photon flux from the map (#/m2/s) = 18.58 (10MeV-655GeV)
-     Fits file (plate-carree only) = $(EXTFILESSYS)/galdiffuse/GP_gamma.fits
+     Fits file (plate-carree only) = $(CONDA_PREFIX)/refdata/fermi
+/galdiffuse/GP_gamma.fits
 -->
      <SpectrumClass name="MapCube" params="1.115, $(FERMI_DIR)/refdata/fermi/galdiffuse/GP_gamma.fits"/>
      <use_spectrum frame="galaxy"/>

@@ -104,7 +104,8 @@ def EgretDiffuse():
                + '      <parameter max="200" min="50" free="0" '
                + 'name="Scale" scale="1" value="100" />\n'
                + '    </spectrum>\n'
-               + '    <spatialModel file="$(EXTFILESSYS)/galdiffuse'
+               + '    <spatialModel file="$(CONDA_PREFIX)/refdata/fermi
+/galdiffuse'
                + '/EGRET_diffuse_gal.fits" type="SpatialMap">\n'
                + '      <parameter max="1000" min="0.001" free="0" '
                + 'name="Prefactor" scale="1" value="1" />\n'

@@ -23,7 +23,8 @@
    <source name="Galactic Diffuse Emission" type="DiffuseSource">
       <spectrum type="Galactic Diffuse Power-law"></spectrum>
       <spatialModel type="SpatialMap" 
-                    file="$(EXTFILESSYS)/galdiffuse/EGRET_diffuse_cel.fits">
+                    file="$(CONDA_PREFIX)/refdata/fermi
+/galdiffuse/EGRET_diffuse_cel.fits">
       </spatialModel>
    </source>
 

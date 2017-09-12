@@ -15,7 +15,8 @@
      Fits file (plate-carree only) = GP_gamma.fits
 -->
          <SpectrumClass name="MapCube"
-          params="18.58, $(EXTFILESSYS)/galdiffuse/GP_gamma.fits"/>
+          params="18.58, $(CONDA_PREFIX)/refdata/fermi
+/galdiffuse/GP_gamma.fits"/>
          <use_spectrum frame="galaxy"/>
       </spectrum>
    </source>
@@ -25,12 +26,14 @@
       <spectrum escale="MeV">
 <!-- Total photon flux from the map (#/m^2/s) = 17.
      Photon spectral index = 2.1
-     Fits file (plate-carree only) = $(EXTFILESSYS)/galdiffuse/EGRET_diffuse_gal.fits
+     Fits file (plate-carree only) = $(CONDA_PREFIX)/refdata/fermi
+/galdiffuse/EGRET_diffuse_gal.fits
      Minimum photon energy (MeV) = 30.
      Maximum photon energy (MeV) = 2e5
 -->
          <SpectrumClass name="MapSource"
-          params="flux=17.,gamma=2.1,fitsFile=$(EXTFILESSYS)/galdiffuse/EGRET_diffuse_gal.fits,emin=30.,emax=2e5"/>
+          params="flux=17.,gamma=2.1,fitsFile=$(CONDA_PREFIX)/refdata/fermi
+/galdiffuse/EGRET_diffuse_gal.fits,emin=30.,emax=2e5"/>
          <use_spectrum frame="galaxy"/>
       </spectrum>
    </source>
@@ -40,12 +43,14 @@
       <spectrum escale="MeV">
 <!-- Total photon flux from the map (#/m^2/s) = 17.
      Photon spectral index = 2.1
-     Fits file (plate-carree only) = $(EXTFILESSYS)/galdiffuse/EGRET_diffuse_gal.fits
+     Fits file (plate-carree only) = $(CONDA_PREFIX)/refdata/fermi
+/galdiffuse/EGRET_diffuse_gal.fits
      Minimum photon energy (MeV) = 30.
      Maximum photon energy (MeV) = 2e5
 -->
          <SpectrumClass name="MapSource"
-          params="17.,2.1,$(EXTFILESSYS)/galdiffuse/EGRET_diffuse_gal.fits,30.,2e5"/>
+          params="17.,2.1,$(CONDA_PREFIX)/refdata/fermi
+/galdiffuse/EGRET_diffuse_gal.fits,30.,2e5"/>
          <use_spectrum frame="galaxy"/>
       </spectrum>
    </source>
@@ -257,7 +262,8 @@
    <source name="tf1map_test">
       <spectrum escale="MeV" particle_name="gamma">
          <SpectrumClass name="TF1Map"
-          params="flux=17.,tf1name=FT1Map_TEST,formula=-0.0001*(100.-x)*(1100.-x),fitsFile=$(EXTFILESSYS)/galdiffuse/EGRET_diffuse_gal.fits,emin=100.,emax=1100,tf1precision=100,gamma=2,lonMin=-180,lonMax=180,latMin=-90,latMax=90"/>
+          params="flux=17.,tf1name=FT1Map_TEST,formula=-0.0001*(100.-x)*(1100.-x),fitsFile=$(CONDA_PREFIX)/refdata/fermi
+/galdiffuse/EGRET_diffuse_gal.fits,emin=100.,emax=1100,tf1precision=100,gamma=2,lonMin=-180,lonMax=180,latMin=-90,latMax=90"/>
          <use_spectrum frame="galaxy"/>
       </spectrum>
    </source>
@@ -273,7 +279,8 @@
    <source name="filespectrummap_test">
       <spectrum escale="GeV" flux="1." particle_name="gamma">
          <SpectrumClass name="FileSpectrumMap"
-          params="flux=17.,fitsFile=$(EXTFILESSYS)/galdiffuse/EGRET_diffuse_gal.fits,specFile=$(GENERICSOURCESDATAPATH)/dm120gev.dat,emin=100.,emax=1000,lonMin=-180,lonMax=180,latMin=-90,latMax=90"/>
+          params="flux=17.,fitsFile=$(CONDA_PREFIX)/refdata/fermi
+/galdiffuse/EGRET_diffuse_gal.fits,specFile=$(GENERICSOURCESDATAPATH)/dm120gev.dat,emin=100.,emax=1000,lonMin=-180,lonMax=180,latMin=-90,latMax=90"/>
          <use_spectrum frame="galaxy"/>
       </spectrum>
    </source>

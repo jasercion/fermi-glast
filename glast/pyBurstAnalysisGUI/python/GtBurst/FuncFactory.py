@@ -167,7 +167,8 @@ def ConstantValue():
 
 def SpatialMap():
     func = '\n'.join( ('<spatialModel '
-                       + 'file="$(EXTFILESSYS)/galdiffuse/EGRET_diffuse_cel.fits" '
+                       + 'file="$(CONDA_PREFIX)/refdata/fermi
+/galdiffuse/EGRET_diffuse_cel.fits" '
                        + 'type="SpatialMap">',
                        '   <parameter max="1000" min="0.001" free="0" '
                        + 'name="Prefactor" scale="1" value="1" />',
