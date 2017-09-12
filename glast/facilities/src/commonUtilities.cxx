@@ -55,8 +55,10 @@ namespace facilities {
   MyInternal::MyInternal() {
     m_superPkgs.clear();
     m_superSet.clear();
-    m_instDir = commonUtilities::getEnvironment("INST_DIR");
-    m_baseDir = commonUtilities::getEnvironment("BASE_DIR");
+	//m_instDir = commonUtilities::getEnvironment("INST_DIR");
+    //m_baseDir = commonUtilities::getEnvironment("BASE_DIR");
+    m_instDir = commonUtilities::getEnvironment("CONDA_PREFIX");
+    m_baseDir = commonUtilities::getEnvironment("CONDA_PREFIX");
     m_hasSupersede =  (m_instDir != m_baseDir);
     if (!m_hasSupersede) return;
 
