@@ -372,7 +372,7 @@ void st_facilitiesTests::test_Env_expandEnvVar() {
 void st_facilitiesTests::test_Env_getDataDir() {
    // For comparison of output, need local and install areas.
    std::string install_area;
-   std::string local_area = Env::getEnv("ST_FACILITIESROOT");
+   std::string local_area = Env::getEnv("CONDA_PREFIX") + "/refdata/fermi/st_facilities";
 
    try {
       // For comparison purposes, expand the install area env variable.
@@ -418,7 +418,7 @@ void st_facilitiesTests::test_FileSys_expandFileList() {
   }
 
   // Non-expansion case: no leading @.
-  list_file = Env::appendFileName(Env::appendFileName("$ST_FACILITIESROOT",
+  list_file = Env::appendFileName(Env::appendFileName("$CONDA_PREFIX/refdata/fermi/st_facilities",
                                                       "data"), "list_file");
   cont = FileSys::expandFileList(list_file);
   // Container should hold just the original file name because no
