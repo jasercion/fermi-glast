@@ -70,7 +70,7 @@ def getTools(env):
     return tools
 
 def parse_entry(entry):
-    bindir = os.path.sep + os.environ["BINDIR"]
+    bindir = os.path.sep + os.environ["CONDA_PREFIX"] + '/bin'
 #    bindir = os.path.sep + os_environ("BINDIR")
     app, exe = entry.split("=")
     exe += ' mode=ql'

@@ -15,7 +15,7 @@ from pil import Pil
 
 _failed_exes = []
 
-bindir = os.environ['BINDIR']
+bindir = os.environ['CONDA_PREFIX'] + '/bin'
 #bindir = os_environ('BINDIR')
 
 def getApp(appName, package=None, raiseKeyErrors=True,
@@ -24,7 +24,7 @@ def getApp(appName, package=None, raiseKeyErrors=True,
         package = appName
     try:
         if os.environ["FERMI_DIR"]:
-            app = os.path.join(os.environ["BINDIR"], appName)
+            app = os.path.join(os.environ["CONDA_PREFIX"], '/bin', appName)
         else:
             app = os.path.join(os.environ[package.upper() + 'ROOT'], bindir,
             #app = os.path.join(os_environ(package.upper() + 'ROOT'), bindir,

@@ -6,7 +6,7 @@ SConsignFile(os.path.join(os.environ['HOME'], '.sconsign'))
 Import('home', 'package', 'apps', 'libraries', 'cflags',
        'linkflags', 'rootlibs')
 
-bindir = os.environ['BINDIR']
+bindir = os.path.join(os.environ['CONDA_PREFIX'], '/bin')
 install_dir = os.path.join(home, bindir)
 
 include_dirs = [home, os.path.join(home, 'src')]
@@ -17,7 +17,7 @@ for lib in libraries.keys():
         lib = lib.split('Lib')[0]
         include_dirs.append(os.environ[lib.upper() + 'ROOT'])
         library_dirs.append(os.path.join(os.environ[lib.upper() + 'ROOT'],
-                                         os.environ['BINDIR']))
+                                         os.environ['CONDA_PREFIX']+'/bin'))
     else:
         include_dirs.append(libraries[lib][0])
         library_dirs.append(libraries[lib][1])
