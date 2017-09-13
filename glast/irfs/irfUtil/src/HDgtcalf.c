@@ -589,7 +589,7 @@ static int gtcalidx (char* mode, char* missn,
      
      if(*status) return *status;  
   
-     caldb = getenv(caldbvar)+"/refdata/fermi/caldb/CALDB";
+     caldb = getenv(caldbvar)+'/refdata/fermi/caldb/CALDB';
 
      if( caldb == NULL || caldb[0] == '\0' ) {
          *status = HD_ERR_NULL_POINTER;
@@ -598,7 +598,7 @@ static int gtcalidx (char* mode, char* missn,
          goto cleanup;
      }
 
-     config = getenv(cnfgvar) + ""/refdata/fermi/caldb/CALDB/software/tools/caldb.config";
+     config = getenv(cnfgvar) + '/refdata/fermi/caldb/CALDB/software/tools/caldb.config';
 
      if( config == NULL || config[0] =='\0') {
          *status = HD_ERR_NULL_POINTER;
