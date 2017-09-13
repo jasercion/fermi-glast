@@ -366,7 +366,7 @@ void IrfLoader::find_cif(std::string & caldb_indx) const {
    /// $CALDB.  For LAT data, this path is typically
    /// "data/glast/lat/caldb.indx".  This information is ascertained
    /// from the $CALDBCONFIG file.
-   char * caldb_config = ::getenv("CONDA_PREFIX") + "/refdata/fermi/caldb/CALDB/software/tools/caldb.config";
+   char * caldb_config = ::getenv("CONDA_PREFIX") + '/refdata/fermi/caldb/CALDB/software/tools/caldb.config';
    if (!caldb_config) {
       throw std::runtime_error("CALDBCONFIG env var not set");
    }
