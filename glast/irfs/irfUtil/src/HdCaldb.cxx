@@ -8,6 +8,7 @@
  */
 
 #include <stdexcept>
+#include <string>
 
 #include "st_facilities/Environment.h"
 #include "st_facilities/Util.h"
