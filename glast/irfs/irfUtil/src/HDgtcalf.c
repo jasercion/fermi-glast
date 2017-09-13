@@ -575,7 +575,7 @@ static int gtcalidx (char* mode, char* missn,
      //const char* caldbvar="CALDB";
      //const char* cnfgvar="CALDBCONFIG";
 	 const char* caldbvar="CONDA_PREFIX";
-	 const char* cnfgvar="CONDA_PREFIX"
+	 const char* cnfgvar="CONDA_PREFIX";
 
      char *caldb;
      char *config;
