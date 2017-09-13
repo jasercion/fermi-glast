@@ -28,6 +28,7 @@ HdCaldb::HdCaldb(const std::string & telescope, const std::string & instrument)
    st_facilities::Util::file_ok(
 //      st_facilities::Environment::getEnv("CALDBCONFIG"));
         st_facilities::Environment::getEnv("CONDA_PREFIX")+'/refdata/fermi/caldb/CALDB/software/tools/caldb.config');
+
    for (int i = 0; i < s_maxret; i++) {
       m_filenames[i] = new char[m_filenamesize];
       m_online[i] = new char[m_filenamesize];
