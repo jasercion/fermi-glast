@@ -55,10 +55,8 @@ namespace facilities {
   MyInternal::MyInternal() {
     m_superPkgs.clear();
     m_superSet.clear();
-	//m_instDir = commonUtilities::getEnvironment("INST_DIR");
-    //m_baseDir = commonUtilities::getEnvironment("BASE_DIR");
-    m_instDir = commonUtilities::getEnvironment("CONDA_PREFIX");
-    m_baseDir = commonUtilities::getEnvironment("CONDA_PREFIX");
+	m_instDir = commonUtilities::getEnvironment("INST_DIR");
+    m_baseDir = commonUtilities::getEnvironment("BASE_DIR");
     m_hasSupersede =  (m_instDir != m_baseDir);
     if (!m_hasSupersede) return;
 
@@ -228,16 +226,18 @@ namespace facilities {
 
 #else
 #ifdef HEADAS
-    //const char *env = getenv("FERMI_INST_DIR");
-    const char *env = getenv("CONDA_PREFIX");
+    const char *env = getenv("FERMI_INST_DIR");
     if(env != NULL)
+      packageRoot = env;
+#ifdef CONDA
+ 	const char *env = getenv("CONDA_PREFIX")
+	if(env != NULL)
       packageRoot = env;
 #else
     std::string upperCase=package;
     transform(upperCase.begin(),upperCase.end(),upperCase.begin(),(int(*)(int)) toupper);
     upperCase=upperCase+"ROOT";
-    //const char *env = getenv(upperCase.c_str());
-    const char *env = getenv("CONDA_PREFIX");
+    const char *env = getenv(upperCase.c_str());
     if(env!=NULL)
       packageRoot = env;
 #endif
