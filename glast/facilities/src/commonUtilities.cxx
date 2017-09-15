@@ -1,7 +1,7 @@
 #include "facilities/commonUtilities.h"
 #include <iostream>
 #include <algorithm>
-#if defined(SCons) || defined(HEADAS)
+#if defined(SCons) || defined(HEADAS) || defined(CONDA_PREFIX)
 #include <sstream>
 #include <fstream>
 #include <set>
