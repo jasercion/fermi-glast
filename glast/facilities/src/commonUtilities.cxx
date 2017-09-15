@@ -1,7 +1,7 @@
 #include "facilities/commonUtilities.h"
 #include <iostream>
 #include <algorithm>
-#if defined(SCons) || defined(HEADAS) || defined(CONDA_PREFIX)
+#if defined(SCons) || defined(HEADAS)
 #include <sstream>
 #include <fstream>
 #include <set>
@@ -229,10 +229,10 @@ namespace facilities {
     const char *env = getenv("FERMI_INST_DIR");
     if(env != NULL)
       packageRoot = env;
-#ifdef CONDA
- 	const char *env = getenv("CONDA_PREFIX")
-	if(env != NULL)
-      packageRoot = env;
+    else
+    	const char *env = getenv("CONDA_PREFIX");
+    	if(env != NULL)
+    		packageRoot = env;
 #else
     std::string upperCase=package;
     transform(upperCase.begin(),upperCase.end(),upperCase.begin(),(int(*)(int)) toupper);
