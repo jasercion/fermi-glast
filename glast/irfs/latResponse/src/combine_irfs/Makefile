@@ -8,7 +8,7 @@ HD_CXXTASK_SRC_cxx      = combine_irfs.cxx
 
 HD_CXXFLAGS             = ${HD_STD_CXXFLAGS}
 
-HD_CXXLIBS              = ${HD_LFLAGS} -L${HC_BLD_EXEC_PFX}/lib -l${HOOPS} -l${PIL} -lst_app -ltip -lwcs -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp -lcfitsio
+HD_CXXLIBS              = ${HD_LFLAGS} -L${HC_BLD_EXEC_PFX}/lib -l${HOOPS} -l${PIL} -lst_stream -lst_graph -lfacilities -lst_app -ltip -lwcs -lhealpix_cxx -lc_utils -lcxxsupport -lfftpack -lsharp -lgomp -lcfitsio
 
 HD_INSTALL_TASKS        = ${HD_CXXTASK}
 
